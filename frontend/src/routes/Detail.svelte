@@ -12,7 +12,7 @@
         push('/user-login')
     }
 
-    const split_code = 'split_subuncream_point'
+    //const split_code = 'split_subuncream_point'
     export let params = {}
     // App.svelte에서 호출할 때 params를 읽어야 하므로 export를 이용해 변수를 선언한다.
     let nonlan_id = params.nonlan_id 
@@ -89,7 +89,7 @@
 
         </div>
         {#if nonlan.user && $username === nonlan.user.username}
-            <button on:click={()=>delete_nonlan(nonlan.id)}>논란 삭제</button>
+            <button on:click={()=>delete_nonlan(nonlan_id)}>논란 삭제</button>
             <a use:link href='/nonlan-modify/{nonlan.id}'>논란 수정</a>
         {/if}
     </div>
