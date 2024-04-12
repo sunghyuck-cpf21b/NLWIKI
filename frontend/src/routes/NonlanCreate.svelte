@@ -128,11 +128,11 @@
             <input id="subject" type="text" class="form-control" bind:value="{subject}">
         </div>
         <div class='mb-3'>
-            <label for="person">주요인물</label>
+            <label for="person">주요 인물</label>
             <input id="person" type="text" class="form-control" bind:value="{person}">
         </div>
         <div class='mb-3'>
-            <label for="occ_date">일시</label>
+            <label for="occ_date">발생 일시</label>
             <input id="occ_date" type="text" class="form-control" placeholder="2000-01-01 00:00" bind:value="{occ_date}">
         </div>
         <div>
@@ -167,8 +167,6 @@
             </div>
         </div>
     </div>
-        
-
 {/if}
 
 
