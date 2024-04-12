@@ -11,7 +11,7 @@
     let subject = ''
     //let editcontent = document.getElementById("hereiscontent")
     let content = ''//editcontent.innerText
-    let content_info = ''
+    //let content_info = ''
     let person = ''
     let occ_date = ''
 
@@ -25,18 +25,18 @@
         if (document.getElementById('content-div-2').innerHTML) {
             content = document.getElementById('content-div-2').innerHTML
             const info_ = document.getElementById('content-div-2').childNodes
-            let info_list = []
+            /*let info_list = []
             for (let e of info_) {
                 info_list.push(e.nodeType)
-            }
-            content_info = String(info_list)
+            }*/
+            //content_info = String(info_list)
         }
         event.preventDefault()
         let url = "/api/nonlan/create"
         let params = {      // 해당 스키마에 입력된 속성들
             subject: subject,
             content: content,
-            content_info: content_info,
+            //content_info: content_info,
             person: person,
             occ_date: occ_date,
 

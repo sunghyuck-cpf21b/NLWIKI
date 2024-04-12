@@ -32,12 +32,12 @@
     function update_nonlan(event) {
         if (document.getElementById('content-div-2').innerHTML) {
             content = document.getElementById('content-div-2').innerHTML
-            const info_ = document.getElementById('content-div-2').childNodes
+            /*const info_ = document.getElementById('content-div-2').childNodes
             let info_list = []
             for (let e of info_) {
                 info_list.push(e.nodeType)
             }
-            content_info = String(info_list)
+            content_info = String(info_list)*/
         }
         event.preventDefault()
         let url = "/api/nonlan/update"
