@@ -1,10 +1,14 @@
 <script>
     import fastapi from "../lib/api"
-    import { link } from 'svelte-spa-router'    // href 앞에 link 를 사용하면 주소에 # 이 붙어 하나의 페이지로 인식된다.
+    import { link, push } from 'svelte-spa-router'    // href 앞에 link 를 사용하면 주소에 # 이 붙어 하나의 페이지로 인식된다.
     import { page, is_login } from "../lib/store"
 
     import moment from 'moment/min/moment-with-locales'
     moment.locale('ko')
+    
+    if(!$is_login) {
+        push('/user-login')
+    }
 
     let nonlan_list = [] 
     let total = 0
@@ -29,11 +33,13 @@
             $page = _page 
             total = json.total
         })
+        
     }
   
     $: get_nonlan_list($page)
 
 
+    
 </script>
 
 

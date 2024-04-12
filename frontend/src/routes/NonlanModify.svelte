@@ -2,6 +2,11 @@
     import { push } from 'svelte-spa-router'
     import fastapi from "../lib/api"
     import Error from "../components/Error.svelte"
+    import { is_login } from '../lib/store'
+
+    if(!$is_login) {
+        push('/user-login')
+    }
 
     export let params = {}
     const nonlan_id = params.nonlan_id 

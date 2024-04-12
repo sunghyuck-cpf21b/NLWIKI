@@ -16,6 +16,7 @@
     '/nonlan_create': NonlanCreate,
     '/user-create': UserCreate,
     '/user-login': UserLogin,
+    '/nonlan-modify/:nonlan_id': NonlanModify,
   }
 </script>
 

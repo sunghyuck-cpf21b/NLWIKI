@@ -2,11 +2,15 @@
     import fastapi from '../lib/api'
     import Error from '../components/Error.svelte'
     import { link, push } from 'svelte-spa-router'
-    import { is_login } from '../lib/store'
+    import { is_login, username } from '../lib/store'
     import { marked } from 'marked'
     import moment from 'moment/min/moment-with-locales'  
     import { get } from 'svelte/store';
     moment.locale('ko')
+
+    if(!$is_login) {
+        push('/user-login')
+    }
 
     const split_code = 'split_subuncream_point'
     export let params = {}
@@ -17,7 +21,7 @@
     // 이 파일에서만 본다면 params에는 아무 속성도 작성되지 않았지만 
     // App.svelte에서 Router 클래스에 의해 불러진 이후에 params값이 정의되기 때문에 nonlan_id의 속성을 정할 수 있게 되는 것이다.
     /* 각 컴포넌트들은 App.svelte 에서 사용될 함수와 같은 코드를 작성해준다고 생각하면 편하다 */
-    let nonlan = {comments: [], content: '', person: '', occ_date: ''}
+    let nonlan = {comments: [], content: '', person: '', occ_date: '', user: ''}
 
     /*비동기 방식의 문제(데이터 로드 전에 ui 실행, 보호 매커니즘이 있지만 여러 표현방식을 사용하다보면 문제 발생 가능) 
     때문에 nonlan 딕셔너리의 속성에 불러와지는 값 들을 초기화 해준다고 하지만
@@ -84,7 +88,10 @@
             </div>
 
         </div>
-        <button on:click={()=>delete_nonlan(nonlan.id)}>논란 삭제</button>
+        {#if nonlan.user && $username === nonlan.user.username}
+            <button on:click={()=>delete_nonlan(nonlan.id)}>논란 삭제</button>
+            <a use:link href='/nonlan-modify/{nonlan.id}'>논란 수정</a>
+        {/if}
     </div>
 
     {#each nonlan.comments as comment}
