@@ -2,7 +2,7 @@
     import fastapi from '../lib/api'
     import Error from '../components/Error.svelte'
     import { link, push } from 'svelte-spa-router'
-    import { is_login, username } from '../lib/store'
+    import { is_login, set_admin, username } from '../lib/store'
     import { marked } from 'marked'
     import moment from 'moment/min/moment-with-locales'  
     import { get } from 'svelte/store';
@@ -104,7 +104,7 @@
             </div>
 
         </div>
-        {#if nonlan.user && $username === nonlan.user.username}
+        {#if nonlan.user && $username === nonlan.user.username || $set_admin}
             <button on:click={()=>delete_nonlan(nonlan_id)}>논란 삭제</button>
             <a use:link href='/nonlan-modify/{nonlan.id}'>논란 수정</a>
         {/if}
