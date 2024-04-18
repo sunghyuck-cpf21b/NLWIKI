@@ -19,7 +19,7 @@ class Nonlan(BaseModel):        # BaseModel : 입력된 데이터가 모델의 �
     occ_date: datetime.datetime
     create_date: datetime.datetime
     comments: list[Comment] = []
-    user: User | None
+    user: User
     #content_info: str
 
     # 필수항목이 아니게 하기 위해서는

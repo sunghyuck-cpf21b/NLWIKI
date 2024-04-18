@@ -24,8 +24,8 @@
     function post_nonlan(event) {
         if (document.getElementById('content-div-2').innerHTML) {
             content = document.getElementById('content-div-2').innerHTML
-            const info_ = document.getElementById('content-div-2').childNodes
-            /*let info_list = []
+            /*const info_ = document.getElementById('content-div-2').childNodes
+            let info_list = []
             for (let e of info_) {
                 info_list.push(e.nodeType)
             }*/

@@ -6,3 +6,5 @@ const login_is_main=()=>{
         push('/user-login')
     }
 }
+
+export default login_is_main

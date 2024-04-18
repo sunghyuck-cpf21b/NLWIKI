@@ -42,7 +42,7 @@ def create_nonlan(db:Session, nonlan_create: NonlanCreate, user: User):
     db.commit()
 
 
-def nonlan_delete(db: Session, db_nonlan: Nonlan):
+def delete_nonlan(db: Session, db_nonlan: Nonlan):
     db.delete(db_nonlan)
     db.commit()
 

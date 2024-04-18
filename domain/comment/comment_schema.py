@@ -1,13 +1,14 @@
 import datetime
 
 from pydantic import BaseModel, field_validator
-
+from domain.user.user_schema import User
 
 class Comment(BaseModel):
     id: int
     content: str
     create_date: datetime.datetime
     nonlan_id: int
+    user: User
 
 
 class CommentCreate(BaseModel):

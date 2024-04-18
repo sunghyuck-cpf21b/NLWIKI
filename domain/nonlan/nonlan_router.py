@@ -65,10 +65,10 @@ def nonlan_delete(_nonlan_delete: nonlan_schema.NonlanDelete,
     if not db_nonlan:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="해당 논란을 찾을 수 없습니다.")
-    if current_user.id != db_nonlan.user.id:
+    if (current_user.id != db_nonlan.user.id) and (current_user.set_admin == False):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail='삭제 권한이 없습니다.')
-    nonlan_crud.nonlan_delete(db=db, db_nonlan=db_nonlan)
+    nonlan_crud.delete_nonlan(db=db, db_nonlan=db_nonlan)
 '''
 논란 삭제 스키마의 id 값을 이용해 삭제할 논란의 내용을 get_nonlan 함수로 찾아줌
 해당 내용이 데이터베이스에 있는지 확인하고
@@ -83,7 +83,7 @@ def nonlan_update(_nonlan_update: nonlan_schema.NonlanUpdate,
     if not db_nonlan:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="데이터를 찾을 수 없습니다.")
-    if current_user.id != db_nonlan.user.id:
+    elif (current_user.id != db_nonlan.user.id) and (current_user.set_admin == False):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail='수정 권한이 없습니다.')
     nonlan_crud.update_nonlan(db=db, db_nonlan=db_nonlan, nonlan_update=_nonlan_update)

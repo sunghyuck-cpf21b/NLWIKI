@@ -70,6 +70,22 @@
             })
     }
 
+    function delete_comment(_comment_id) {
+        if(window.confirm('정말로 삭제하시겠습니까?')) {
+            let url='/api/comment/delete'
+            let params = {
+                comment_id: _comment_id
+            }
+            fastapi('delete', url, params,
+                (json)=>{
+                    get_nonlan()
+                },
+                (err_json)=>{
+                    error = err_json
+                })
+            }
+    }
+
 </script>
 
 
@@ -94,13 +110,24 @@
         {/if}
     </div>
 
-    {#each nonlan.comments as comment}
-        <div class='comment_box'>
-            <div>
-                {@html marked.parse(comment.content)}
+    <div class='comment_box'>
+        {#each nonlan.comments as comment}
+            <div class='comment_box_inside'>
+                <div class="comment_info">
+                    {@html marked.parse(comment.user.username)}
+                </div>
+                <div class='comment_content'>
+                    {@html marked.parse(comment.content)}
+                </div>
+                <div class='comment_date'>
+                    {moment(comment.create_date).format("YYYY.MM.DD")}
+                    <button class='comment_btn' on:click={()=>delete_comment(comment.id)}>삭제</button>
+                </div>
+
             </div>
-        </div>
-    {/each}
+        {/each}
+    </div>
+
     <Error error={error} />
     <form method='post'>
         <div>
@@ -132,6 +159,44 @@ on:click = "{문자열 또는 함수"
 
 <style>
     .comment_box {
-        border: 1px solid #000000;
+        position: static;
+        margin: 20px auto;
+        padding: 0 0 50px;
+        border-top: 3px solid #000000;
+        border-bottom: 3px solid #000000;
+    }
+
+    .comment_box_inside {
+        display: grid;
+        grid-template-columns: 15% 1fr 20%;
+        grid-template-areas: 
+        "a b c";
+        
+
+        border-bottom: 1px solid #000000;
+
+    }
+
+    .comment_box_inside > div {
+        padding: 5px;
+    }
+
+    .comment_info {
+        grid-area: a;
+    }
+
+    .comment_content {
+        grid-area: b;
+    }
+
+    .comment_date {
+        position: static;
+        grid-area: c;
+    }
+
+    .comment_btn {
+        position: absolute;
+        margin: 0px 5px;
+        right: 0px;
     }
 </style>

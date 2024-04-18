@@ -94,10 +94,12 @@
 		urls = []
 	}
 
+
+
 </script>
 
 <div class="container">
-    <h5 class="my-3 border-bottom pb-2">질문 수정</h5>
+    <h5 class="my-3 border-bottom pb-2">질문 수정 gggg</h5>
     <Error error={error} />
     <form method="post" class="my-3">
         <div class="mb-3">
@@ -118,7 +120,7 @@
 
             <div id='content-div' class='mb-3'>
                 <label for='content'>논란 내용</label>
-                <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true">{content}</div>
+                <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true">{@html content}</div>
                 <input id='content' style='display: none'>
                 <!--<input id="contt" type="text" class="form-control" bind:value="{content}">-->
             </div>

@@ -34,6 +34,9 @@ def user_create(_user_create: user_schema.UserCreate, db: Session = Depends(get_
     if user:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,
                             detail='이미 존재하는 사용자입니다.')
+    if len(_user_create.username) > 15:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail='이름은 15자 이하로 만들어야 합니다.')
     user_crud.create_user(db=db, user_create=_user_create)
 
 @router.post("/login", response_model=user_schema.Token)
