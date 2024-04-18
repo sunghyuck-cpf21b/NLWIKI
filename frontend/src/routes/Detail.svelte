@@ -133,7 +133,7 @@
         <div>
             <textarea rows='3' bind:value={comment_content} disabled={$is_login ? '' : 'disabled'}></textarea>
         </div>
-        <input type='submit' value='답변등록' class='{$is_login ? '' : 'disabled'}' on:click='{post_comment}'>
+        <input type='submit' value='댓글 등록' class='{$is_login ? '' : 'disabled'}' on:click='{post_comment}'>
     </form>
 </div>
 
