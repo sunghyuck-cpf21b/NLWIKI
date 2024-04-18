@@ -86,6 +86,10 @@
             }
     }
 
+    console.log(nonlan.user && $username === nonlan.user.username)
+    console.log($set_admin)
+    
+
 </script>
 
 
@@ -104,7 +108,7 @@
             </div>
 
         </div>
-        {#if nonlan.user && $username === nonlan.user.username || $set_admin}
+        {#if (nonlan.user && $username === nonlan.user.username) || $set_admin}
             <button on:click={()=>delete_nonlan(nonlan_id)}>논란 삭제</button>
             <a use:link href='/nonlan-modify/{nonlan.id}'>논란 수정</a>
         {/if}
