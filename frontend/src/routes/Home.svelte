@@ -53,16 +53,18 @@
         <thead>
             <tr>
                 <th class='th-id'>논란번호</th>
+                <th>주요 인물</th>
                 <th class='th-subject'>제목</th>
                 <th>작성자</th>
-                <th>발생일</th>
-                <th>작성일</th>
+                <th class='th_date'>발생일</th>
+                <th class='th_date'>작성일</th>
             </tr>
         </thead>
         <tbody>
             {#each nonlan_list as nonlan}
                 <tr>
                     <td>{nonlan.id}</td>
+                    <td>{nonlan.person}</td>
                     <td style='text-align: left;'>
                         <a use:link href='/detail/{nonlan.id}'>{nonlan.subject}</a>
                         {#if nonlan.comments.length > 0}
@@ -72,8 +74,8 @@
                         {/if}
                     </td>
                     <td>{nonlan.user ? nonlan.user.username : ''}</td>
-                    <td>{moment(nonlan.occ_date).format("YYYY/MM/DD")}</td>
-                    <td>{moment(nonlan.create_date).format('YYYY/MM/DD')}</td>
+                    <td>{moment(nonlan.occ_date).format("YYYY.MM.DD")}</td>
+                    <td>{moment(nonlan.create_date).format('YYYY.MM.DD')}</td>
                 </tr>
             {/each}
         </tbody>
@@ -150,6 +152,10 @@
 
     .th-subject {
         width: 60%
+    }
+
+    .th_date {
+        font-size: 12px;
     }
 
     tbody tr:hover {
