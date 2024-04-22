@@ -110,6 +110,7 @@
     .nonlan_table {
         width: 800px;
         margin: 0 auto;
+        font-size: 14px;
     }
 
     .tool_bar {
@@ -159,7 +160,6 @@
     }
 
     .th_date {
-        font-size: 12px;
     }
 
     tbody tr:hover {
@@ -173,6 +173,10 @@
     th {
         border-top: 4px solid #000000;
         border-bottom: 2px solid #000000;
+    }
+
+    td, th {
+        padding: 0 3px;
     }
 
     .div_page {
