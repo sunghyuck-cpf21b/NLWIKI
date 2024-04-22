@@ -156,7 +156,7 @@
     }
 
     .th_person {
-        width: 10%
+        width: 15%
     }
 
     .th_date {
