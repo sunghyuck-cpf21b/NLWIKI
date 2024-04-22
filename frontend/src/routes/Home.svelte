@@ -53,11 +53,11 @@
         <thead>
             <tr>
                 <th class='th-id'>논란번호</th>
-                <th>주요 인물</th>
+                <th class='th_person'>주요 인물</th>
                 <th class='th-subject'>제목</th>
                 <th>작성자</th>
-                <th class='th_date'>발생일</th>
-                <th class='th_date'>작성일</th>
+                <th>발생일</th>
+                <th>작성일</th>
             </tr>
         </thead>
         <tbody>
@@ -74,8 +74,8 @@
                         {/if}
                     </td>
                     <td>{nonlan.user ? nonlan.user.username : ''}</td>
-                    <td>{moment(nonlan.occ_date).format("YYYY.MM.DD")}</td>
-                    <td>{moment(nonlan.create_date).format('YYYY.MM.DD')}</td>
+                    <td class='th_date'>{moment(nonlan.occ_date).format("YYYY.MM.DD")}</td>
+                    <td class='th_date'>{moment(nonlan.create_date).format('YYYY.MM.DD')}</td>
                 </tr>
             {/each}
         </tbody>
@@ -152,6 +152,10 @@
 
     .th-subject {
         width: 60%
+    }
+
+    .th_person {
+        width: 10%
     }
 
     .th_date {
