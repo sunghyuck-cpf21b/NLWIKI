@@ -21,7 +21,7 @@ def get_nonlan_list(db: Session, skip: int = 0, limit: int = 10, keyword: str = 
                     sub_query.c.username.ilike(search)
                     )
     total = nonlan_list.distinct().count()
-    nonlan_list = nonlan_list.order_by(Nonlan.occ_date.desc())\
+    nonlan_list = nonlan_list.order_by(Nonlan.occ_date.desc(), Nonlan.create_date.desc())\
         .offset(skip).limit(limit).distinct().all()
     return total, nonlan_list
 
