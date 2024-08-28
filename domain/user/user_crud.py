@@ -4,6 +4,8 @@ from models import User
 
 from passlib.context import CryptContext
 
+import Levenshtein
+
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 
 def create_user(db: Session, user_create: UserCreate):
@@ -20,3 +22,21 @@ def get_user(db: Session, username: str):
 
 def user_info(db: Session, user_id: int):
     return db.query(User).get(user_id)
+
+
+
+def search_user(db: Session, username: str, cutoff: float):
+    user_dict = {
+        f'{Levenshtein.ratio(username, user.username)}user.username': user
+        for user
+        in db.query(User).all()
+        if Levenshtein.ratio(username.lower(), user.username.lower()) >= cutoff
+    }
+    print(username)
+    print(user_dict)
+    temp = dict(sorted(user_dict.items(), reverse=True))
+    result = list(temp.values())
+    return result
+
+def get_user_id(db: Session ,username: str):
+    return db.query(User.id).filter_by(username=username).scalar()

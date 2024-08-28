@@ -87,3 +87,9 @@ def get_user(user_id: int,
              db: Session = Depends(get_db)):
     user = user_crud.user_info(db, user_id)
     return user
+
+@router.get('/search_user/{username}', response_model=list[user_schema.User])
+def get_search_user_list(username: str, cutoff: float = 0.2, db: Session = Depends(get_db)):
+    result = user_crud.search_user(db=db, username=username, cutoff=cutoff)
+    print(result)
+    return result
