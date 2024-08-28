@@ -23,20 +23,23 @@
         <div>
             <ul>
                 {#if $is_login}
-                    <li>
-                        <a use:link href='/user-login' on:click={()=>{
-                            $access_token = ''
-                            $username = ''
-                            $is_login = false
-                        }}>로그아웃 ({$username})</a>
-                    </li>
+                <li>
+                    <a use:link href='/mypage/{$username}'>마이페이지</a>
+                </li>
+                <li>
+                    <a use:link href='/user-login' on:click={()=>{
+                        $access_token = ''
+                        $username = ''
+                        $is_login = false
+                    }}>로그아웃 ({$username})</a>
+                </li>
                 {:else}
-                    <li>
-                        <a use:link href='/user-create'>회원가입</a>
-                    </li>
-                    <li>
-                        <a use:link href='/user-login'>로그인</a>
-                    </li>
+                <li>
+                    <a use:link href='/user-create'>회원가입</a>
+                </li>
+                <li>
+                    <a use:link href='/user-login'>로그인</a>
+                </li>
                 {/if}
             </ul>
         </div>
