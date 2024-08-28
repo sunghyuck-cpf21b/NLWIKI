@@ -54,39 +54,39 @@ const fastapi = (operation, url, params, success_callback, failure_callback) => 
 // -> 실제 서버로부터 받은 응답에 대한 정보를 담고 있는 객체이다. 이 객체를 사용하여 응답 본문을 json 형식으로 파싱하거나 다양한 응답 정보를 확인할 수 있다.
 // promise는 비동기 작업의 결과를 나타내는 javascript 객체로, 작업이 완료되면 값을 반환하거나 오류를 발생시키는데 사용된다.
 // -> 네트워크
-    fetch(_url, options)
-        .then(response => {
-            if(response.status === 204) {       // 응답 결과가 없는 API를 위해 추가된 부분이다. 응답 결과가 없더라도 success_callback을 실행할 수 있다.
-                if(success_callback) {          // success_callback 값이 있다면 실행, 응답 결과가 없기 때문에 success_callback에 값을 넘겨주지 않는다.
-                    success_callback()
-                }
-                return  // if 문이 작동한다면 여기서 fetch문을 종료test@gmail.com
+    try {
+        const response = await fetch(_url, options)
+        if (response.status === 204) {
+            if (success_callback) {
+                await success_callback();
             }
-            response.json()
-                .then(json => {
-                    if(response.status >= 200 && response.status < 300) { 
-                        if(success_callback) {      // success_callback에 값이 있다면 응답 결과를 넘겨주어 실행시킨다.
-                            success_callback(json)
-                        }
-                    }else if(operation !== 'login' && response.status === 401) { // token time out
-                        access_token.set('')
-                        username.set('')
-                        is_login.set(false)
-                        alert(operation)
-                        alert(response.status)
-                        push('/user-login')
-                    }else {
-                        if (failure_callback) {
-                            failure_callback(json)
-                        }else {
-                            alert(JSON.stringify(json))
-                        }
-                    }
-                })
-                .catch(error => {
-                    alert(JSON.stringify(error))
-                })
-        })
+            return
+        }
+        const json = await response.json()
+        if (response.status >= 200 && response.status < 300) {
+            if (success_callback) {
+                await success_callback(json)
+            }
+            return json
+        } else if (operation !== 'login' && response.status === 401) {
+            access_token.set('')
+            username.set('')
+            is_login.set('')
+            alert(operation)
+            alert(response.status)
+            push('/login')
+        } else {
+            if (failure_callback) {
+                failure_callback(json)
+            } else {
+                alert(JSON.stringify(json))
+            }
+            throw new Error(json.message || 'Fetch failed')
+        }
+    } catch (error) {
+        alert(JSON.stringify(error))
+        throw error
+    }
 }
 // _url에 요청을 보낸다.
 // then 에서는 fetch 함수가 반환한 promise를 처리하는데 사용된다. 서버로부터 받은 응답을 처리한다.

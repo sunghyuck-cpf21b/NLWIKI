@@ -12,6 +12,11 @@ const persist_storage = (key, initValue) => {
 
 export const page = persist_storage("page", 0)
 
+let NowDay = new Date
+const ST_year = NowDay.getFullYear()
+const ST_month = NowDay.getMonth()+1
+export const year = persist_storage("year", ST_year)
+export const month = persist_storage("month", ST_month)
 
 export const access_token = persist_storage("access_token", "")
 export const username = persist_storage("username", "")
