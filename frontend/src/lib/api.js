@@ -4,7 +4,7 @@ import { get } from 'svelte/store'
 import { push } from 'svelte-spa-router'
 
 // 요청 방식, 경로, 전달한 매개변수, 성공시 동작, 실패시 동작
-const fastapi = (operation, url, params, success_callback, failure_callback) => {
+const fastapi = async (operation, url, params, success_callback, failure_callback) => {
     let method = operation
     let content_type = 'application/json'
     let body = JSON.stringify(params)
