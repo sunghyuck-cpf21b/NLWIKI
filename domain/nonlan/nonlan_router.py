@@ -39,6 +39,7 @@ def nonlan_list(db: Session = Depends(get_db), page: int = 0, size: int = 10, ke
 @router.get("/detail/{nonlan_id}", response_model=nonlan_schema.Nonlan)
 def nonlan_detail(nonlan_id: int, db: Session = Depends(get_db)):
     nonlan = nonlan_crud.get_nonlan(db, nonlan_id=nonlan_id)
+    print(nonlan)
     return nonlan
 '''
 파일을 가져오기 위해 입력해야 할 매개변수는 

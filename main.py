@@ -7,7 +7,7 @@ from domain.nonlan import nonlan_router
 from domain.comment import comment_router
 from domain.user import user_router
 from domain.Sep_Program import sep_program_router
-from domain.weeklymemo import weeklymemo_schema
+from domain.weeklymemo import weeklymemo_router
 # from domain.image import image_router
 
 app = FastAPI()
@@ -30,7 +30,7 @@ app.include_router(nonlan_router.router)
 app.include_router(comment_router.router)
 app.include_router(user_router.router)
 app.include_router(sep_program_router.router)
-app.include_router(weeklymemo_schema.router)
+app.include_router(weeklymemo_router.router)
 # app.include_router(image_router.router)
 
 

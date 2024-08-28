@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.exc import InvalidRequestError
 from starlette.config import Config
 
 config = Config('.env')
@@ -15,7 +16,16 @@ engine = create_engine(
 3. 자원 관리:션 풀은 데이터베이스 연결을 효율적으로 관리하여 자원을 절약합니다. 연결이 더 이상 필요하지 않을 때는 커넥션을 닫고 재활용하거나 반환하여 데이터베이스 자원을 최적화합니다.
 '''
 
+class ReadOnly(Session):
+    def commit(self):
+        raise InvalidRequestError("읽기 전용 파일입니다.")
+    def flush(self, *args, **kwargs):
+        raise InvalidRequestError("읽기 전용 파일입니다.")
+
+
 SessionLocal = sessionmaker(autocommit = False, autoflush= False, bind = engine)
+SessionLocal_read = sessionmaker(autocommit = False, autoflush = False, bind = engine, class_=ReadOnly)
+
 '''
 autoflush : 세션 객체가 변경 사항이 발생할 때 마다 데이터베이스에 자동으로 반영된다. 변경 사항이 발생하는 시점에는 세션이 데이터베이스에 대한 쿼리를 실행하여 변경 사항을 반영한다.
 비활성화 시에는 명시적으로 commit() 메소드를 호출하여 변경 사항을 데이터베이스에 반영해야 한다.
@@ -53,3 +63,9 @@ def get_db():
     finally:
         db.close()
 
+def read_only_db():
+    db = SessionLocal_read()
+    try:
+        yield db
+    finally:
+        db.close()
