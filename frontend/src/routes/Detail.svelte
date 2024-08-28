@@ -124,7 +124,6 @@
                     {moment(comment.create_date).format("YYYY.MM.DD")}
                     <button class='comment_btn' on:click={()=>delete_comment(comment.id)}>삭제</button>
                 </div>
-
             </div>
         {/each}
     </div>
