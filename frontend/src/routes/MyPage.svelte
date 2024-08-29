@@ -19,6 +19,7 @@
         params.year = year
         params.month = month
     }
+    console.log('test page')
 </script>
 
 <div class='date_control'>
