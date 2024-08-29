@@ -57,6 +57,7 @@ const fastapi = async (operation, url, params, success_callback, failure_callbac
     console.log(_url, options)
     try {
         const response = await fetch(_url, options)
+        console.log(response)
         if (response.status === 204) {
             console.log('fetch 204')
             if (success_callback) {
