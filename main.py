@@ -61,3 +61,15 @@ http://127.0.0.1:8000/ => 사이트
 3. git commit -m "커밋 코멘트" 명령 수행하기
 4. git push 명령 수행하기
 '''
+
+
+
+''' for error log '''
+import logging
+
+log_file_path = "/home/ubuntu/projects/myapi/logs/nginx_error.log"
+logging.basicConfig(
+    filename= log_file_path,
+    level= logging.INFO,
+    format= "%(asctime)s - %(levelname)s - %(message)s"
+)
