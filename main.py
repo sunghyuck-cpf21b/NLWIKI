@@ -45,7 +45,7 @@ import logging
 log_file_path = "/home/ubuntu/projects/myapi/logs/nginx_error.log"
 logging.basicConfig(
     filename= log_file_path,
-    level= logging.INFO,
+    level= logging.DEBUG,
     format= "%(asctime)s - %(levelname)s - %(message)s"
 )
 
