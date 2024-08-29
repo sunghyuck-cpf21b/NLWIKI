@@ -58,6 +58,7 @@ const fastapi = async (operation, url, params, success_callback, failure_callbac
     try {
         const response = await fetch(_url, options)
         if (response.status === 204) {
+            console.log('fetch 204')
             if (success_callback) {
                 await success_callback();
             }
@@ -65,11 +66,13 @@ const fastapi = async (operation, url, params, success_callback, failure_callbac
         }
         const json = await response.json()
         if (response.status >= 200 && response.status < 300) {
+            console.log('fetch 200 to 300')
             if (success_callback) {
                 await success_callback(json)
             }
             return json
         } else if (operation !== 'login' && response.status === 401) {
+            console.log('fetch login')
             access_token.set('')
             username.set('')
             is_login.set('')
@@ -77,6 +80,7 @@ const fastapi = async (operation, url, params, success_callback, failure_callbac
             alert(response.status)
             push('/login')
         } else {
+            console.log('fetch fail')
             if (failure_callback) {
                 failure_callback(json)
             } else {
