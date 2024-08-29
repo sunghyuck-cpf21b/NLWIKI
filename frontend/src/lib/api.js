@@ -54,6 +54,7 @@ const fastapi = async (operation, url, params, success_callback, failure_callbac
 // -> 실제 서버로부터 받은 응답에 대한 정보를 담고 있는 객체이다. 이 객체를 사용하여 응답 본문을 json 형식으로 파싱하거나 다양한 응답 정보를 확인할 수 있다.
 // promise는 비동기 작업의 결과를 나타내는 javascript 객체로, 작업이 완료되면 값을 반환하거나 오류를 발생시키는데 사용된다.
 // -> 네트워크
+    console.log(_url, options)
     try {
         const response = await fetch(_url, options)
         if (response.status === 204) {

@@ -8,14 +8,15 @@
     let login_username = ''
     let login_password = ''
 
-    function login(event) {
+    async function login(event) {
         event.preventDefault()
         let url = "/api/user/login"
         let params = {
             username: login_username,
             password: login_password,
         }
-        fastapi('login', url, params,
+        console.log('123123123')
+        await fastapi('login', url, params,
             (json) => {
                 $access_token = json.access_token 
                 $username = json.username 
