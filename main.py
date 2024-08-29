@@ -39,8 +39,19 @@ app.mount('/assets', StaticFiles(directory='frontend/dist/assets'))
 # index.html에서 참조하는 js, css파일의 경로가 /assets로 시작하는 경로로 참조하므로
 # directory 경로를 /assets로 매핑한다.
 
+''' for error log '''
+import logging
+
+log_file_path = "/home/ubuntu/projects/myapi/logs/nginx_error.log"
+logging.basicConfig(
+    filename= log_file_path,
+    level= logging.INFO,
+    format= "%(asctime)s - %(levelname)s - %(message)s"
+)
+
 @app.get('/')
 def index():
+    logging.info("Sercing index page")
     return FileResponse('frontend/dist/index.html')
 # 여기까지
 '''
@@ -64,12 +75,4 @@ http://127.0.0.1:8000/ => 사이트
 
 
 
-''' for error log '''
-import logging
 
-log_file_path = "/home/ubuntu/projects/myapi/logs/nginx_error.log"
-logging.basicConfig(
-    filename= log_file_path,
-    level= logging.INFO,
-    format= "%(asctime)s - %(levelname)s - %(message)s"
-)
