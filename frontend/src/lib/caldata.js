@@ -166,7 +166,7 @@ export async function delete_weekly_memo(sunday_date) {
     return edit_complete
 }
 
-
+/*
 export async function get_month_data(year, month) {
     const url = '/api/sep_program/month_data'
     const params = {
@@ -182,5 +182,5 @@ export async function get_month_data(year, month) {
         }
     )
     return [month_data, bool]
-}
+}*/
 

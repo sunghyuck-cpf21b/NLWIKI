@@ -15,13 +15,13 @@
 
     let edit_auth = Boolean(is_login && $username == params.username)
     $: calendar = caldata.calendar_maker(params.year, params.month)
-
+/*
     let month_data = {}
     let data_ready = false
     caldata.get_month_data(params.year, params.month).then(data=>{
         month_data = data[0]
         data_ready = data[1]
-    })
+    })*/
     
     async function get_daily_data({date, btn_action}) {
         const url = '/api/sep_program/program_date'

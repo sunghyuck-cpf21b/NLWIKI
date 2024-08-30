@@ -1,10 +1,10 @@
 from database import SessionLocal
-from models import Nonlan
+from models import Nonlan, User, ProgramDate
+from sqlalchemy import and_
 
 db = SessionLocal()
-id_list = db.query(Nonlan.id).all()
-print(id_list)
-print(id_list[-1][0])
-print(type(id_list[-1][0]))
-id = db.query(Nonlan.id).order_by(Nonlan.id.desc()).all()[0][0]
-print(id)
+
+
+
+data_list = db.query(ProgramDate).filter(ProgramDate.user_id == 3).all()
+print(data_list)
