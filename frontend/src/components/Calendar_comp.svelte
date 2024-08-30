@@ -470,7 +470,6 @@
         }
     }
 
-    $: get_total_calendar({yy:params.year, mm:params.month, btn_action:true})
     $: calendar_bool(cal)
 
     // 메뉴상자 컨트롤
