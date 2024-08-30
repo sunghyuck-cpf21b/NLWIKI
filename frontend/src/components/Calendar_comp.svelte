@@ -292,25 +292,6 @@
 
     let isit_called = false
     let test_var
-    // 상황에 따른 cal, exercise, volume, memo 리스트 초기화 기능 넣기
-    async function get_total_calendar({yy, mm, btn_action}) {       // 달력 가져오기
-        let url = '/api/program/calendar/'
-        let params = {
-            year: yy,
-            month: mm,
-        }
-        if(btn_action) {cal=[]; exercise=[]; volume=[]; memo=[];}
-        await fastapi('get', url, params,
-            (json)=>{
-                cal = json.cal 
-                exercise = json.exercise
-                volume = json.volume
-                memo = json.memo
-                get_all_exercise()
-                return json
-            })
-    } 
-
 
 
 
