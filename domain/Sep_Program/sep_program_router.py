@@ -66,11 +66,9 @@ def get_month_data_2(start_date: datetime.date,
                      username: str,
                      db: Session = Depends(get_db)):
     user_id = user_crud.get_user_id(db=db, username=username)
-    '''
     if not user_id:
         raise HTTPException(status_code=status.HTTP_204_NO_CONTENT,
                             detail='해당 사용자가 존재하지 않습니다.')
-    '''
     data = sep_program_crud.get_month_data_2(db=db, start_date=start_date,
                                              end_date=end_date, user_id=user_id)
     return data
