@@ -64,9 +64,10 @@
         align-items: center;
     }
     .login_input{
-        width: 60%;
-        height: 30%;
+        width: 80%;
+        height: 40%;
         display: flex;
+        flex-direction: column;
         align-items: flex-start;
         justify-content: center;
     }
