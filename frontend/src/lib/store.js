@@ -11,6 +11,7 @@ const persist_storage = (key, initValue) => {
 }
 
 export const page = persist_storage("page", 0)
+export const now_page = persist_storage("now_page", 1)
 
 let NowDay = new Date
 const ST_year = NowDay.getFullYear()

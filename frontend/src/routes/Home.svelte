@@ -1,7 +1,7 @@
 <script>
     import fastapi from "../lib/api"
     import { link, push } from 'svelte-spa-router'    // href 앞에 link 를 사용하면 주소에 # 이 붙어 하나의 페이지로 인식된다.
-    import { page, is_login } from "../lib/store"
+    import { page, now_page, is_login } from "../lib/store"
 
     import moment from 'moment/min/moment-with-locales'
     moment.locale('ko')
@@ -16,7 +16,6 @@
     let kw = ''
     let T_page = 0
 
-    let now_page = 1
 
     $: total_page = Math.ceil(total/size)
 
@@ -84,19 +83,19 @@
     <!-- page -->
     <div class='div_page'>
         {#if T_page > 0}
-            <a class='page_back' href='#' on:click={()=>{(T_page-=1); get_nonlan_list(T_page*5); (now_page=T_page*5+1)}}>이전</a>
+            <a class='page_back' href='#' on:click={()=>{(T_page-=1); get_nonlan_list(T_page*5); ($now_page=T_page*5+1)}}>이전</a>
         {/if}
         {#each [1,2,3,4,5] as n}
             {#if T_page*5+n <= total_page}
                 {#if T_page*5+n === now_page}
-                    <a class='page_{n}' style='text-decoration-line: underline; font-weight: 600;' href='#' on:click={()=>{get_nonlan_list(T_page*5+n-1); (now_page=T_page*5+n);}}>{T_page*5+n}</a>
+                    <a class='page_{n}' style='text-decoration-line: underline; font-weight: 600;' href='#' on:click={()=>{get_nonlan_list(T_page*5+n-1); ($now_page=T_page*5+n);}}>{T_page*5+n}</a>
                 {:else}
-                    <a class='page_{n}' href='#' on:click={()=>{get_nonlan_list(T_page*5+n-1); (now_page=T_page*5+n);}}>{T_page*5+n}</a>
+                    <a class='page_{n}' href='#' on:click={()=>{get_nonlan_list(T_page*5+n-1); ($now_page=T_page*5+n);}}>{T_page*5+n}</a>
                 {/if}
             {/if}
         {/each}
         {#if T_page*5+5 < total_page}
-            <a class='page_next' href='#' on:click={()=>{(T_page+=1); get_nonlan_list(T_page*5); (now_page=T_page*5+1)}}>다음</a>
+            <a class='page_next' href='#' on:click={()=>{(T_page+=1); get_nonlan_list(T_page*5); ($now_page=T_page*5+1)}}>다음</a>
         {/if}
     </div>
 
