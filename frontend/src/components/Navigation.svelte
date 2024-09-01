@@ -64,7 +64,10 @@
     }
     .home_logo {
         font-size: 30px;
-        text-decoration: none;
         font-weight: 600;
+    }
+    a {
+        text-decoration: none;
+        color: #000000;
     }
 </style>

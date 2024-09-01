@@ -43,5 +43,13 @@
 
 
 <Navigation />
-<Router {routes}/>
+<main>
+  <Router {routes}/>
+</main>
 
+
+<style>
+  main{
+    margin: 50px auto;
+  }
+</style>
