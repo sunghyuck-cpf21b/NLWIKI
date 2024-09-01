@@ -6,7 +6,7 @@
 <!-- 네비게이션바 -->
 <nav>
     <div>
-        <a class='go_home' use:link href="/" on:click={()=>{$page=0}}>논란위키</a>
+        <a class='home_logo' use:link href="/" on:click={()=>{$page=0}}>NLWK</a>
         <!--
         <a class='create_btn' use:link href="/nonlan_create">논란 작성</a>
         -->
@@ -53,7 +53,7 @@
         width: 100%;
         margin: 0;
     }
-    .nav_div {
+    nav > div {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -61,5 +61,10 @@
     nav li {
         list-style-type: none;
         display: inline;
+    }
+    .home_logo {
+        font-size: 30px;
+        text-decoration: none;
+        font-weight: 600;
     }
 </style>
