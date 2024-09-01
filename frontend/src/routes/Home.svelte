@@ -87,7 +87,7 @@
         {/if}
         {#each [1,2,3,4,5] as n}
             {#if T_page*5+n <= total_page}
-                {#if T_page*5+n === now_page}
+                {#if T_page*5+n === $now_page}
                     <a class='page_{n}' style='text-decoration-line: underline; font-weight: 600;' href='#' on:click={()=>{get_nonlan_list(T_page*5+n-1); ($now_page=T_page*5+n);}}>{T_page*5+n}</a>
                 {:else}
                     <a class='page_{n}' href='#' on:click={()=>{get_nonlan_list(T_page*5+n-1); ($now_page=T_page*5+n);}}>{T_page*5+n}</a>
