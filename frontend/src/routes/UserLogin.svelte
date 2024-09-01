@@ -33,11 +33,11 @@
     <h5>로그인</h5>
     <Error error={error} />
     <form method='post'>
-        <div class='login_box'>
+        <div class='login_input'>
             <label for='username'>사용자 이름</label>
             <input type='text' id='username' bind:value='{login_username}'>
         </div>
-        <div class='login_box'>
+        <div class='login_input'>
             <label for='password'>비밀번호</label>
             <input type='password' id='password' bind:value='{login_password}'>
         </div>
@@ -62,5 +62,12 @@
         height: 200px;
         justify-content: space-evenly;
         align-items: center;
+    }
+    .login_input{
+        width: 60%;
+        height: 30%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
     }
 </style>
