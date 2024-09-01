@@ -47,31 +47,19 @@
 </nav>
 
 
-<!--
 <style>
     nav {
-        height: 50px;
-        border-bottom: 1px solid #000000;
-        /*position: fixed;*/
+        border: 1px solid #000000;
+        width: 100%;
+        margin: 0;
+    }
+    .nav_div {
         display: flex;
-        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
     }
-
-    nav > div {
-
-    }
-
-    a {
-        color: #000000;
-        text-decoration-line: none;
-    }
-
-    .go_home {
-        font-size: 20px;
-    }
-
-    .create_btn {
-        font-size: 15px;
+    nav li {
+        list-style-type: none;
+        display: inline;
     }
 </style>
--->
