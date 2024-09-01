@@ -62,6 +62,9 @@
         list-style-type: none;
         display: inline;
     }
+    li a {
+        margin: auto 10px;
+    }
     .home_logo {
         font-size: 30px;
         font-weight: 600;
