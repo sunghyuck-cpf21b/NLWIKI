@@ -142,7 +142,7 @@
 
     table {
         width: 100%;
-        margin: 0 auto;
+        margin: 10px auto;
         text-align: center;
     }
 

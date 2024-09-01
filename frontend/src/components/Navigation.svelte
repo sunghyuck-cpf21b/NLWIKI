@@ -50,6 +50,7 @@
 <style>
     nav {
         border: 1px solid #000000;
+        min-width: 900px;
         width: 100%;
         margin: 0;
     }
@@ -57,6 +58,8 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: baseline;
+        margin: 3px 10px;
     }
     nav li {
         list-style-type: none;
