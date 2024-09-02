@@ -90,7 +90,7 @@
 </script>
 
 
-<div>
+<div class='content_box'>
     <h2>{nonlan.subject}</h2>
     <div>
         <div>
@@ -158,6 +158,11 @@ on:click = "{문자열 또는 함수"
 
 
 <style>
+    .content_box {
+        width: 1000px;
+        border: 1px solid #000000;
+    }
+
     .comment_box {
         position: static;
         margin: 20px auto;
