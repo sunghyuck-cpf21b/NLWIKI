@@ -13,10 +13,10 @@ from domain.weeklymemo import weeklymemo_router
 app = FastAPI()
 
 origins = [
-    'http://http://127.0.0.1:8000',
+    'http://localhost:5173',
 ]
 #
-#
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
