@@ -51,6 +51,7 @@
 <style>
   main{
     margin: 50px auto;
+    boder: 1px solid #000000;
     min-width: 800px;
     width: 90vw;
     /* 최소 너비 설정 + 창 크기에 맞춰서 크기 설정*/
