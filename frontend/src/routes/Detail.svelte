@@ -91,7 +91,20 @@
 
 
 <div class='content_box'>
-    <h2>{nonlan.subject}</h2>
+    <div class='content_info'>
+        <div class='subject'>{nonlan.subject}</div>
+        <div class='content_sub_info_1'>
+            작성 정보
+            <p>{nonlan.user}</p>
+            <p>{nonlan.create_date}</p>
+        </div>
+        <div class='content_sub_info_2'>
+            논란 정보
+            <p>{nonlan.person}</p>
+            <p>{nonlan.occ_date}</p>
+        </div>
+    </div>
+    
     <div>
         <div>
             <div>
