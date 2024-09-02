@@ -16,7 +16,10 @@ class Nonlan(Base):
     create_date = Column(DateTime, nullable=False)
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     user = relationship('User', backref='nonlan_users')
-
+'''
+허가된 유저들만 논란 작성 및 열람 가능하도록
+논란 모델을 일반 
+'''
 
 
 

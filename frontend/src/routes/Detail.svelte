@@ -90,60 +90,62 @@
 </script>
 
 
-<div class='content_box'>
-    <div class='content_info_room'>
-        <div class='subject'>{nonlan.subject}</div>
-        <div class='content_info_box'>
-            <span>작성 정보</span>
-            <span class='content_info'>{nonlan.user.username}</span>
-            <span class='content_info'>{moment(nonlan.create_date).format("YYYY.MM.DD HH:mm:ss")}</span>
+<section>
+    <div class='content_box'>
+        <div class='content_info_room'>
+            <div class='subject'>{nonlan.subject}</div>
+            <div class='content_info_box'>
+                <span>작성 정보</span>
+                <span class='content_info'>{nonlan.user.username}</span>
+                <span class='content_info'>{moment(nonlan.create_date).format("YYYY.MM.DD HH:mm:ss")}</span>
+            </div>
+            <div class='content_info_box'>
+                <span>논란 정보</span>
+                <span class='content_info'>{nonlan.person}</span>
+                <span class='content_info'>{moment(nonlan.occ_date).format("YYYY.MM.DD")}</span>
+            </div>
         </div>
-        <div class='content_info_box'>
-            <span>논란 정보</span>
-            <span class='content_info'>{nonlan.person}</span>
-            <span class='content_info'>{moment(nonlan.occ_date).format("YYYY.MM.DD")}</span>
+        
+        <div class='main_content_box'>
+            <div class='main_content'>
+                {@html nonlan.content}
+            </div>
+            {#if nonlan.user && $username === nonlan.user.username}
+                <button on:click={()=>delete_nonlan(nonlan_id)}>논란 삭제</button>
+                <button on:click={()=>{push(`/nonlan-modify/${nonlan.id}`)}}>논란 수정</button>
+            {/if}
         </div>
-    </div>
     
-    <div class='main_content_box'>
-        <div class='main_content'>
-            {@html nonlan.content}
+        <div class='comment_box'>
+            {#each nonlan.comments as comment}
+                <div class='comment_box_inside'>
+                    <div class="comment_info">
+                        {@html marked.parse(comment.user.username)}
+                    </div>
+                    <div class='comment_content'>
+                        {@html marked.parse(comment.content)}
+                    </div>
+                    <div class='comment_date'>
+                        {moment(comment.create_date).format("YYYY.MM.DD")}
+                        <button class='comment_btn' on:click={()=>delete_comment(comment.id)}>삭제</button>
+                    </div>
+                </div>
+            {/each}
+            <form class='comment_form' method='post'>
+                <div class='comment_div'>
+                    <textarea 
+                    class='comment_textarea'
+                    rows='3' bind:value={comment_content} disabled={$is_login ? '' : 'disabled'}></textarea>
+                    <input type='submit' value='댓글 등록' class='{$is_login ? '' : 'disabled'}' on:click='{post_comment}'>
+                </div>
+                
+            </form>
         </div>
-        {#if nonlan.user && $username === nonlan.user.username}
-            <button on:click={()=>delete_nonlan(nonlan_id)}>논란 삭제</button>
-            <button on:click={()=>{push(`/nonlan-modify/${nonlan.id}`)}}>논란 수정</button>
-        {/if}
+    
+        <Error error={error} />
+    
     </div>
-
-    <div class='comment_box'>
-        {#each nonlan.comments as comment}
-            <div class='comment_box_inside'>
-                <div class="comment_info">
-                    {@html marked.parse(comment.user.username)}
-                </div>
-                <div class='comment_content'>
-                    {@html marked.parse(comment.content)}
-                </div>
-                <div class='comment_date'>
-                    {moment(comment.create_date).format("YYYY.MM.DD")}
-                    <button class='comment_btn' on:click={()=>delete_comment(comment.id)}>삭제</button>
-                </div>
-            </div>
-        {/each}
-        <form class='comment_form' method='post'>
-            <div class='comment_div'>
-                <textarea 
-                class='comment_textarea'
-                rows='3' bind:value={comment_content} disabled={$is_login ? '' : 'disabled'}></textarea>
-                <input type='submit' value='댓글 등록' class='{$is_login ? '' : 'disabled'}' on:click='{post_comment}'>
-            </div>
-            
-        </form>
-    </div>
-
-    <Error error={error} />
-
-</div>
+</section>
 
 
 
@@ -166,6 +168,7 @@ on:click = "{문자열 또는 함수"
 
 
 <style>
+
     .subject {
         font-size: 20px;
         font-weight: 600;

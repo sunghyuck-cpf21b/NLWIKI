@@ -9,6 +9,7 @@
   import UserCreate from './routes/UserCreate.svelte';
   import UserLogin from './routes/UserLogin.svelte';
   import MyPage from './routes/MyPage.svelte';
+  import SideBar from './components/Side_Bar.svelte';
 
   import { access_token, username, is_login } from './lib/store';
 
@@ -45,11 +46,15 @@
 <Navigation />
 <main>
   <Router {routes}/>
+  <aside>
+    <SideBar />
+  </aside>
 </main>
 
 
 <style>
   main{
+    float: left;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -58,5 +63,8 @@
     min-width: 800px;
     width: 90vw;
     /* 최소 너비 설정 + 창 크기에 맞춰서 크기 설정*/
+  }
+  aside {
+    float: right;
   }
 </style>

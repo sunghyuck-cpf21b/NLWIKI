@@ -1,12 +1,12 @@
 <script>
     import { link } from 'svelte-spa-router'
-    import { page, access_token, username, is_login } from "../lib/store"
+    import { page, now_page, T_page, access_token, username, is_login } from "../lib/store"
 </script>
 
 <!-- 네비게이션바 -->
 <nav>
     <div>
-        <a class='home_logo' use:link href="/" on:click={()=>{$page=0}}>NLWK</a>
+        <a class='home_logo' use:link href="/" on:click={()=>{$page=0; $now_page=1; $T_page=0;}}>NLWK</a>
         <!--
         <a class='create_btn' use:link href="/nonlan_create">논란 작성</a>
         -->

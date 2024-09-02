@@ -40,71 +40,74 @@
     
 </script>
 
+<section>
+    <div class='nonlan_table'>
+        <div class='tool_bar'>
 
-<div class='nonlan_table'>
-    <div class='tool_bar'>
+            <a class='create_nonlan {$is_login ? '' : 'disabled'}' use:link href='/nonlan_create'>논란 작성</a>
 
-        <a class='create_nonlan {$is_login ? '' : 'disabled'}' use:link href='/nonlan_create'>논란 작성</a>
-
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th class='th-id'>논란번호</th>
-                <th class='th_person'>주요 인물</th>
-                <th class='th-subject'>제목</th>
-                <th>작성자</th>
-                <th>발생일</th>
-                <th>작성일</th>
-            </tr>
-        </thead>
-        <tbody>
-            {#each nonlan_list as nonlan}
+        </div>
+        <table>
+            <thead>
                 <tr>
-                    <td>{nonlan.id}</td>
-                    <td>{nonlan.person}</td>
-                    <td style='text-align: left;'>
-                        <a use:link href='/detail/{nonlan.id}'>{nonlan.subject}</a>
-                        {#if nonlan.comments.length > 0}
-                        <span> 
-                            [{nonlan.comments.length}]
-                        </span>
-                        {/if}
-                    </td>
-                    <td>{nonlan.user ? nonlan.user.username : ''}</td>
-                    <td class='th_date'>{moment(nonlan.occ_date).format("YYYY.MM.DD")}</td>
-                    <td class='th_date'>{moment(nonlan.create_date).format('YYYY.MM.DD')}</td>
+                    <th class='th-id'>논란번호</th>
+                    <th class='th_person'>주요 인물</th>
+                    <th class='th-subject'>제목</th>
+                    <th>작성자</th>
+                    <th>발생일</th>
+                    <th>작성일</th>
                 </tr>
-            {/each}
-        </tbody>
-    </table>    
-    
-    <!-- page -->
-    <div class='div_page'>
-        {#if $T_page > 0}
-            <a class='page_back' href='/' on:click|preventDefault={()=>{($T_page-=1); get_nonlan_list($T_page*5); ($now_page=$T_page*5+1)}}>이전</a>
-        {/if}
-        {#each [1,2,3,4,5] as n}
-            {#if $T_page*5+n <= total_page}
-                {#if $T_page*5+n === $now_page}
-                    <a class='page_{n}' style='text-decoration-line: underline; font-weight: 600;' href='/' on:click|preventDefault={()=>{get_nonlan_list($T_page*5+n-1); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
-                {:else}
-                    <a class='page_{n}' href='/' on:click|preventDefault={()=>{get_nonlan_list($T_page*5+n-1); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
-                {/if}
+            </thead>
+            <tbody>
+                {#each nonlan_list as nonlan}
+                    <tr>
+                        <td>{nonlan.id}</td>
+                        <td>{nonlan.person}</td>
+                        <td style='text-align: left;'>
+                            <a use:link href='/detail/{nonlan.id}'>{nonlan.subject}</a>
+                            {#if nonlan.comments.length > 0}
+                            <span> 
+                                [{nonlan.comments.length}]
+                            </span>
+                            {/if}
+                        </td>
+                        <td>{nonlan.user ? nonlan.user.username : ''}</td>
+                        <td class='th_date'>{moment(nonlan.occ_date).format("YYYY.MM.DD")}</td>
+                        <td class='th_date'>{moment(nonlan.create_date).format('YYYY.MM.DD')}</td>
+                    </tr>
+                {/each}
+            </tbody>
+        </table>    
+        
+        <!-- page -->
+        <div class='div_page'>
+            {#if $T_page > 0}
+                <a class='page_back' href='/' on:click|preventDefault={()=>{($T_page-=1); get_nonlan_list($T_page*5); ($now_page=$T_page*5+1)}}>이전</a>
             {/if}
-        {/each}
-        {#if $T_page*5+5 < total_page}
-            <a class='page_next' href='/' on:click|preventDefault={()=>{($T_page+=1); get_nonlan_list($T_page*5); ($now_page=$T_page*5+1)}}>다음</a>
-        {/if}
-    </div>
+            {#each [1,2,3,4,5] as n}
+                {#if $T_page*5+n <= total_page}
+                    {#if $T_page*5+n === $now_page}
+                        <a class='page_{n}' style='text-decoration-line: underline; font-weight: 600;' href='/' on:click|preventDefault={()=>{get_nonlan_list($T_page*5+n-1); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
+                    {:else}
+                        <a class='page_{n}' href='/' on:click|preventDefault={()=>{get_nonlan_list($T_page*5+n-1); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
+                    {/if}
+                {/if}
+            {/each}
+            {#if $T_page*5+5 < total_page}
+                <a class='page_next' href='/' on:click|preventDefault={()=>{($T_page+=1); get_nonlan_list($T_page*5); ($now_page=$T_page*5+1)}}>다음</a>
+            {/if}
+        </div>
 
-</div>
+    </div>
+</section>
 
 
 
 
 <style> 
-
+    section {
+        float: left;
+    }
     .nonlan_table {
         width: 800px;
         margin: 0 auto;
