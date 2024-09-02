@@ -91,36 +91,27 @@
 
 
 <div class='content_box'>
-    <div class='content_info'>
+    <div class='content_info_room'>
         <div class='subject'>{nonlan.subject}</div>
-        <div class='content_sub_info_1'>
-            작성 정보
-            <p>{nonlan.user}</p>
-            <p>{nonlan.create_date}</p>
+        <div class='content_info_box'>
+            <span>작성 정보</span>
+            <span class='content_info'>{nonlan.user.username}</span>
+            <span class='content_info'>{moment(nonlan.create_date).format("YYYY.MM.DD HH:mm:ss")}</span>
         </div>
-        <div class='content_sub_info_2'>
-            논란 정보
-            <p>{nonlan.person}</p>
-            <p>{nonlan.occ_date}</p>
+        <div class='content_info_box'>
+            <span>논란 정보</span>
+            <span class='content_info'>{nonlan.person}</span>
+            <span class='content_info'>{moment(nonlan.occ_date).format("YYYY.MM.DD")}</span>
         </div>
     </div>
     
-    <div>
-        <div>
-            <div>
-                {nonlan.person}
-            </div>
-            <div>
-                {nonlan.occ_date}
-            </div>
-            <div>
-                {@html nonlan.content}
-            </div>
-
+    <div class='main_content_box'>
+        <div class='main_content'>
+            {@html nonlan.content}
         </div>
         {#if nonlan.user && $username === nonlan.user.username}
             <button on:click={()=>delete_nonlan(nonlan_id)}>논란 삭제</button>
-            <a use:link href='/nonlan-modify/{nonlan.id}'>논란 수정</a>
+            <button on:click={()=>{push(`/nonlan-modify/${nonlan.id}`)}}>논란 수정</button>
         {/if}
     </div>
 
@@ -139,15 +130,19 @@
                 </div>
             </div>
         {/each}
+        <form class='comment_form' method='post'>
+            <div class='comment_div'>
+                <textarea 
+                class='comment_textarea'
+                rows='3' bind:value={comment_content} disabled={$is_login ? '' : 'disabled'}></textarea>
+                <input type='submit' value='댓글 등록' class='{$is_login ? '' : 'disabled'}' on:click='{post_comment}'>
+            </div>
+            
+        </form>
     </div>
 
     <Error error={error} />
-    <form method='post'>
-        <div>
-            <textarea rows='3' bind:value={comment_content} disabled={$is_login ? '' : 'disabled'}></textarea>
-        </div>
-        <input type='submit' value='댓글 등록' class='{$is_login ? '' : 'disabled'}' on:click='{post_comment}'>
-    </form>
+
 </div>
 
 
@@ -171,15 +166,51 @@ on:click = "{문자열 또는 함수"
 
 
 <style>
-    .content_box {
-        width: 1000px;
-        border: 1px solid #000000;
+    .subject {
+        font-size: 20px;
+        font-weight: 600;
     }
+    .content_info_room {
+
+    }
+    .content_info_box {
+        display: flex;
+        font-size: 13px;
+    }
+    .content_info_box > span {
+        
+    }
+    :global(.content_info::before) { /* svelte 스타일 스코핑 매커니즘으로 인한 잘못된 적용 피하기 위해 global로 설정함 */
+        content: '';
+        display: inline-block;
+        width: 1px;
+        height: 12px;
+        background: #ccc;
+        margin: 0 10px 0 10px;
+        vertical-align: -2px;
+    }
+    .content_info_room::after {
+        content: '';
+        display: inline-block;
+        margin: 0 auto;
+        width: 100%;
+        height: 1px;
+        background-color: #ccc;
+    }
+    .content_box {
+        max-width: 800px;
+        width: 100%;
+    }
+    .main_content {
+        margin: 20px auto 50px;
+    }
+
+
 
     .comment_box {
         position: static;
         margin: 20px auto;
-        padding: 0 0 50px;
+        padding: 10px 0;
         border-top: 3px solid #000000;
         border-bottom: 3px solid #000000;
     }
@@ -211,7 +242,14 @@ on:click = "{문자열 또는 함수"
         position: static;
         grid-area: c;
     }
-
+    .comment_form {
+        margin: 10px auto;
+    }
+    .comment_div {
+    }
+    .comment_textarea {
+        width: 100%;
+    }
     .comment_btn {
         position: absolute;
         margin: 0px 5px;
