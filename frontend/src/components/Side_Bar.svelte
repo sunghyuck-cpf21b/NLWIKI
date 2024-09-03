@@ -8,7 +8,7 @@
 <div class='sidebar'>
     사이드바 
     공사중입니다.
-    <img src="../img/20230217_185036.jpg" alt=''>
+    <img src="https://photos.app.goo.gl/tZmJmBvBHXgm3D4JA" alt=''>
 </div>
 
 <style>
