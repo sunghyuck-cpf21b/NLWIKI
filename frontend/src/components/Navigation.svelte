@@ -6,7 +6,7 @@
 <!-- 네비게이션바 -->
 <nav>
     <div>
-        <a class='home_logo' use:link href="/" on:click={()=>{$page=0; $now_page=1; $T_page=0;}}>NLWK</a>
+        <a class='home_logo' use:link href="/home" on:click={()=>{$page=0; $now_page=1; $T_page=0;}}>NLWK</a>
         <!--
         <a class='create_btn' use:link href="/nonlan_create">논란 작성</a>
         -->
@@ -50,7 +50,7 @@
 <style>
     nav {
         border: 1px solid #000000;
-        min-width: 900px;
+        min-width: 1200px;
         width: 100%;
         margin: 0;
     }

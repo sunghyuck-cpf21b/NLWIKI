@@ -1,9 +1,10 @@
 <script>
   import Router from 'svelte-spa-router'
-  import Home from "./routes/Home.svelte"
-  import Detail from "./routes/Detail.svelte"
-  import NonlanCreate from './routes/NonlanCreate.svelte';
-  import NonlanModify from './routes/NonlanModify.svelte';
+  import Home from './routes/Home.svelte';
+  import PostList from "./routes/PostList.svelte"
+  import PostDetail from "./routes/PostDetail.svelte"
+  import PostCreate from './routes/PostCreate.svelte';
+  import PostModify from './routes/PostModify.svelte';
   import Navigation from "./components/Navigation.svelte";
   import TempImage from './routes/TempImage.svelte';
   import UserCreate from './routes/UserCreate.svelte';
@@ -15,12 +16,13 @@
 
 
   const routes = {    // 속성값으로 path와 component를 받으며 path는 경로를 나타내는 문자열, component는 경로와 일치하는 경우 표시할 svelte 컴포넌트를 나타낸다.
-    '/' : Home,
-    '/detail/:nonlan_id': Detail,
-    '/nonlan_create': NonlanCreate,
+    '/home' : Home,
+    '/postlist' : PostList,
+    '/postdetail/:nonlan_id': PostDetail,
+    '/postcreate': PostCreate,
     '/user-create': UserCreate,
     '/user-login': UserLogin,
-    '/nonlan-modify/:nonlan_id': NonlanModify,
+    '/postmodify/:nonlan_id': PostModify,
     '/mypage/:username': MyPage,
   }
 
@@ -46,25 +48,22 @@
 <Navigation />
 <main>
   <Router {routes}/>
-  <aside>
-    <SideBar />
-  </aside>
 </main>
 
-
 <style>
+  
   main{
-    float: left;
+    /*
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: center;*/
     margin: 50px auto;
-    min-width: 800px;
-    width: 90vw;
+    /*min-width: 800px;
+    width: 90vw;*/
+    width: 1150px;
     /* 최소 너비 설정 + 창 크기에 맞춰서 크기 설정*/
+    overflow: hidden;
   }
-  aside {
-    float: right;
-  }
-</style>
+
+</style> 

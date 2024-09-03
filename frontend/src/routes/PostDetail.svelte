@@ -6,6 +6,8 @@
     import { marked } from 'marked'
     import moment from 'moment/min/moment-with-locales'  
     import { get } from 'svelte/store';
+
+    import SideBar from '../components/Side_Bar.svelte'
     moment.locale('ko')
 
     if(!$is_login) {
@@ -112,7 +114,7 @@
             </div>
             {#if nonlan.user && $username === nonlan.user.username}
                 <button on:click={()=>delete_nonlan(nonlan_id)}>논란 삭제</button>
-                <button on:click={()=>{push(`/nonlan-modify/${nonlan.id}`)}}>논란 수정</button>
+                <button on:click={()=>{push(`/postmodify/${nonlan.id}`)}}>논란 수정</button>
             {/if}
         </div>
     
@@ -147,7 +149,9 @@
     </div>
 </section>
 
-
+<aside>
+    <SideBar />
+</aside>
 
 
             <!-- svelte는 비동기적으로 script와 body 부분이 실행된다. 
@@ -201,8 +205,7 @@ on:click = "{문자열 또는 함수"
         background-color: #ccc;
     }
     .content_box {
-        max-width: 800px;
-        width: 100%;
+        width: 800px;
     }
     .main_content {
         margin: 20px auto 50px;
