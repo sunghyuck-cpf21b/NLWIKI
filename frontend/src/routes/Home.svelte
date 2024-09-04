@@ -30,7 +30,7 @@
             }
         )
     }
-
+/*
     let res_html 
     function back_html() {
         const url = '/api/test/html/hahaha'
@@ -42,7 +42,7 @@
             }
         )
     }
-    back_html()
+    back_html()*/
 </script>
 
 <Error error={error}/>
