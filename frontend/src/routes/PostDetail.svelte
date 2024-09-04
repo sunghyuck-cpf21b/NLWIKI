@@ -1,5 +1,5 @@
 <script>
-    import fastapi from '../lib/api'
+    import {fastapi} from '../lib/api'
     import Error from '../components/Error.svelte'
     import { link, push } from 'svelte-spa-router'
     import { is_login, set_admin, username } from '../lib/store'
@@ -10,8 +10,10 @@
     import SideBar from '../components/Side_Bar.svelte'
     moment.locale('ko')
 
+    import * as myurl from "../lib/myurl"   
+
     if(!$is_login) {
-        push('/user-login')
+        push(myurl.userlogin_url)
     }
 
     //const split_code = 'split_subuncream_point'

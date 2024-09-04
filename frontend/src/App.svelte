@@ -13,17 +13,20 @@
   import SideBar from './components/Side_Bar.svelte';
 
   import { access_token, username, is_login } from './lib/store';
+  import * as myurl from "./lib/myurl"
 
 
   const routes = {    // 속성값으로 path와 component를 받으며 path는 경로를 나타내는 문자열, component는 경로와 일치하는 경우 표시할 svelte 컴포넌트를 나타낸다.
-    '/home' : Home,
-    '/postlist' : PostList,
-    '/postdetail/:nonlan_id': PostDetail,
-    '/postcreate': PostCreate,
-    '/user-create': UserCreate,
-    '/user-login': UserLogin,
-    '/postmodify/:nonlan_id': PostModify,
-    '/mypage/:username': MyPage,
+    [myurl.home_url] : Home,
+    [myurl.mypage_url+'/:username']: MyPage,
+
+    [myurl.postlist_url] : PostList,
+    [myurl.postdetail_url+'/:nonlan_id'] : PostDetail,
+    [myurl.postcreate_url] : PostCreate,
+    [myurl.postmodify_url+'/:nonlan_id'] : PostModify,
+
+    [myurl.usercreate_url] : UserCreate,
+    [myurl.userlogin_url] : UserLogin,
   }
 
   if ($is_login) {

@@ -1,4 +1,4 @@
-import fastapi from "./api"
+import {fastapi} from "./api"
 
 export function calendar_maker(year, month) {
     let full_date_list = []

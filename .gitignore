@@ -6,3 +6,5 @@ migrations
 alembic.ini
 .env
 data_check.py
+
+domain/test_api

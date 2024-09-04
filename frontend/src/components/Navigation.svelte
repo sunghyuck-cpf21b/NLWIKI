@@ -1,12 +1,13 @@
 <script>
     import { link } from 'svelte-spa-router'
     import { page, now_page, T_page, access_token, username, is_login } from "../lib/store"
+    import * as myurl from "../lib/myurl"
 </script>
 
 <!-- 네비게이션바 -->
 <nav>
     <div>
-        <a class='home_logo' use:link href="/home" on:click={()=>{$page=0; $now_page=1; $T_page=0;}}>NLWK</a>
+        <a class='home_logo' use:link href={myurl.home_url} on:click={()=>{$page=0; $now_page=1; $T_page=0;}}>NLWK</a>
         <!--
         <a class='create_btn' use:link href="/nonlan_create">논란 작성</a>
         -->
@@ -24,10 +25,10 @@
             <ul>
                 {#if $is_login}
                 <li>
-                    <a use:link href='/mypage/{$username}'>마이페이지</a>
+                    <a use:link href={myurl.mypage_url+$username}>마이페이지</a>
                 </li>
                 <li>
-                    <a use:link href='/user-login' on:click={()=>{
+                    <a use:link href={myurl.userlogin_url} on:click={()=>{
                         $access_token = ''
                         $username = ''
                         $is_login = false
@@ -35,10 +36,10 @@
                 </li>
                 {:else}
                 <li>
-                    <a use:link href='/user-create'>회원가입</a>
+                    <a use:link href={myurl.usercreate_url}>회원가입</a>
                 </li>
                 <li>
-                    <a use:link href='/user-login'>로그인</a>
+                    <a use:link href={myurl.userlogin_url}>로그인</a>
                 </li>
                 {/if}
             </ul>

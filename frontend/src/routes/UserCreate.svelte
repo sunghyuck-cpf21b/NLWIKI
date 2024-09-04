@@ -1,7 +1,9 @@
 <script>
     import { push } from 'svelte-spa-router'
-    import fastapi from '../lib/api'
+    import {fastapi} from '../lib/api'
     import Error from '../components/Error.svelte';
+
+    import * as myurl from "../lib/myurl"
 
     let error = {detail:[]}
     let username = ''
@@ -18,7 +20,7 @@
         }
         fastapi('post', url, params,
             (json) => {
-                push('/user-login')
+                push(myurl.userlogin_url)
             },
         (json_error) => {
             error = json_error

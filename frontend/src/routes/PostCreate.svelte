@@ -1,10 +1,12 @@
 <script>
     import { link, push } from 'svelte-spa-router'
-    import fastapi from "../lib/api"
+    import {fastapi} from "../lib/api"
     import Error from "../components/Error.svelte"
     import bootstrapMin from 'bootstrap/dist/js/bootstrap.min';
     import Modal from '../lib/Modal.svelte';
     import { onMount } from 'svelte';
+
+    import * as myurl from "../lib/myurl"
 
     let error = {detail:[]}
 
@@ -43,7 +45,7 @@
         }
         fastapi('post', url, params, 
             (json) => {
-                push("/")
+                push(myurl.postlist_url)
             },
             (json_error) => {
                 error = json_error
@@ -97,6 +99,8 @@
 		}
 	}	
 	function btn_check() {
+        // 함수 수정하기
+        // 확인 버튼을 누르면 이미지를 전송 
         const dd = document.getElementById('content-div-2')
         for (const url of urls) {
             const ii = document.createElement('img')
@@ -136,7 +140,7 @@
             <input id="occ_date" type="text" class="form-control" placeholder="2000-01-01 00:00" bind:value="{occ_date}">
         </div>
         <div>
-            <a href='/' on:click={()=>{(showModal=true); nohome(event);}}>사진</a>
+            <a href='/' on:click|preventDefault={()=>{(showModal=true);}}>사진</a>
 
             <div id='content-div' class='mb-3'>
                 <label for='content'>논란 내용</label>

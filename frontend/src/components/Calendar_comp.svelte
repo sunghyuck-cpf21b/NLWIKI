@@ -1,5 +1,5 @@
 <script>
-    import fastapi from "../lib/api";
+    import {fastapi} from "../lib/api";
     import { link, push } from 'svelte-spa-router'
     import { year, month } from "../lib/store";
     import { findBestMatch } from 'string-similarity';

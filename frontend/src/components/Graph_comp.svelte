@@ -1,7 +1,7 @@
 <script>
     import { Chart, registerables } from 'chart.js'
     import { onMount } from 'svelte';
-    import fastapi from '../lib/api';
+    import {fastapi} from '../lib/api';
     import * as my_func from "../lib/my_func";
 
     import { findBestMatch } from 'string-similarity';

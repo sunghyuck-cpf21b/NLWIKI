@@ -1,14 +1,16 @@
 <script>
-    import fastapi from "../lib/api"
+    import {fastapi} from "../lib/api"
     import { link, push } from 'svelte-spa-router'    // href 앞에 link 를 사용하면 주소에 # 이 붙어 하나의 페이지로 인식된다.
     import { page, now_page, T_page, is_login } from "../lib/store"
     import SideBar from "../components/Side_Bar.svelte";
 
     import moment from 'moment/min/moment-with-locales'
     moment.locale('ko')
+
+    import * as myurl from "../lib/myurl"
     
     if(!$is_login) {
-        push('/user-login')
+        push(myurl.userlogin_url)
     }
 
     let nonlan_list = [] 
@@ -45,7 +47,7 @@
     <div class='post_table'>
         <div class='tool_bar'>
 
-            <a class='create_post {$is_login ? '' : 'disabled'}' use:link href='/postcreate'>논란 작성</a>
+            <a class='create_post {$is_login ? '' : 'disabled'}' use:link href={myurl.postcreate_url}>논란 작성</a>
 
         </div>
         <table>
@@ -65,7 +67,7 @@
                         <td>{nonlan.id}</td>
                         <td>{nonlan.person}</td>
                         <td style='text-align: left;'>
-                            <a use:link href='/postdetail/{nonlan.id}'>{nonlan.subject}</a>
+                            <a use:link href={myurl.postdetail_url+'/'+nonlan.id}>{nonlan.subject}</a>
                             {#if nonlan.comments.length > 0}
                             <span> 
                                 [{nonlan.comments.length}]

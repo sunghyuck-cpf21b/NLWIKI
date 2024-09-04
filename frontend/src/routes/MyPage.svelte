@@ -1,5 +1,5 @@
 <script>
-    import fastapi from "../lib/api";
+    import {fastapi} from "../lib/api";
     import CalendarComp from "../components/Calendar_comp.svelte";
     import GraphComp from "../components/Graph_comp.svelte";
     import { username, is_login } from "../lib/store";

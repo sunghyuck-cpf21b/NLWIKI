@@ -16,29 +16,6 @@ class Nonlan(Base):
     create_date = Column(DateTime, nullable=False)
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     user = relationship('User', backref='nonlan_users')
-'''
-허가된 유저들만 논란 작성 및 열람 가능하도록
-논란 모델을 일반 
-'''
-
-
-
-class FileTemp_M(Base):
-    __tablename__ = "file_temp"
-
-    id = Column(Integer, primary_key=True)
-    filename = Column(String, nullable=False)
-    fileurl = Column(String, nullable=False)
-
-class File_M(Base):      # 이미지 선택 창을 따로 띄워 임시 저장한 후 글 작성이 완료되면 최종 저장
-    __tablename__ = "file"
-
-    id = Column(Integer, primary_key=True)
-    filename = Column(String, nullable=False)
-    fileurl = Column(String, nullable=False)
-
-
-
 
 class Comment(Base):
     __tablename__ = "comment"
@@ -59,6 +36,44 @@ class User(Base):
     set_admin = Column(Boolean, default=False, nullable=True)
     username = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
+
+class Post(Base):
+    __tablename__ = "post"
+
+    id = Column(Integer, primary_key=True)
+
+    # 카테고리는 일단 공지, 일반, 논란으로 분류 => 선택란 중 논란은 일부 사용자에게만 보이도록
+    category = Column(String, nullable=False)
+    subject = Column(String, nullable=False)
+    content = Column(Text, nullable=False)
+    create_date = Column(DateTime, nullable=False)
+
+    # 논란 작성 및 열람 가능한 일부 사용자를 위함
+    person = Column(String, nullable=True)
+    occ_date = Column(DateTime, nullable=True)
+
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+
+    user = relationship('User', back_populates='posts')
+
+class CommentTemp(Base):
+    __tablename__ = "commenttemp"
+
+    id = Column(Integer, primary_key=True)
+    content = Column(Text, nullable=False)
+    create_date = Column(DateTime, nullable=False)
+
+    post_id = Column(Integer, ForeignKey("post.id"))
+    post = relationship("Post", back_populates='comments')
+
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user = relationship('User', back_populates='comments')
+
+
+User.posts = relationship("Post", back_populates='user')
+User.comments = relationship("CommentTemp", back_populates='user')
+Post.comments = relationship("CommentTemp", back_populates='post')
+
 
 '''
 관리자 로그인
@@ -116,7 +131,7 @@ class Weeklymemo(Base):
     user = relationship("User", back_populates='weeklymemos')
 
 
-
+# 부모 관계에 있는 모델에 자식 모델 관계 추가
 ProgramDate.exercises = relationship("Exercise", order_by=Exercise.order, back_populates='program_date', cascade='all, delete-orphan')
 Exercise.volumes = relationship('Volume', order_by=Volume.id, back_populates='exercise', cascade='all, delete-orphan')
 # 각 부모자식 테이블의 관계 지정, order_by에 의해 어떤 column을 기준으로 정렬할건지 정할 수 있음

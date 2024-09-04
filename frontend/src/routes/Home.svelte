@@ -1,9 +1,40 @@
 <script>
-    import fastapi from "../lib/api";
+    import { fastapi, fileapi } from "../lib/api";
     import { link, push } from 'svelte-spa-router'
+
+    import * as myurl from "../lib/myurl"
+    import Error from "../components/Error.svelte";
+
+    const fd = new FormData()
+    fd.append('test', '1234567890')
+
+    console.log(fd)
+
+    let imagefile
+    let error = {}
+    function test(file) {
+        if (!file) {
+            return
+        }
+        fd.append('file', file)
+        console.log('formdata 조회')
+        for (const i of fd) {
+            console.log(i)
+        }
+        const url = '/api/test/img_test'
+        const params = fd
+        console.log('fastapi 호출 직전', fd)
+        fileapi(url, params, 
+            (json) => {
+                console.log(json)
+            }
+        )
+    }
 </script>
 
-
+<Error error={error}/>
+<input id='' type='file' accept="image/*" on:change={(e)=>{imagefile = e.target.files[0]}}>
+<button on:click={()=>{test(imagefile)}}>upload</button>
 임시 메인 홈 입니다.
 
-<a use:link href='/postlist'>위키 이동</a>
+<a use:link href={myurl.postlist_url}>위키 이동</a>
