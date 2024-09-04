@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
+from fastapi.responses import HTMLResponse
 from typing import Optional
 from sqlalchemy.orm import Session
 from starlette import status
@@ -29,3 +30,8 @@ async def img_test(file: UploadFile = File(None)):
     with open(f'C:/NLWIKI_proj/myapi/domain/test_api/file_storage/{filename}', 'wb') as f:
         f.write(content)
     return file
+
+
+@router.get('/html/{test}', status_code=status.HTTP_200_OK)
+def test_page(test: str):
+    return f'<h1>this is your text : {test}</h1>'
