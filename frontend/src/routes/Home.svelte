@@ -56,6 +56,8 @@
 임시 메인 홈 입니다.
 
 <a use:link href={myurl.postlist_url}>위키 이동</a>
+
+<a href='/test'>test</a>
 <!--
 {#if res_html}
 {@html res_html}
