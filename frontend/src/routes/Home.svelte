@@ -46,20 +46,20 @@
 </script>
 
 <Error error={error}/>
-
 <!--
 <input id='' type='file' accept="image/*" on:change={(e)=>{imagefile = e.target.files[0]}}>
 <button on:click={()=>{test(imagefile)}}>upload</button>
-
 -->
 
 임시 메인 홈 입니다.
 
 <a use:link href={myurl.postlist_url}>위키 이동</a>
 
-<a href='/test'>test</a>
+<a href='/media'>test</a>
 <!--
 {#if res_html}
 {@html res_html}
 {/if}
 -->
+
+

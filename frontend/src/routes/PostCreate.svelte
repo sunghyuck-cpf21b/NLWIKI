@@ -1,6 +1,6 @@
 <script>
     import { link, push } from 'svelte-spa-router'
-    import {fastapi} from "../lib/api"
+    import { fastapi, fileapi } from "../lib/api"
     import Error from "../components/Error.svelte"
     import bootstrapMin from 'bootstrap/dist/js/bootstrap.min';
     import Modal from '../lib/Modal.svelte';
@@ -117,6 +117,35 @@
 		showModal = false;
 		urls = []
 	}
+
+    function file_send() {
+
+    }
+
+    async function testtt() {
+        const url = '/api/test/img_test'
+        const dd = document.getElementById('content-div-2')
+        for (const i of input.files) {
+            const fd = new FormData()
+            fd.append('file', i)
+            const params = fd
+            await fileapi(url, params, 
+            (json)=>{
+                
+                const  ii = document.createElement('img')
+                ii.src = json 
+                const img_ratio = 0.5 
+                ii.style.width = (ii.width*img_ratio)+'px'
+                ii.style.height = (ii.height *img_ratio)+'px'
+                dd.appendChild(ii)
+            }
+        )
+        }
+        showModal = false;
+
+
+
+    }
 </script>
 
 
@@ -162,11 +191,11 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class='modal' on:click={()=>(showModal=false)}>
         <div class='modal-content' on:click|stopPropagation>
-            <input type='file' bind:this={input} on:change={get_url} multiple accept=".jpg, .jpeg, .png, .gif, .bmp, .webp"/>
+            <input type='file' bind:this={input} on:change={()=>{get_url();}} multiple accept=".jpg, .jpeg, .png, .gif, .bmp, .webp"/>
             <div id='modal_img' class='modal-content-img'>
             </div>
             <div class='btn-box'>
-                <button class='check-btn' on:click={btn_check}>확인</button>
+                <button class='check-btn' on:click={()=>{testtt();}}>확인</button>
                 <button class='cancel-btn' on:click={btn_cancel}>취소</button>
             </div>
         </div>

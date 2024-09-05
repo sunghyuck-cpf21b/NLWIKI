@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from fastapi.responses import HTMLResponse
-from typing import Optional
+from typing import Optional, List
 from sqlalchemy.orm import Session
 from starlette import status
 import datetime
@@ -23,13 +23,13 @@ async def img_test(file: UploadFile = File(None)):
     content = await file.read()
     date = datetime.datetime.now()
     str_date = date.strftime('%Y%m%d%H%M%S') + f'{date.microsecond // 1000:03d}'
-    print(str_date)
-
     filename = str_date + file.filename
+    print(filename)
     print('=============================================================================')
-    with open(f'C:/NLWIKI_proj/myapi/domain/test_api/file_storage/{filename}', 'wb') as f:
+    with open(f'C:/NLWIKI_proj/myapi/frontend/media-server/public/{filename}', 'wb') as f:
         f.write(content)
-    return file
+    image_url = f'http://localhost:4000/{filename}'
+    return image_url
 
 
 @router.get('/html/{test}', status_code=status.HTTP_200_OK)
