@@ -55,7 +55,7 @@
 
 <a use:link href={myurl.postlist_url}>위키 이동</a>
 
-<a href='/media'>test</a>
+<a href='/media'>media</a>
 <!--
 {#if res_html}
 {@html res_html}

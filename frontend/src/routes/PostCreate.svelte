@@ -122,23 +122,30 @@
 
     }
 
+    let content_box
+    function imgtag_maker({CD, src_url, width, height}) {
+        console.log(src_url, width, height)
+        const ii = document.createElement('img')
+        ii.src = src_url 
+        if (width > 600) {
+            height = height * (600 / width)
+            ii.style.width = 600 + 'px'
+            ii.style.height = height  + 'px'
+        }
+        CD.appendChild(ii)
+    }
+
     async function testtt() {
-        const url = '/api/test/img_test'
+        const url = '/api/file/img'
         const dd = document.getElementById('content-div-2')
         for (const i of input.files) {
             const fd = new FormData()
             fd.append('file', i)
             const params = fd
             await fileapi(url, params, 
-            (json)=>{
-                
-                const  ii = document.createElement('img')
-                ii.src = json 
-                const img_ratio = 0.5 
-                ii.style.width = (ii.width*img_ratio)+'px'
-                ii.style.height = (ii.height *img_ratio)+'px'
-                dd.appendChild(ii)
-            }
+                async (json)=>{
+                    await imgtag_maker({CD: dd, src_url: json.image_url, width: json.width, height: json.height})
+                }
         )
         }
         showModal = false;
@@ -173,7 +180,7 @@
 
             <div id='content-div' class='mb-3'>
                 <label for='content'>논란 내용</label>
-                <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true"></div>
+                <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true" bind:this={content_box}></div>
                 <input id='content' style='display: none'>
                 <!--<input id="contt" type="text" class="form-control" bind:value="{content}">-->
             </div>

@@ -9,6 +9,7 @@ from domain.user import user_router
 from domain.Sep_Program import sep_program_router
 from domain.weeklymemo import weeklymemo_router
 from domain.test_api import test_router
+from domain.file import file_router
 # from domain.image import image_router
 
 app = FastAPI()
@@ -34,6 +35,7 @@ app.include_router(user_router.router)
 app.include_router(sep_program_router.router)
 app.include_router(weeklymemo_router.router)
 app.include_router(test_router.router)
+app.include_router(file_router.router)
 # app.include_router(image_router.router)
 
 

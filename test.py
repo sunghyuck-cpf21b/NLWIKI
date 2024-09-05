@@ -5,24 +5,13 @@ from sqlalchemy import and_
 db = SessionLocal()
 
 
-n = db.query(Nonlan).filter(Nonlan.id == 77).first()
 
-import base64
+import os
 
+dir = os.path.dirname(os.path.abspath(__file__))
 
-ll = n.content.split('"')
-'''
+print(dir)
 
-data = base64.b64decode(ll[1])
-print(data)
-'''
-data64 = ll[1]
-length = len(data64)
-mp = length % 4
-if mp != 0:
-    data64 += '=' * (4-mp)
+fp = os.path.join(dir, '../../a.txt')
 
-data = base64.b64decode(data64)
-
-with open('test_img.png', 'wb') as f:
-    f.write(data)
+print(fp)
