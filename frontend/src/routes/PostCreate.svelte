@@ -142,6 +142,7 @@
             const fd = new FormData()
             fd.append('file', i)
             const params = fd
+            console.log('api 호출 직전')
             await fileapi(url, params, 
                 async (json)=>{
                     await imgtag_maker({CD: dd, src_url: json.image_url, width: json.width, height: json.height})
