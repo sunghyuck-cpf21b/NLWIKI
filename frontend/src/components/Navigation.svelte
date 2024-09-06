@@ -8,6 +8,7 @@
 <nav>
     <div>
         <a class='home_logo' use:link href={myurl.home_url} on:click={()=>{$page=0; $now_page=1; $T_page=0;}}>NLWK</a>
+        <img src='https://nlwk.nlwiki.com/media/logo_1.png' alt='' style='width: 30px; height: 30px;'>
         <!--
         <a class='create_btn' use:link href="/nonlan_create">논란 작성</a>
         -->
