@@ -34,7 +34,7 @@ app.include_router(comment_router.router)
 app.include_router(user_router.router)
 app.include_router(sep_program_router.router)
 app.include_router(weeklymemo_router.router)
-app.include_router(test_router.router)
+# app.include_router(test_router.router)
 app.include_router(file_router.router)
 # app.include_router(image_router.router)
 
