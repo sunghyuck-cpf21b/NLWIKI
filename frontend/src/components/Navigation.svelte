@@ -27,7 +27,7 @@
         <ul>
             {#if $is_login}
             <li>
-                <a use:link href={myurl.mypage_url+$username}>마이페이지</a>
+                <a use:link href={myurl.mypage_url+'/'+$username}>마이페이지</a>
             </li>
             <li>
                 <a use:link href={myurl.userlogin_url} on:click={()=>{
