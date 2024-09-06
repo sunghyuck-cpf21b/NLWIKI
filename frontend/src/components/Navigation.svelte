@@ -73,6 +73,8 @@
     .home_logo {
         font-size: 30px;
         font-weight: 600;
+        display: flex;
+        align-items: center;
     }
     .logo_box {
         height: 100%;
