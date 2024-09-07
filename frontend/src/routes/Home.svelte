@@ -55,7 +55,11 @@
 
 <a use:link href={myurl.postlist_url}>위키 이동</a>
 
+<!--
 <a href='/media'>media</a>
+-->
+
+
 <img src='https://nlwk.nlwiki.com/media/maxresdefault.jpg' alt='' style='width: 100%;'>
 <!--
 {#if res_html}

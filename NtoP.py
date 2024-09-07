@@ -4,10 +4,9 @@ from models import *
 db = SessionLocal()
 
 
-ns = db.query(Nonlan).all()
+cs = db.query(Comment).all()
 
-for n in ns:
-    p = Post(id=n.id, category='논란', subject=n.subject, content=n.content, create_date=n.create_date,
-             person=n.person, occ_date=n.occ_date, user_id=n.user_id)
-    db.add(p)
+for c in cs:
+    ct = CommentTemp(id=c.id, content=c.content, create_date=c.create_date, post_id=c.nonlan_id, user_id=c.user_id)
+    db.add(ct)
     db.commit()

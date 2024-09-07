@@ -1,17 +1,13 @@
 from database import SessionLocal
-from models import Nonlan, User, ProgramDate, Post, CommentTemp
+from models import Nonlan, User, ProgramDate, Post, CommentTemp, Comment
 from sqlalchemy import and_
 
 db = SessionLocal()
 
+ns = db.query(Nonlan).all()
+cs = db.query(Comment).all()
+split_code = '*ssubun11111*'
 
 
-import os
 
-dir = os.path.dirname(os.path.abspath(__file__))
 
-print(dir)
-
-fp = os.path.join(dir, '../../a.txt')
-
-print(fp)

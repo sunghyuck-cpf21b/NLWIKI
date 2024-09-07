@@ -70,10 +70,17 @@ class CommentTemp(Base):
     user = relationship('User', back_populates='comments')
 
 
+
 User.posts = relationship("Post", back_populates='user')
 User.comments = relationship("CommentTemp", back_populates='user')
 Post.comments = relationship("CommentTemp", back_populates='post')
 
+
+class PersonalMemo(Base):
+    __tablename__ = "personalmemo"
+
+    id = Column(Integer, primary_key=True)
+    content = Column(Text, nullable=True)
 
 '''
 관리자 로그인
@@ -140,3 +147,5 @@ User.program_dates = relationship('ProgramDate', back_populates='user')
 User.exercises = relationship("Exercise", back_populates='user')
 User.volumes = relationship("Volume", back_populates='user')
 User.weeklymemos = relationship("Weeklymemo", back_populates='user')
+
+

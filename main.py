@@ -70,7 +70,11 @@ http://127.0.0.1:8000/ => 사이트
 4. git push 명령 수행하기
 '''
 
-
+'''
+백엔드 파일 적용하려면 
+sudo systemctl restart myapi.service
+까지 해야함
+'''
 
 
 
