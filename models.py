@@ -72,8 +72,8 @@ class CommentTemp(Base):
 
 
 User.posts = relationship("Post", back_populates='user')
-User.comments = relationship("Commenttemp", back_populates='user')
-Post.comments = relationship("Commenttemp", back_populates='post')
+User.comments = relationship("CommentTemp", back_populates='user')
+Post.comments = relationship("CommentTemp", back_populates='post')
 
 
 class PersonalMemo(Base):
