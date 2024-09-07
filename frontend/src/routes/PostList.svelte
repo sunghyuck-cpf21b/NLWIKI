@@ -13,7 +13,7 @@
         push(myurl.userlogin_url)
     }
 
-    let nonlan_list = [] 
+    let post_list = [] 
     let total = 0
     let size = 10
     let kw = ''
@@ -21,7 +21,7 @@
 
     $: total_page = Math.ceil(total/size)
 
-    function get_nonlan_list(_page) {
+    function get_post_list(_page) {
         
         let params = {
             page: _page,
@@ -29,15 +29,15 @@
             keyword: kw,
         }
 
-        fastapi('get', '/api/nonlan/list', params, (json) => {
-            nonlan_list = json.nonlan_list
+        fastapi('get', '/api/post/list', params, (json) => {
+            post_list = json.post_list
             $page = _page 
             total = json.total
         })
         
     }
   
-    $: get_nonlan_list($page)
+    $: get_post_list($page)
 
 
     
@@ -62,21 +62,21 @@
                 </tr>
             </thead>
             <tbody>
-                {#each nonlan_list as nonlan}
+                {#each post_list as post}
                     <tr>
-                        <td>{nonlan.id}</td>
-                        <td>{nonlan.person}</td>
+                        <td>{post.id}</td>
+                        <td>{post.person}</td>
                         <td style='text-align: left;'>
-                            <a use:link href={myurl.postdetail_url+'/'+nonlan.id}>{nonlan.subject}</a>
-                            {#if nonlan.comments.length > 0}
+                            <a use:link href={myurl.postdetail_url+'/'+post.id}>{post.subject}</a>
+                            {#if post.comments.length > 0}
                             <span> 
-                                [{nonlan.comments.length}]
+                                [{post.comments.length}]
                             </span>
                             {/if}
                         </td>
-                        <td>{nonlan.user ? nonlan.user.username : ''}</td>
-                        <td class='th_date'>{moment(nonlan.occ_date).format("YYYY.MM.DD")}</td>
-                        <td class='th_date'>{moment(nonlan.create_date).format('YYYY.MM.DD')}</td>
+                        <td>{post.user ? post.user.username : ''}</td>
+                        <td class='th_date'>{moment(post.occ_date).format("YYYY.MM.DD")}</td>
+                        <td class='th_date'>{moment(post.create_date).format('YYYY.MM.DD')}</td>
                     </tr>
                 {/each}
             </tbody>
@@ -85,7 +85,7 @@
         <div class='page_room'>
             <p class='page_shift'>
                 {#if $T_page > 0}
-                    <a class='page_shift' href='/' on:click|preventDefault={()=>{($T_page-=1); get_nonlan_list($T_page*5); ($now_page=$T_page*5+1)}}>이전</a>
+                    <a class='page_shift' href='/' on:click|preventDefault={()=>{($T_page-=1); get_post_list($T_page*5); ($now_page=$T_page*5+1)}}>이전</a>
                 {/if}
             </p>
             <div class='page_box'>
@@ -93,9 +93,9 @@
                 <p class='page_num'>
                 {#if $T_page*5+n <= total_page}
                     {#if $T_page*5+n === $now_page}
-                        <a style='text-decoration-line: underline; font-weight: 600;' href='/' on:click|preventDefault={()=>{get_nonlan_list($T_page*5+n-1); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
+                        <a style='text-decoration-line: underline; font-weight: 600;' href='/' on:click|preventDefault={()=>{get_post_list($T_page*5+n-1); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
                     {:else}
-                        <a href='/' on:click|preventDefault={()=>{get_nonlan_list($T_page*5+n-1); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
+                        <a href='/' on:click|preventDefault={()=>{get_post_list($T_page*5+n-1); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
                     {/if}
                 {/if}
                 </p>
@@ -103,7 +103,7 @@
             </div>
             <p class='page_shift'>
                 {#if $T_page*5+5 < total_page}
-                    <a href='/' on:click|preventDefault={()=>{($T_page+=1); get_nonlan_list($T_page*5); ($now_page=$T_page*5+1)}}>다음</a>
+                    <a href='/' on:click|preventDefault={()=>{($T_page+=1); get_post_list($T_page*5); ($now_page=$T_page*5+1)}}>다음</a>
                 {/if}
             </p>
         </div>

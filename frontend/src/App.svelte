@@ -21,9 +21,9 @@
     [myurl.mypage_url+'/:username']: MyPage,
 
     [myurl.postlist_url] : PostList,
-    [myurl.postdetail_url+'/:nonlan_id'] : PostDetail,
+    [myurl.postdetail_url+'/:post_id'] : PostDetail,
     [myurl.postcreate_url] : PostCreate,
-    [myurl.postmodify_url+'/:nonlan_id'] : PostModify,
+    [myurl.postmodify_url+'/:post_id'] : PostModify,
 
     [myurl.usercreate_url] : UserCreate,
     [myurl.userlogin_url] : UserLogin,

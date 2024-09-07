@@ -23,7 +23,7 @@
         event.preventDefault()
     }
 
-    function post_nonlan(event) {
+    function post_post(event) {
         if (document.getElementById('content-div-2').innerHTML) {
             content = document.getElementById('content-div-2').innerHTML
             /*const info_ = document.getElementById('content-div-2').childNodes
@@ -34,7 +34,7 @@
             //content_info = String(info_list)
         }
         event.preventDefault()
-        let url = "/api/nonlan/create"
+        let url = "/api/post/create"
         let params = {      // 해당 스키마에 입력된 속성들
             subject: subject,
             content: content,
@@ -188,7 +188,7 @@
         </div>
            
 
-        <button class="btn btn-primary" on:click='{post_nonlan}'>저장하기</button>
+        <button class="btn btn-primary" on:click='{post_post}'>저장하기</button>
     </form>
 </div>
 
