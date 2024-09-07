@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 
 from database import Base
 
-'''
+
 class Nonlan(Base):
     __tablename__ = "nonlan"
 
@@ -27,7 +27,7 @@ class Comment(Base):
     nonlan = relationship("Nonlan", backref="comments")
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     user = relationship('User', backref='comment_users')
-'''
+
 
 class User(Base):
     __tablename__ = "user"
@@ -56,8 +56,8 @@ class Post(Base):
 
     user = relationship('User', back_populates='posts')
 
-class Comment(Base):
-    __tablename__ = "comment"
+class CommentTemp(Base):
+    __tablename__ = "commenttemp"
 
     id = Column(Integer, primary_key=True)
     content = Column(Text, nullable=False)
@@ -72,8 +72,8 @@ class Comment(Base):
 
 
 User.posts = relationship("Post", back_populates='user')
-User.comments = relationship("Comment", back_populates='user')
-Post.comments = relationship("Comment", back_populates='post')
+User.comments = relationship("Commenttemp", back_populates='user')
+Post.comments = relationship("Commenttemp", back_populates='post')
 
 
 class PersonalMemo(Base):
