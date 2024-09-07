@@ -23,7 +23,7 @@
         event.preventDefault()
     }
 
-    function post_post(event) {
+    function post_nonlan(event) {
         if (document.getElementById('content-div-2').innerHTML) {
             content = document.getElementById('content-div-2').innerHTML
             /*const info_ = document.getElementById('content-div-2').childNodes
@@ -188,7 +188,7 @@
         </div>
            
 
-        <button class="btn btn-primary" on:click='{post_post}'>저장하기</button>
+        <button class="btn btn-primary" on:click='{post_nonlan}'>저장하기</button>
     </form>
 </div>
 
