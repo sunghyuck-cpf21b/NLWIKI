@@ -1,4 +1,4 @@
-import datetime
+"""import datetime
 
 from pydantic import BaseModel, field_validator
 # pydantic은 FastAPI의 입출력 스펙을 정의하고 그 값을 검증하기 위해 사용된다.
@@ -55,3 +55,4 @@ class NonlanUpdate(NonlanCreate):
 
 
 
+"""

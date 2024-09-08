@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Session
+"""from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 
 from database import get_db
@@ -42,7 +42,7 @@ def nonlan_detail(nonlan_id: int, db: Session = Depends(get_db)):
     print(nonlan)
     return nonlan
 '''
-파일을 가져오기 위해 입력해야 할 매개변수는 
+파일을 가져오기 위해 입력해야 할 매개변수는
 '''
 
 # post의 프론트엔드 동작
@@ -87,4 +87,4 @@ def nonlan_update(_nonlan_update: nonlan_schema.NonlanUpdate,
     elif (current_user.id != db_nonlan.user.id) and (current_user.set_admin == False):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail='수정 권한이 없습니다.')
-    nonlan_crud.update_nonlan(db=db, db_nonlan=db_nonlan, nonlan_update=_nonlan_update)
+    nonlan_crud.update_nonlan(db=db, db_nonlan=db_nonlan, nonlan_update=_nonlan_update)"""
