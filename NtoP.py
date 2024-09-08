@@ -3,8 +3,6 @@ from models import *
 
 db = SessionLocal()
 
-
-
 split_code = '***subunchockchock***'
 ps = db.query(Post).all()
 for i, p in enumerate(ps):
@@ -31,8 +29,6 @@ for i, p in enumerate(ps):
         f.write(str(p.user.password))
         f.write(split_code)
         f.write('\n')
-
-
 
 cs = db.query(Comment).all()
 for i, c in enumerate(cs):
