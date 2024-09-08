@@ -82,6 +82,11 @@ class PersonalMemo(Base):
     id = Column(Integer, primary_key=True)
     content = Column(Text, nullable=True)
 
+    user_id = Column(Integer, ForeignKey("user.id"))
+    user = relationship("User", back_populates='psersonalmemos')
+
+User.personalmemos = relationship("PersonalMemo", back_populates='user')
+
 '''
 관리자 로그인
 id : 관리자
