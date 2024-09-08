@@ -7,7 +7,7 @@ db = SessionLocal()
 split_code = '***subunchockchock***'
 data_split = '***datasplit***'
 
-'''
+
 with open('backups/users.txt', 'r', encoding='utf-8') as f:
     users_info = f.read()
 users = users_info.split(data_split)
@@ -16,8 +16,7 @@ for i in users[:-1]:
     u = User(id=il[0], username=il[1], password=il[2])
     db.add(u)
     db.commit()
-'''
-'''
+
 with open('backups/posts.txt', 'r', encoding='utf-8') as f:
     posts_info = f.read()
 posts = posts_info.split(data_split)
@@ -30,16 +29,16 @@ for i in posts[:-1]:
              user_id=il[7], user=u)
     db.add(p)
     db.commit()
-'''
 
+'''
 with open('backups/comments.txt', 'r', encoding='utf-8') as f:
     comments_info = f.read()
 comments = comments_info.split(data_split)
 for i in comments[:-1]:
     il = i.split(split_code)
     cd = datetime.datetime.strptime(il[2], '%Y-%m-%d %H:%M:%S.%f')
-    print(il)
-
+    
+'''
 
 
 '''
