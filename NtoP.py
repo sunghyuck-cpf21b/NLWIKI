@@ -26,6 +26,10 @@ for i, p in enumerate(ps):
         f.write(split_code)
         f.write(str(p.user_id))
         f.write(split_code)
+        f.write(str(p.user.username))
+        f.write(split_code)
+        f.write(str(p.user.password))
+        f.write(split_code)
         f.write('\n')
 
 
@@ -42,5 +46,9 @@ for i, c in enumerate(cs):
         f.write(str(c.post_id))
         f.write(split_code)
         f.write(str(c.user_id))
+        f.write(split_code)
+        f.write(str(c.user.username))
+        f.write(split_code)
+        f.write(str(c.user.password))
         f.write(split_code)
         f.write('\n')
