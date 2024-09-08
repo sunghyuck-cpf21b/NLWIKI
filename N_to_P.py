@@ -46,6 +46,8 @@ for i, c in enumerate(cs):
         f.write(split_code)
         f.write(str(c.post_id))
         f.write(split_code)
+        f.write(str(c.post.id))
+        f.write(split_code)
         f.write(str(c.user_id))
         f.write(split_code)
         f.write(str(c.user.username))

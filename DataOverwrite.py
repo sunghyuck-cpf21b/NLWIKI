@@ -5,9 +5,40 @@ import datetime
 db = SessionLocal()
 
 split_code = '***subunchockchock***'
+data_split = '***datasplit***'
 
+'''
 with open('backups/users.txt', 'r', encoding='utf-8') as f:
-    info = f.read()
+    users_info = f.read()
+users = users_info.split(data_split)
+for i in users[:-1]:
+    il = i.split(split_code)
+    u = User(id=il[0], username=il[1], password=il[2])
+    db.add(u)
+    db.commit()
+'''
+'''
+with open('backups/posts.txt', 'r', encoding='utf-8') as f:
+    posts_info = f.read()
+posts = posts_info.split(data_split)
+for i in posts[:-1]:
+    il = i.split(split_code)
+    cd = datetime.datetime.strptime(il[4], '%Y-%m-%d %H:%M:%S.%f')
+    od = datetime.datetime.strptime(il[6], '%Y-%m-%d %H:%M:%S')
+    u = db.query(User).filter_by(id=il[7]).first()
+    p = Post(id=il[0], category=il[1], subject=il[2], content=il[3], create_date=cd, person=il[5], occ_date=od,
+             user_id=il[7], user=u)
+    db.add(p)
+    db.commit()
+'''
+
+with open('backups/comments.txt', 'r', encoding='utf-8') as f:
+    comments_info = f.read()
+comments = comments_info.split(data_split)
+for i in comments[:-1]:
+    il = i.split(split_code)
+    cd = datetime.datetime.strptime(il[2], '%Y-%m-%d %H:%M:%S.%f')
+    print(il)
 
 
 
