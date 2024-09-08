@@ -50,3 +50,5 @@ for i, c in enumerate(cs):
         f.write(str(c.user.password))
         f.write(split_code)
         f.write('\n')
+
+# test
