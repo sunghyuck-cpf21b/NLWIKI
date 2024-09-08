@@ -3,7 +3,7 @@ from models import *
 
 db = SessionLocal()
 split_code = '***subunchockchock***'
-
+data_split = '***datasplit***'
 
 
 
@@ -31,7 +31,7 @@ for i, p in enumerate(ps):
         f.write(split_code)
         f.write(str(p.user.password))
         f.write(split_code)
-        f.write('\n')
+        f.write(data_split)
 
 
 cs = db.query(Comment).all()
@@ -52,7 +52,7 @@ for i, c in enumerate(cs):
         f.write(split_code)
         f.write(str(c.user.password))
         f.write(split_code)
-        f.write('\n')
+        f.write(data_split)
 
 us = db.query(User).all()
 for i, e in enumerate(us):
@@ -64,4 +64,4 @@ for i, e in enumerate(us):
         f.write(split_code)
         f.write(str(e.password))
         f.write(split_code)
-        f.write('\n')
+        f.write(data_split)

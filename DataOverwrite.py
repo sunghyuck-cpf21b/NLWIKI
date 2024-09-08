@@ -6,14 +6,8 @@ db = SessionLocal()
 
 split_code = '***subunchockchock***'
 
-with open('backups/posts.txt', 'r', encoding='utf-8') as f:
-    content = f.read()
-pp = content.split(split_code)
-main_count = (len(pp)-1)/10
-print(main_count)
-for i in range(int(main_count)):
-    p = Post()
-
+with open('backups/users.txt', 'r', encoding='utf-8') as f:
+    info = f.read()
 
 
 
