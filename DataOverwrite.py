@@ -9,8 +9,15 @@ split_code = '***subunchockchock***'
 with open('backups/posts.txt', 'r', encoding='utf-8') as f:
     content = f.read()
 pp = content.split(split_code)
-main_count = (len(pp)-1)/8
+main_count = (len(pp)-1)/10
 print(main_count)
+for i in range(int(main_count)):
+    p = Post()
+
+
+
+
+'''
 for i in range(int(main_count)):
     cd = datetime.datetime.strptime(pp[i*8+4], '%Y-%m-%d %H:%M:%S.%f')
     od = datetime.datetime.strptime(pp[i * 8 + 6], '%Y-%m-%d %H:%M:%S')
@@ -18,7 +25,7 @@ for i in range(int(main_count)):
              person=pp[i*8+5], occ_date=od, user_id=pp[i*8+7])
     db.add(p)
     db.commit()
-
+'''
 
 '''
 작성 잘못해서 splitcode로만 나눠야함
@@ -31,6 +38,8 @@ for i in range(int(main_count)):
 5: 인물
 6: 발생일자
 7: 작성자 id
+8: 작성자 이름
+9: 작성자 비밀번호
 
 현재 nonlan, comment(기존) 테이블 주석처리 하고 새롭게
 post, comment(새로운) 테이블 generate 해놨음

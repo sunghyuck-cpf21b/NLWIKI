@@ -2,8 +2,11 @@ from database import SessionLocal
 from models import *
 
 db = SessionLocal()
-
 split_code = '***subunchockchock***'
+
+
+
+
 ps = db.query(Post).all()
 for i, p in enumerate(ps):
     how = 'w' if i == 0 else 'a'
@@ -51,4 +54,14 @@ for i, c in enumerate(cs):
         f.write(split_code)
         f.write('\n')
 
-# test
+us = db.query(User).all()
+for i, e in enumerate(us):
+    how = 'w' if i == 0 else 'a'
+    with open('backups/users.txt', how, encoding='utf-8') as f:
+        f.write(str(e.id))
+        f.write(split_code)
+        f.write(str(e.username))
+        f.write(split_code)
+        f.write(str(e.password))
+        f.write(split_code)
+        f.write('\n')
