@@ -30,6 +30,7 @@ for i, p in enumerate(ps):
         f.write(split_code)
         f.write('\n')
 
+
 cs = db.query(Comment).all()
 for i, c in enumerate(cs):
     how = 'w' if i == 0 else 'a'
