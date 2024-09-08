@@ -1,4 +1,4 @@
-from datetime import datetime
+"""from datetime import datetime
 
 from domain.nonlan.nonlan_schema import NonlanCreate, NonlanUpdate
 from models import Nonlan, Comment, User
@@ -57,3 +57,4 @@ def update_nonlan(db: Session, db_nonlan: Nonlan,
     #db_nonlan.content_info = nonlan_update.content_info
     db.add(db_nonlan)
     db.commit()
+"""

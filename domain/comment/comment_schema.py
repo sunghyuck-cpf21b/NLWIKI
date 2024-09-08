@@ -7,7 +7,7 @@ class Comment(BaseModel):
     id: int
     content: str
     create_date: datetime.datetime
-    nonlan_id: int
+    post_id: int
     user: User
 
 

@@ -3,11 +3,11 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 
 from domain.comment.comment_schema import CommentCreate, CommentUpdate
-from models import Nonlan, Comment, User
+from models import Post, Comment, User
 
 
-def create_comment(db: Session, nonlan: Nonlan, comment_create: CommentCreate, user: User):
-    db_comment = Comment(nonlan=nonlan,
+def create_comment(db: Session, post: Post, comment_create: CommentCreate, user: User):
+    db_comment = Comment(post=post,
                          content=comment_create.content,
                          create_date=datetime.now(),
                          user=user)

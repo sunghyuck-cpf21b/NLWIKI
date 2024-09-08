@@ -5,22 +5,22 @@ from starlette import status
 from database import get_db
 from domain.comment import comment_schema, comment_crud
 from domain.user.user_router import get_current_user
-from domain.nonlan import nonlan_crud
+from domain.post import post_crud
 from models import User
 
 router = APIRouter(
     prefix="/api/comment"
 )
 
-@router.post("/create/{nonlan_id}", status_code=status.HTTP_204_NO_CONTENT)
-def comment_create(nonlan_id: int,
+@router.post("/create/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
+def comment_create(post_id: int,
                    _comment_create: comment_schema.CommentCreate,
                    db: Session = Depends(get_db),
                    current_user: User = Depends(get_current_user)):
-    nonlan = nonlan_crud.get_nonlan(db, nonlan_id=nonlan_id)
-    if not nonlan:
+    post = post_crud.get_post(db, post_id=post_id)
+    if not post:
         raise HTTPException(status_code=404, detail="논란을 찾을 수 없습니다.")
-    comment_crud.create_comment(db, nonlan=nonlan, comment_create=_comment_create, user=current_user)
+    comment_crud.create_comment(db, post=post, comment_create=_comment_create, user=current_user)
 
 
 @router.get("/detail/{comment_id}", response_model=comment_schema.Comment)
