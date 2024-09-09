@@ -83,7 +83,7 @@ class PersonalMemo(Base):
     content = Column(Text, nullable=True)
 
     user_id = Column(Integer, ForeignKey("user.id"))
-    user = relationship("User", back_populates='psersonalmemos')
+    user = relationship("User", back_populates='personalmemos')
 
 User.personalmemos = relationship("PersonalMemo", back_populates='user')
 
