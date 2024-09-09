@@ -8,7 +8,7 @@ from domain.post import post_router
 from domain.comment import comment_router
 from domain.user import user_router
 from domain.Sep_Program import sep_program_router
-from domain.weeklymemo import weeklymemo_router
+from domain.memo import memo_router
 from domain.test_api import test_router
 from domain.file_api import file_router
 # from domain.image import image_router
@@ -37,7 +37,7 @@ app.include_router(comment_router.router)
 app.include_router(file_router.router)
 
 app.include_router(sep_program_router.router)
-app.include_router(weeklymemo_router.router)
+app.include_router(memo_router.router)
 
 #app.include_router(nonlan_router.router)
 # app.include_router(test_router.router)

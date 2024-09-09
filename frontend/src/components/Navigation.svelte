@@ -13,7 +13,7 @@
     <div class='logo_box'>
         
         <a class='home_logo' use:link href={myurl.home_url} on:click={()=>{$page=0; $now_page=1; $T_page=0;}}>
-            <img src='https://nlwk.nlwiki.com/media/logo_1.png' alt='' style='width: {50*(nav_height-5)/42.3}px; height: {nav_height-5}px;'>
+            <img src='https://nlwk.nlwiki.com/media/youarebugs.gif' alt='' style='width: {nav_height-5}px; height: {nav_height-5}px;'>
             <span>NLWK</span>
         </a>
         
