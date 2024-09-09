@@ -20,7 +20,7 @@
     let kw = ''
 
     let notification_list = []
-    let notification_size = 5
+    let notification_size = 10
 
     $: total_page = Math.ceil(total/size)
 
