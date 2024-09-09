@@ -97,17 +97,19 @@
 <section>
     <div class='content_box'>
         <div class='content_info_room'>
-            <div class='subject'>{post.subject}</div>
+            <div class='subject'>[{post.category}] {post.subject}</div>
             <div class='content_info_box'>
                 <span>작성 정보</span>
                 <span class='content_info'>{post.user.username}</span>
                 <span class='content_info'>{moment(post.create_date).format("YYYY.MM.DD HH:mm:ss")}</span>
             </div>
+            {#if post.category == '논란'}
             <div class='content_info_box'>
                 <span>논란 정보</span>
                 <span class='content_info'>{post.person}</span>
                 <span class='content_info'>{moment(post.occ_date).format("YYYY.MM.DD")}</span>
             </div>
+            {/if}
         </div>
         
         <div class='main_content_box'>
@@ -115,8 +117,8 @@
                 {@html post.content}
             </div>
             {#if post.user && $username === post.user.username}
-                <button on:click={()=>delete_post(post_id)}>논란 삭제</button>
-                <button on:click={()=>{push(`/postmodify/${post.id}`)}}>논란 수정</button>
+                <button on:click={()=>delete_post(post_id)}>게시물 삭제</button>
+                <button on:click={()=>{push(`/postmodify/${post.id}`)}}>게시물 수정</button>
             {/if}
         </div>
     

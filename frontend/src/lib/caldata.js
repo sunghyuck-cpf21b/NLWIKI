@@ -98,7 +98,7 @@ export async function get_month_data_2(year, month, username) {
 // 한달 주간 메모 가져오기
 export async function get_month_weekly_memo(year, month, username) {
     const start_and_end = await start_end(year, month)
-    const url = '/api/weeklymemo/month_memo'
+    const url = '/api/memo/weekly/month_memo'
     const params = {
         start_date: start_and_end[0],
         end_date: start_and_end[1],
@@ -116,7 +116,7 @@ export async function get_month_weekly_memo(year, month, username) {
 }
 // 단일 주간 메모 가져오기
 export async function get_weekly_memo(date, username) {
-    const url = '/api/weeklymemo/memo'
+    const url = '/api/memo/weekly/memo'
     const params = {
         date: date,
         username, username
@@ -132,11 +132,11 @@ export async function get_weekly_memo(date, username) {
 
 // 주간 메모 생성 및 수정
 export async function post_weekly_memo(sunday_date, content, data) {
-    let url = '/api/weeklymemo/create'
+    let url = '/api/memo/weekly/create'
     let operation = 'post'
     console.log(sunday_date)
     if (data[sunday_date]) {
-        url = '/api/weeklymemo/update'
+        url = '/api/memo/weekly/update'
         operation = 'put'
     }
     const params = {
@@ -153,7 +153,7 @@ export async function post_weekly_memo(sunday_date, content, data) {
 }
 // 주간 메모 삭제
 export async function delete_weekly_memo(sunday_date) {
-    const url = '/api/weeklymemo/delete'
+    const url = '/api/memo/weekly/delete'
     const params = {
         sunday_date: sunday_date,
     }

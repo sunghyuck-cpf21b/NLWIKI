@@ -3,6 +3,7 @@
     import { link, push } from 'svelte-spa-router'    // href 앞에 link 를 사용하면 주소에 # 이 붙어 하나의 페이지로 인식된다.
     import { page, now_page, T_page, is_login } from "../lib/store"
     import SideBar from "../components/Side_Bar.svelte";
+    import * as api_funcs from '../lib/api_funcs'
 
     import moment from 'moment/min/moment-with-locales'
     moment.locale('ko')
@@ -15,69 +16,118 @@
 
     let post_list = [] 
     let total = 0
-    let size = 10
+    let size = 20
     let kw = ''
 
+    let notification_list = []
+    let notification_size = 5
 
     $: total_page = Math.ceil(total/size)
 
-    function get_post_list(_page) {
-        
+    let categories = []
+    let selected_category = '전체'
+
+    api_funcs.get_categories({task:'list'}).then(data=>{
+        categories = data
+    })
+
+    async function get_post_list(_page, size, kw, category) {
         let params = {
             page: _page,
             size: size,
             keyword: kw,
+            category: category,
         }
-
-        fastapi('get', '/api/post/list', params, (json) => {
+        let post_list = []; let page; let total;
+        await fastapi('get', '/api/post/list', params, (json) => {
             post_list = json.post_list
-            $page = _page 
+            page = _page 
             total = json.total
         })
-        
+        return [post_list, page, total]
     }
-  
-    $: get_post_list($page)
-
-
+    $: get_post_list($page, size, kw, selected_category).then(data=>{ // 선택된 카테고리 게시물
+        post_list = data[0];
+        $page = data[1];
+        total = data[2];
+        console.log(data)
+    })
+    $: get_post_list(0, notification_size, kw, '공지').then(data=>{
+        notification_list = data[0]
+        
+    })
+    $: console.log(notification_list)
     
 </script>
 
 <section>
     <div class='post_table'>
         <div class='tool_bar'>
-
-            <a class='create_post {$is_login ? '' : 'disabled'}' use:link href={myurl.postcreate_url}>논란 작성</a>
+            <select class='select_category' on:change={()=>{selected_category=event.target.value}}>
+                {#each categories as c}
+                <option style={(c=='논란') ? 'color: #ff0000':''}>{c}</option>
+                {/each}
+            </select>
+            <a class='create_post {$is_login ? '' : 'disabled'}' use:link href={myurl.postcreate_url}>게시글 작성</a>
 
         </div>
         <table>
             <thead>
                 <tr>
-                    <th class='th-id'>논란번호</th>
-                    <th class='th_person'>주요 인물</th>
+                    <th class='th-id'>번호</th>
+                    <!--<th class='th_person'>주요 인물</th>-->
                     <th class='th-subject'>제목</th>
                     <th>작성자</th>
-                    <th>발생일</th>
+                    <!--<th>발생일</th>-->
                     <th>작성일</th>
                 </tr>
             </thead>
             <tbody>
+                {#each notification_list as note}
+                <tr>
+                    <td>{note.id}</td>
+                    <td style='text-align: left;'>
+                        <a use:link href={myurl.postdetail_url+'/'+note.id}>
+                            <span class='category' style='color: #000000; font-weight: 600;'>[{note.category}]&nbsp;&nbsp;</span>
+                            {note.subject}
+                        </a>
+                        {#if note.comments.length > 0}
+                        <span> 
+                            [{note.comments.length}]
+                        </span>
+                        {/if}
+                    </td>
+                    <td>{note.user ? note.user.username : ''}</td>
+                    <td class='th_date'>{moment(note.create_date).format('YYYY.MM.DD')}</td>
+                    
+                </tr>
+                {/each}
                 {#each post_list as post}
-                    <tr>
-                        <td>{post.id}</td>
-                        <td>{post.person}</td>
-                        <td style='text-align: left;'>
-                            <a use:link href={myurl.postdetail_url+'/'+post.id}>{post.subject}</a>
-                            {#if post.comments.length > 0}
-                            <span> 
-                                [{post.comments.length}]
-                            </span>
+                <tr>
+                    <td>{post.id}</td>
+                    <!--<td>{post.person}</td>-->
+                    <td style='text-align: left;'>
+                        <a use:link href={myurl.postdetail_url+'/'+post.id}>
+                            {#if post.category=='공지'}
+                            <span class='category' style='color: #000000; font-weight: 600;'>[{post.category}]&nbsp;&nbsp;</span>
+                            {:else if post.category=='논란'}
+                            <span class='category' style='color: #ff0000; font-weight: 600;'>[{post.category}]&nbsp;&nbsp;</span>
+                            {:else}
+                            <span class='category'>[{post.category}]&nbsp;&nbsp;</span>
                             {/if}
-                        </td>
-                        <td>{post.user ? post.user.username : ''}</td>
-                        <td class='th_date'>{moment(post.occ_date).format("YYYY.MM.DD")}</td>
-                        <td class='th_date'>{moment(post.create_date).format('YYYY.MM.DD')}</td>
-                    </tr>
+                            
+                            {post.subject}
+                        </a>
+                        {#if post.comments.length > 0}
+                        <span> 
+                            [{post.comments.length}]
+                        </span>
+                        {/if}
+                    </td>
+                    <td>{post.user ? post.user.username : ''}</td>
+                    <!--<td class='th_date'>{moment(post.occ_date).format("YYYY.MM.DD")}</td>-->
+                    <td class='th_date'>{moment(post.create_date).format('YYYY.MM.DD')}</td>
+                </tr>
                 {/each}
             </tbody>
         </table>    
@@ -138,6 +188,15 @@
         padding: 1px 5px;
         font-size: 15px;
     }
+    .select_category {
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+    .select_category > option {
+        font-weight: 600;
+    }
 
     a.create_post:hover {
         text-decoration: none;
@@ -188,6 +247,10 @@
 
     td, th {
         padding: 0 3px;
+    }
+
+    .category {
+        color: #999999;
     }
 
     .page_room {

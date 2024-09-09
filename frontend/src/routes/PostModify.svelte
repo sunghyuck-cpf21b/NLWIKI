@@ -11,7 +11,7 @@
     }
 
     export let params = {}
-    const nonlan_id = params.nonlan_id 
+    const post_id = params.post_id 
 
     let error = {detail:[]}
     let subject = ''
@@ -24,14 +24,14 @@
         event.preventDefault()
     }
 
-    fastapi("get", "/api/nonlan/detail/"+nonlan_id, {}, (json) => {
+    fastapi("get", "/api/post/detail/"+post_id, {}, (json) => {
         subject = json.subject
         content = json.content
         occ_date = json.occ_date
         person = json.person
     })
 
-    function update_nonlan(event) {
+    function update_post(event) {
         if (document.getElementById('content-div-2').innerHTML) {
             content = document.getElementById('content-div-2').innerHTML
             /*const info_ = document.getElementById('content-div-2').childNodes
@@ -42,9 +42,9 @@
             content_info = String(info_list)*/
         }
         event.preventDefault()
-        let url = "/api/nonlan/update"
+        let url = "/api/post/update"
         let params = {
-            nonlan_id: nonlan_id,
+            post_id: post_id,
             subject: subject,
             content: content,
             occ_date, occ_date,
@@ -52,7 +52,7 @@
         }
         fastapi('put', url, params,
             (json) => {
-                push(myurl.postdetail_url+nonlan_id)
+                push(myurl.postdetail_url+post_id)
             },
             (json_error) => {
                 error = json_error
@@ -127,7 +127,7 @@
                 <!--<input id="contt" type="text" class="form-control" bind:value="{content}">-->
             </div>
         </div>
-        <button class="btn btn-primary" on:click="{update_nonlan}">수정하기</button>
+        <button class="btn btn-primary" on:click="{update_post}">수정하기</button>
     </form>
 
 </div>

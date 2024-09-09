@@ -21,6 +21,8 @@
     }
     console.log('test page')
 </script>
+
+
 <h1>test</h1>
 <div class='date_control'>
     <select bind:value={year}>

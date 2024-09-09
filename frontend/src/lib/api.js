@@ -56,12 +56,9 @@ export const fastapi = async (operation, url, params, success_callback, failure_
 // -> 실제 서버로부터 받은 응답에 대한 정보를 담고 있는 객체이다. 이 객체를 사용하여 응답 본문을 json 형식으로 파싱하거나 다양한 응답 정보를 확인할 수 있다.
 // promise는 비동기 작업의 결과를 나타내는 javascript 객체로, 작업이 완료되면 값을 반환하거나 오류를 발생시키는데 사용된다.
 // -> 네트워크
-    console.log('fastapi 함수 ',_url, options, body)
     try {
         const response = await fetch(_url, options)
-        console.log(response)
         if (response.status === 204) {
-            console.log('fetch 204')
             if (success_callback) {
                 await success_callback();
             }
@@ -69,13 +66,11 @@ export const fastapi = async (operation, url, params, success_callback, failure_
         }
         const json = await response.json()
         if (response.status >= 200 && response.status < 300) {
-            console.log('fetch 200 to 300')
             if (success_callback) {
                 await success_callback(json)
             }
             return json
         } else if (operation !== 'login' && response.status === 401) {
-            console.log('fetch login')
             access_token.set('')
             username.set('')
             is_login.set('')
@@ -83,7 +78,6 @@ export const fastapi = async (operation, url, params, success_callback, failure_
             alert(response.status)
             push('/login')
         } else {
-            console.log('fetch fail')
             if (failure_callback) {
                 failure_callback(json)
             } else {
@@ -107,7 +101,6 @@ export const fastapi = async (operation, url, params, success_callback, failure_
 // 파일을 업로드하기위한 api 함수
 export const fileapi = async(url, FD, success_callback, failure_callback) => { // FD: formdata 객체
     let _url = import.meta.env.VITE_SERVER_URL+url
-    console.log(_url)
     try {
         const response = await fetch(_url, {method:'post', body: FD})
         if (response.status === 204) {
@@ -118,7 +111,6 @@ export const fileapi = async(url, FD, success_callback, failure_callback) => { /
         }
         const json = await response.json()
         if (response.status >= 200 && response.status < 300) {
-            console.log(json)
             if (success_callback) {
                 await success_callback(json)
             }
