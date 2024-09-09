@@ -6,16 +6,17 @@
     import Modal from '../lib/Modal.svelte';
     import { onMount } from 'svelte';
 
+    import * as api_funcs from '../lib/api_funcs'
     import * as myurl from "../lib/myurl"
 
     let error = {detail:[]}
 
-    let subject = ''
+    let subject
     //let editcontent = document.getElementById("hereiscontent")
-    let content = ''//editcontent.innerText
+    let content//editcontent.innerText
     //let content_info = ''
-    let person = ''
-    let occ_date = ''
+    let person
+    let occ_date
 
 
 
@@ -23,7 +24,13 @@
         event.preventDefault()
     }
 
-    function post_nonlan(event) {
+    let categories = []
+    let selected_category = '일반'
+    api_funcs.get_categories({task:'create'}).then(data=>{
+        categories = data // 백엔드 카테고리 리스트에 '전체'가 첫 번째 요소이므로 1번 인덱스부터
+    })
+
+    function post_post(event) {
         if (document.getElementById('content-div-2').innerHTML) {
             content = document.getElementById('content-div-2').innerHTML
             /*const info_ = document.getElementById('content-div-2').childNodes
@@ -36,13 +43,14 @@
         event.preventDefault()
         let url = "/api/post/create"
         let params = {      // 해당 스키마에 입력된 속성들
+            category: selected_category,
             subject: subject,
             content: content,
             //content_info: content_info,
             person: person,
             occ_date: occ_date,
-
         }
+        console.log(params)
         fastapi('post', url, params, 
             (json) => {
                 push(myurl.postlist_url)
@@ -150,9 +158,6 @@
         )
         }
         showModal = false;
-
-
-
     }
 </script>
 
@@ -161,26 +166,33 @@
 
 
 <div class="container">
-    <h5 class="my-3 border-bottom pb-2">질문 등록</h5>
+
     <Error error={error} />
-    <form method="post" class="my-3">
-        <div class="mb-3">
-            <label for="subject">제목</label>
-            <input id="subject" type="text" class="form-control" bind:value="{subject}">
+    <div class="input_box">
+        <select class='select_category' on:change={()=>{selected_category=event.target.value}}>
+            {#each categories as c}
+            <option style={(c=='논란') ? 'color: #ff0000':''}>{c}</option>
+            {/each}
+        </select>
+        <div class="subject_box">
+            <label for="subject"></label>
+            <input id="subject" type="text" placeholder="제목을 입력해주세요" class="form-control" bind:value="{subject}">
         </div>
-        <div class='mb-3'>
-            <label for="person">주요 인물</label>
-            <input id="person" type="text" class="form-control" bind:value="{person}">
+        {#if selected_category == '논란'}
+        <div class='person_box'>
+            <label for="person"></label>
+            <input id="person" type="text" placeholder="주요 인물을 입력해주세요" class="form-control" bind:value="{person}">
         </div>
-        <div class='mb-3'>
-            <label for="occ_date">발생 일시</label>
+        <div class='occ_data_box'>
+            <label for="occ_date">select로 변경하기</label>
             <input id="occ_date" type="text" class="form-control" placeholder="2000-01-01 00:00" bind:value="{occ_date}">
         </div>
+        {/if}
         <div>
             <a href='/' on:click|preventDefault={()=>{(showModal=true);}}>사진</a>
 
             <div id='content-div' class='mb-3'>
-                <label for='content'>논란 내용</label>
+                <label for='content'>내용</label>
                 <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true" bind:this={content_box}></div>
                 <input id='content' style='display: none'>
                 <!--<input id="contt" type="text" class="form-control" bind:value="{content}">-->
@@ -188,8 +200,8 @@
         </div>
            
 
-        <button class="btn btn-primary" on:click='{post_nonlan}'>저장하기</button>
-    </form>
+        <button class="btn btn-primary" on:click='{post_post}'>저장하기</button>
+    </div>
 </div>
 
 

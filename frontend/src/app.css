@@ -1,3 +1,4 @@
+/* 사이드바가 같이 있어야 할 페이지에 section 태그를 씌우기 */
 section {
     float: left;
 }

@@ -31,29 +31,30 @@
     }
 </script>
 
-<section>
-    <div class='login_box'>
-        <h5>로그인</h5>
-        <Error error={error} />
-        <form method='post'>
-            <div class='login_input'>
-                <label for='username'>사용자 이름</label>
-                <input type='text' id='username' bind:value='{login_username}'>
-            </div>
-            <div class='login_input'>
-                <label for='password'>비밀번호</label>
-                <input type='password' id='password' bind:value='{login_password}'>
-            </div>
-            <button type='submit' on:click='{login}'>로그인</button>
-        </form>
-    </div>
-</section>
+
+<div class='login_box'>
+    <h5>로그인</h5>
+    <Error error={error} />
+    <form method='post'>
+        <div class='login_input'>
+            <label for='username'>사용자 이름</label>
+            <input type='text' id='username' bind:value='{login_username}'>
+        </div>
+        <div class='login_input'>
+            <label for='password'>비밀번호</label>
+            <input type='password' id='password' bind:value='{login_password}'>
+        </div>
+        <button type='submit' on:click='{login}'>로그인</button>
+    </form>
+</div>
+
 
 
 <style>
     .login_box {
         border: 1px solid #000000;
         width: 400px;
+        margin: 0 auto;
         display: flex;
         height: 300px;
         flex-direction: column;

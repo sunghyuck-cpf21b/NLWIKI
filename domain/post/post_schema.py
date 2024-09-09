@@ -17,8 +17,8 @@ class Post(BaseModel):        # BaseModel : 입력된 데이터가 모델의 기
     content: str
     create_date: datetime.datetime
 
-    person: str
-    occ_date: datetime.datetime
+    person: str | None
+    occ_date: datetime.datetime | None
 
     comments: list[Comment] = []
     user: User
@@ -35,8 +35,8 @@ class PostCreate(BaseModel):
     subject: str
     content: str
 
-    person: str
-    occ_date: datetime.datetime
+    person: str | None = None
+    occ_date: datetime.datetime | None = None
     #content_info: str
 
 

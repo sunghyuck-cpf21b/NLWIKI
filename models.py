@@ -34,8 +34,14 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     set_admin = Column(Boolean, default=False, nullable=True)
+    set_nonlan_user = Column(Boolean, default=False, nullable=True)
     username = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
+
+# 0번 요소는 이후 요소를 모두 포함하는 것으로
+categories = ['전체', '일반', '공지', '논란']
+# 공지, 논란은 router에서 아이디 판별 후 추가
+
 
 class Post(Base):
     __tablename__ = "post"

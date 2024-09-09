@@ -23,7 +23,7 @@
             content: content,
         }
         await fastapi('post', url, params, 
-            (json)=>{get_personal_memo()}
+            (json)=>{}
         )
     }
     
@@ -33,13 +33,21 @@
             content: content,
         }
         await fastapi('put', url, params, 
-            (json)=>{get_personal_memo()}
+            (json)=>{}
         )
     }
-    function on_BL() {
+    async function on_BL() {
         const content = event.target.innerHTML
-        if (isit_memo) {update_personal_memo(content)}
-        else {post_personal_memo(content)}
+        if (isit_memo) {await update_personal_memo(content)}
+        else {await post_personal_memo(content)}
+        await get_personal_memo()
+    }
+    async function input_enter() {
+        if (event.key === 'Enter') {
+            const content = event.target.innerHTML
+        if (isit_memo) {await update_personal_memo(content)}
+        else {await post_personal_memo(content)}
+        }
     }
 </script>
 
@@ -48,13 +56,15 @@
     <img src="https://noonnucc-production.sfo2.cdn.digitaloceanspaces.com/202308/1692878523978236.jpeg" 
     alt='' style='width: 100%;'>
     {#if isit_memo}
+    <!--svelte-ignore a11y-no-static-element-interactions-->
     <div class='personal_memo' contenteditable="true"
-    on:blur={()=>{on_BL()}}>
+    on:blur={()=>{on_BL()}} on:keydown={()=>{input_enter()}}>
         {@html personal_memo}
     </div>
     {:else}
+    <!--svelte-ignore a11y-no-static-element-interactions-->
     <div class='personal_memo' contenteditable="true"
-    on:blur={()=>{on_BL()}}>
+    on:blur={()=>{on_BL()}} on:keydown={()=>{input_enter()}}>
     </div>
     {/if}
 </div> 
@@ -68,5 +78,7 @@
     .personal_memo {
         width: 100%;
         min-height: 100%;
+        padding: 5px;
+        font-size: 14px;
     }
 </style>

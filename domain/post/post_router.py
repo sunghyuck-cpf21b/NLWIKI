@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from database import get_db
 from domain.post import post_schema, post_crud
 from domain.user.user_router import get_current_user
-from models import User
+from models import User, categories
 
 from starlette import status
 
@@ -16,9 +16,19 @@ router = APIRouter(
 # 엔드포인트 : url 경로(여기서는 "/list")
 # response_model에 값으로 입력된 모델을 사용하여 응답의 형식을 정의 및 검사한다. 그리고 API 문서에 해당 형식이 표시된다.
 @router.get("/list", response_model=post_schema.PostList)
-def post_list(db: Session = Depends(get_db), page: int = 0, size: int = 10, keyword: str = ''):     # db 객체에 get_db 제네레이터에 의해 생성된 세션 객체 주입
+def post_list(category: str, # 클라이언트가 선택한 카테고리
+              page: int = 0, size: int = 10, keyword: str = '',
+              db: Session = Depends(get_db),
+              current_user: User = Depends(get_current_user)):     # db 객체에 get_db 제네레이터에 의해 생성된 세션 객체 주입
+    if not current_user.set_nonlan_user and category == '논란':
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail='허가되지 않은 사용자입니다.')
+    if category not in categories:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail='존재하지 않는 카테고리입니다.')
     total, _post_list = post_crud.get_post_list(
-        db, skip=page*size, limit=size, keyword=keyword
+        db, category=category, user=current_user, category_list=categories[:],
+        skip=page*size, limit=size, keyword=keyword
     )
     return {'total': total, 'post_list': _post_list}
     # return 값은 dictionary 형식으로
@@ -41,19 +51,40 @@ def post_detail(post_id: int, db: Session = Depends(get_db)):
     post = post_crud.get_post(db, post_id=post_id)
     print(post)
     return post
-'''
-파일을 가져오기 위해 입력해야 할 매개변수는 
-'''
+
+@router.get('/categories', status_code=status.HTTP_200_OK)
+def get_categories(task: str = 'list',
+                   category_list: list = categories[:],
+                   db: Session = Depends(get_db),
+                   current_user: User = Depends(get_current_user)):
+    # 논란을 열람 및 작성 가능한 사용자인지 판단
+    print(current_user.set_nonlan_user, current_user.set_admin)
+    print(category_list)
+    if not current_user.set_nonlan_user: 
+        category_list.remove('논란')
+    if task == 'create':
+        category_list.remove('전체')
+        if not current_user.set_admin:
+            category_list.remove('공지')
+    print(123123, category_list)
+    return category_list
+
 
 # post의 프론트엔드 동작
 # fastapi = (operation, url, params, success_callback, failure_callback)
 # operation : post / url : "/create" / params : _post_create에 매칭된 스키마에 따른 데이터들
 # s_callback : status_code를 응답으로 전달
 @router.post("/create", status_code=status.HTTP_204_NO_CONTENT)
-def post_create(_post_create: post_schema.PostCreate,
+def post_create(create_data: post_schema.PostCreate,
                   db: Session = Depends(get_db),
                   current_user: User = Depends(get_current_user)):
-    post_crud.create_post(db=db, post_create=_post_create,
+    if create_data.category == '공지' and not current_user.set_admin:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail='허가되지 않은 사용자입니다.')
+    if create_data.category == '논란' and not current_user.set_nonlan_user:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail='허가되지 않은 사용자입니다.')
+    post_crud.create_post(db=db, post_create=create_data,
                               user=current_user)
 
 

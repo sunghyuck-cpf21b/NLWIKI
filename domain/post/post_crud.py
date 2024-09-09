@@ -1,13 +1,22 @@
 from datetime import datetime
 
 from domain.post.post_schema import PostCreate, PostUpdate
-from models import Post, Comment, User
+from models import Post, Comment, User, categories
 from sqlalchemy.orm import Session
-from sqlalchemy import and_
+from sqlalchemy import and_, desc
 
-def get_post_list(db: Session, skip: int = 0, limit: int = 10, keyword: str = ''):
-    post_list = db.query(Post)
-    if keyword:
+
+
+def get_post_list(db: Session, category: str, user: User,
+                  category_list: list = categories[:],
+                  skip: int = 0, limit: int = 15, keyword: str = ''):
+    if not user.set_nonlan_user: # 논란 열람 가능한 사용자인지 판단
+        category_list.remove('논란')
+    if category != categories[0]: # 선택한 카테고리가 '전체' 가 아니라면 카테고리 리스트를 축소(선택한 카테고리 하나만 남도록) => 판별을 category_list로만 할거기때문
+        category_list = [category]
+    post_list = db.query(Post).filter(Post.category.in_(category_list)).order_by(desc(Post.id))
+
+    if keyword: # 검색기능
         search = '%%{}%%'.format(keyword)
         sub_query = db.query(Comment.post_id, Comment.content, User.username)\
             .outerjoin(User, and_(Comment.user_id == User.id)).subquery()
