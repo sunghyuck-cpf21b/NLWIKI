@@ -2,7 +2,10 @@ import { writable } from "svelte/store";
 
 const persist_storage = (key, initValue) => {
     const storedValueStr = localStorage.getItem(key)
-    const store = writable(storedValueStr != null ? JSON.parse(storedValueStr) : initValue)
+    console.log(key, storedValueStr, initValue)
+    const store = writable(
+        storedValueStr != null || storedValueStr != undefined || storedValueStr != 'undefined'
+        ? JSON.parse(storedValueStr) : initValue)
     // 물음표 조건문 => 조건 ? true return : false return
     store.subscribe((val) => {
         localStorage.setItem(key, JSON.stringify(val))

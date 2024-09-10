@@ -31,22 +31,23 @@
         categories = data
     })
 
-    async function get_post_list(_page, size, kw, category) {
+    async function get_post_list(PG, size, kw, category) {
         let params = {
-            page: _page,
+            page: PG,
             size: size,
             keyword: kw,
             category: category,
         }
-        let post_list = []; let page; let total;
+        let post_list = []; let _page; let total;
         await fastapi('get', '/api/post/list', params, (json) => {
             post_list = json.post_list
-            page = _page 
+            _page = PG
+            console.log(_page)
             total = json.total
         })
-        return [post_list, page, total]
+        return [post_list, _page, total]
     }
-    $: get_post_list($page, size, kw, selected_category).then(data=>{ // 선택된 카테고리 게시물
+    $: get_post_list(0, size, kw, selected_category).then(data=>{ // 선택된 카테고리 게시물
         post_list = data[0];
         $page = data[1];
         total = data[2];
@@ -135,7 +136,7 @@
         <div class='page_room'>
             <p class='page_shift'>
                 {#if $T_page > 0}
-                    <a class='page_shift' href='/' on:click|preventDefault={()=>{($T_page-=1); get_post_list($T_page*5); ($now_page=$T_page*5+1)}}>이전</a>
+                    <a class='page_shift' href='/' on:click|preventDefault={()=>{($T_page-=1); get_post_list($T_page*5, size, kw, selected_category); ($now_page=$T_page*5+1)}}>이전</a>
                 {/if}
             </p>
             <div class='page_box'>
@@ -143,9 +144,9 @@
                 <p class='page_num'>
                 {#if $T_page*5+n <= total_page}
                     {#if $T_page*5+n === $now_page}
-                        <a style='text-decoration-line: underline; font-weight: 600;' href='/' on:click|preventDefault={()=>{get_post_list($T_page*5+n-1); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
+                        <a style='text-decoration-line: underline; font-weight: 600;' href='/' on:click|preventDefault={()=>{get_post_list($T_page*5+n-1, size, kw, selected_category); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
                     {:else}
-                        <a href='/' on:click|preventDefault={()=>{get_post_list($T_page*5+n-1); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
+                        <a href='/' on:click|preventDefault={()=>{get_post_list($T_page*5+n-1, size, kw, selected_category); ($now_page=$T_page*5+n);}}>{$T_page*5+n}</a>
                     {/if}
                 {/if}
                 </p>
@@ -153,7 +154,7 @@
             </div>
             <p class='page_shift'>
                 {#if $T_page*5+5 < total_page}
-                    <a href='/' on:click|preventDefault={()=>{($T_page+=1); get_post_list($T_page*5); ($now_page=$T_page*5+1)}}>다음</a>
+                    <a href='/' on:click|preventDefault={()=>{($T_page+=1); get_post_list($T_page*5, size, kw, selected_category); ($now_page=$T_page*5+1)}}>다음</a>
                 {/if}
             </p>
         </div>
