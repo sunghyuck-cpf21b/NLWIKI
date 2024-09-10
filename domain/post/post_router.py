@@ -79,6 +79,7 @@ def get_categories(task: str = 'list',
 def post_create(create_data: post_schema.PostCreate,
                   db: Session = Depends(get_db),
                   current_user: User = Depends(get_current_user)):
+    print(create_data)
     if create_data.category == '공지' and not current_user.set_admin:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail='허가되지 않은 사용자입니다.')
@@ -113,6 +114,7 @@ def post_update(_post_update: post_schema.PostUpdate,
                   db: Session = Depends(get_db),
                   current_user: User = Depends(get_current_user)):
     db_post = post_crud.get_post(db, post_id=_post_update.post_id)
+    print(_post_update)
     if not db_post:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="데이터를 찾을 수 없습니다.")
