@@ -148,7 +148,9 @@
                 
             </form>
         </div>
-    
+        
+        <button on:click={()=>{push(myurl.postlist_url)}}>목록으로</button>
+
         <Error error={error} />
     
     </div>
