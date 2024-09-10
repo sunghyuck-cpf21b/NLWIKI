@@ -69,9 +69,13 @@
             content_info = String(info_list)*/
         }
         event.preventDefault()
-        let date = add_0(selected_month)
-        let month = add_0(selected_month)
-        let _occ_date = `${selected_year}-${month}-${date}`
+        let _occ_date 
+        if (selected_category === '논란') {
+            let date = add_0(selected_month)
+            let month = add_0(selected_month)
+            let _occ_date = `${selected_year}-${month}-${date}`
+        }
+        
         let url = "/api/post/update"
         let params = {
             post_id: post_id,

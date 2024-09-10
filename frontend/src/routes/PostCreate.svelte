@@ -53,9 +53,12 @@
             }*/
             //content_info = String(info_list)
         }
-        let date = add_0(selected_month)
-        let month = add_0(selected_month)
-        let occ_date = `${selected_year}-${month}-${date}`
+        let occ_date 
+        if (selected_category === '논란') {
+            let date = add_0(selected_month)
+            let month = add_0(selected_month)
+            let occ_date = `${selected_year}-${month}-${date}`
+        }
         console.log(occ_date)
         event.preventDefault()
         let url = "/api/post/create"
