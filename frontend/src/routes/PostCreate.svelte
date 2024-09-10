@@ -23,9 +23,6 @@
     let content//editcontent.innerText
     //let content_info = ''
     let person
-    let occ_date
-
-
 
     function nohome(event) {
         event.preventDefault()
@@ -37,6 +34,15 @@
         categories = data
     })
 
+    function add_0(num) {
+        if (num < 10) {
+            return '0'+num
+        }
+        else {
+            return num
+        }
+    }
+
     function post_post(event) {
         if (document.getElementById('content-div-2').innerHTML) {
             content = document.getElementById('content-div-2').innerHTML
@@ -47,6 +53,10 @@
             }*/
             //content_info = String(info_list)
         }
+        let date = add_0(selected_month)
+        let month = add_0(selected_month)
+        let occ_date = `${selected_year}-${month}-${date}`
+        console.log(occ_date)
         event.preventDefault()
         let url = "/api/post/create"
         let params = {      // 해당 스키마에 입력된 속성들
@@ -60,6 +70,7 @@
         console.log(params)
         fastapi('post', url, params, 
             (json) => {
+                store.now_page.set(0)
                 push(myurl.postlist_url)
             },
             (json_error) => {

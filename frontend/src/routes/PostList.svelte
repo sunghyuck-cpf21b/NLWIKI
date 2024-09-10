@@ -36,6 +36,7 @@
     })
 
     async function get_post_list(PG, size, kw, category) {
+        if (category !== '공지') {console.log('PG=', PG)}
         let params = {
             page: PG,
             size: size,
@@ -50,7 +51,7 @@
         })
         return [post_list, _page, total]
     }
-    $: get_post_list($now_page, size, kw, selected_category).then(data=>{
+    $: get_post_list($now_page-1, size, kw, selected_category).then(data=>{
         post_list = data[0]
         total = data[2]
     })

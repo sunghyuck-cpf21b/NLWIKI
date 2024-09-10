@@ -4,8 +4,12 @@
     import Error from "../components/Error.svelte"
     import { is_login } from '../lib/store'
 
+    import * as store from '../lib/store'
     import * as api_funcs from '../lib/api_funcs'
     import * as myurl from "../lib/myurl"
+
+    import moment from 'moment'
+    moment.locale('ko')
 
     if(!$is_login) {
         push(myurl.userlogin_url)
@@ -20,7 +24,6 @@
     let occ_date = ''
     let person = ''
 
-
     function nohome(event) {
         event.preventDefault()
     }
@@ -31,13 +34,29 @@
         categories = data
     })
 
+    let occ_date_list = []
     fastapi("get", "/api/post/detail/"+post_id, {}, (json) => {
         selected_category = json.category
         subject = json.subject
         content = json.content
-        occ_date = json.occ_date
+        occ_date = moment(json.occ_date).format('YYYY-MM-DD')
+        occ_date_list = occ_date.split('-')
         person = json.person
     })
+    
+    $: selected_year = parseInt(occ_date_list[0])
+    $: selected_month = parseInt(occ_date_list[1])
+    $: selected_date = parseInt(occ_date_list[2])
+    $: last_date = new Date(selected_year, selected_month, 0).getDate()
+
+    function add_0(num) {
+        if (num < 10) {
+            return '0'+num
+        }
+        else {
+            return num
+        }
+    }
 
     function update_post(event) {
         if (document.getElementById('content-div-2').innerHTML) {
@@ -50,17 +69,22 @@
             content_info = String(info_list)*/
         }
         event.preventDefault()
+        let date = add_0(selected_month)
+        let month = add_0(selected_month)
+        let _occ_date = `${selected_year}-${month}-${date}`
         let url = "/api/post/update"
         let params = {
             post_id: post_id,
+            category: selected_category,
             subject: subject,
             content: content,
-            occ_date, occ_date,
+            occ_date, _occ_date,
             person: person,
         }
         fastapi('put', url, params,
             (json) => {
-                push(myurl.postdetail_url+post_id)
+                console.log(myurl.postdetail_url+post_id)
+                push(myurl.postdetail_url+'/'+post_id)
             },
             (json_error) => {
                 error = json_error
@@ -127,8 +151,22 @@
             <input id="person" type="text" placeholder="주요 인물을 입력해주세요" class="form-control" bind:value="{person}">
         </div>
         <div class='occ_data_box'>
-            <label for="occ_date">select로 변경하기</label>
-            <input id="occ_date" type="text" class="form-control" placeholder="2000-01-01 00:00" bind:value="{occ_date}">
+            <label for="occ_date"></label>
+            <select bind:value={selected_year}>
+                {#each Array.from({length:10}) as _, i}
+                <option>{store.ST_year-i}</option>
+                {/each}
+            </select>
+            <select bind:value={selected_month}>
+                {#each Array.from({length:12}) as _, i}
+                <option>{1+i}</option>
+                {/each}
+            </select>
+            <select bind:value={selected_date}>
+                {#each Array.from({length:parseInt(last_date)}) as _, i}
+                <option>{1+i}</option>
+                {/each}
+            </select>
         </div>
         {/if}
         <div>
