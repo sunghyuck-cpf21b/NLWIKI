@@ -87,7 +87,7 @@
             </thead>
             <tbody>
                 {#each notification_list as note}
-                <tr>
+                <tr style='background-color: #ffff0077;'>
                     <td>{note.id}</td>
                     <td style='text-align: left;'>
                         <a use:link href={myurl.postdetail_url+'/'+note.id}>
