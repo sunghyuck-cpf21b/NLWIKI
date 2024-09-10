@@ -5,9 +5,16 @@
     import bootstrapMin from 'bootstrap/dist/js/bootstrap.min';
     import Modal from '../lib/Modal.svelte';
     import { onMount } from 'svelte';
+    import * as store from "../lib/store"
 
     import * as api_funcs from '../lib/api_funcs'
     import * as myurl from "../lib/myurl"
+
+    let selected_year = store.ST_year
+    let selected_month = store.ST_month
+    let selected_date = store.ST_date
+    $: last_date = new Date(selected_year, selected_month, 0).getDate()
+
 
     let error = {detail:[]}
 
@@ -27,7 +34,7 @@
     let categories = []
     let selected_category = '일반'
     api_funcs.get_categories({task:'create'}).then(data=>{
-        categories = data // 백엔드 카테고리 리스트에 '전체'가 첫 번째 요소이므로 1번 인덱스부터
+        categories = data
     })
 
     function post_post(event) {
@@ -130,7 +137,6 @@
 
     }
 
-    let content_box
     function imgtag_maker({CD, src_url, width, height}) {
         console.log(src_url, width, height)
         const ii = document.createElement('img')
@@ -184,8 +190,22 @@
             <input id="person" type="text" placeholder="주요 인물을 입력해주세요" class="form-control" bind:value="{person}">
         </div>
         <div class='occ_data_box'>
-            <label for="occ_date">select로 변경하기</label>
-            <input id="occ_date" type="text" class="form-control" placeholder="2000-01-01 00:00" bind:value="{occ_date}">
+            <label for="occ_date"></label>
+            <select bind:value={selected_year}>
+                {#each Array.from({length:10}) as _, i}
+                <option>{store.ST_year-i}</option>
+                {/each}
+            </select>
+            <select bind:value={selected_month}>
+                {#each Array.from({length:12}) as _, i}
+                <option>{1+i}</option>
+                {/each}
+            </select>
+            <select bind:value={selected_date}>
+                {#each Array.from({length:parseInt(last_date)}) as _, i}
+                <option>{1+i}</option>
+                {/each}
+            </select>
         </div>
         {/if}
         <div>
@@ -193,7 +213,7 @@
 
             <div id='content-div' class='mb-3'>
                 <label for='content'>내용</label>
-                <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true" bind:this={content_box}></div>
+                <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true"></div>
                 <input id='content' style='display: none'>
                 <!--<input id="contt" type="text" class="form-control" bind:value="{content}">-->
             </div>
