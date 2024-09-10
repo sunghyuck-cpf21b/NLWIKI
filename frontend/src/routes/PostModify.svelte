@@ -4,6 +4,7 @@
     import Error from "../components/Error.svelte"
     import { is_login } from '../lib/store'
 
+    import * as api_funcs from '../lib/api_funcs'
     import * as myurl from "../lib/myurl"
 
     if(!$is_login) {
@@ -24,7 +25,14 @@
         event.preventDefault()
     }
 
+    let categories = []
+    let selected_category
+    api_funcs.get_categories({task:'create'}).then(data=>{
+        categories = data
+    })
+
     fastapi("get", "/api/post/detail/"+post_id, {}, (json) => {
+        selected_category = json.category
         subject = json.subject
         content = json.content
         occ_date = json.occ_date
@@ -99,39 +107,47 @@
 
 
 </script>
-<!--
-<div class="container">
-    <h5 class="my-3 border-bottom pb-2">질문 수정</h5>
-    <Error error={error} />
-    <form method="post" class="my-3">
-        <div class="mb-3">
-            <label for="subject">제목</label>
-            <input type="text" class="form-control" bind:value="{subject}">
-        </div>
-        <div class="mb-3">
-            <label for="person">주요 인물</label>
-            <input type="text" class="form-control" bind:value="{person}">
-        </div>
-        <div class="mb-3">
-            <label for="occ_date">발생 일시</label>
-            <input type="text" class="form-control" placeholder="2000-00-00 00:00" bind:value="{occ_date}">
-        </div>
 
+<div class="container">
+
+    <Error error={error} />
+    <div class="input_box">
+        <select class='select_category' on:change={()=>{selected_category=event.target.value}} bind:value={selected_category}>
+            {#each categories as c}
+            <option style={(c=='논란') ? 'color: #ff0000':''}>{c}</option>
+            {/each}
+        </select>
+        <div class="subject_box">
+            <label for="subject"></label>
+            <input id="subject" type="text" placeholder="제목을 입력해주세요" class="form-control" bind:value="{subject}">
+        </div>
+        {#if selected_category == '논란'}
+        <div class='person_box'>
+            <label for="person"></label>
+            <input id="person" type="text" placeholder="주요 인물을 입력해주세요" class="form-control" bind:value="{person}">
+        </div>
+        <div class='occ_data_box'>
+            <label for="occ_date">select로 변경하기</label>
+            <input id="occ_date" type="text" class="form-control" placeholder="2000-01-01 00:00" bind:value="{occ_date}">
+        </div>
+        {/if}
         <div>
-            <a href='/' on:click={()=>{(showModal=true); nohome(event);}}>사진</a>
+            <a href='/' on:click|preventDefault={()=>{(showModal=true);}}>사진</a>
 
             <div id='content-div' class='mb-3'>
-                <label for='content'>논란 내용</label>
+                <label for='content'>내용</label>
                 <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true">{@html content}</div>
                 <input id='content' style='display: none'>
-                
+                <!--<input id="contt" type="text" class="form-control" bind:value="{content}">-->
             </div>
         </div>
-        <button class="btn btn-primary" on:click="{update_post}">수정하기</button>
-    </form>
+           
 
+        <button class="btn btn-primary" on:click='{update_post}'>저장하기</button>
+    </div>
 </div>
--->
+
+
 
 {#if showModal}
 <!-- svelte-ignore a11y-no-static-element-interactions -->

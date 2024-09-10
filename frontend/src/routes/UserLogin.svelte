@@ -42,7 +42,7 @@
         </div>
         <div class='login_input'>
             <label for='password'>비밀번호</label>
-            <input type='password' id='password' bind:value='{login_password}'>
+            <input type='password' id='password' spellcheck="false" bind:value='{login_password}'>
         </div>
         <button type='submit' on:click='{login}'>로그인</button>
     </form>
@@ -76,4 +76,5 @@
         align-items: flex-start;
         justify-content: center;
     }
+
 </style>

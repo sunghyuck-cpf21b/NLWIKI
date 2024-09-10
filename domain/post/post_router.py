@@ -20,6 +20,7 @@ def post_list(category: str, # 클라이언트가 선택한 카테고리
               page: int = 0, size: int = 10, keyword: str = '',
               db: Session = Depends(get_db),
               current_user: User = Depends(get_current_user)):     # db 객체에 get_db 제네레이터에 의해 생성된 세션 객체 주입
+    print('page=',page, 'size=',size)
     if not current_user.set_nonlan_user and category == '논란':
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail='허가되지 않은 사용자입니다.')
