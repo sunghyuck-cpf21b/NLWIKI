@@ -49,7 +49,8 @@
             }
             fastapi('delete', url, params,
                 (json) => {
-                    push('/')
+                    console.log(myurl.postlist_url)
+                    push(myurl.postlist_url)
                 },
                 (err_json) => {
                     error = err_json
