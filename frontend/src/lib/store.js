@@ -13,7 +13,7 @@ const persist_storage = (key, initValue) => {
 }
 
 export const page = persist_storage("page", 0)
-export const now_page = persist_storage("now_page", 0)
+export const now_page = persist_storage("now_page", 1)
 export const T_page = persist_storage("T_page", 0)
 
 let NowDay = new Date

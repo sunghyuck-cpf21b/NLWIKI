@@ -82,12 +82,13 @@
             category: selected_category,
             subject: subject,
             content: content,
-            occ_date, _occ_date,
+            occ_date: _occ_date,
             person: person,
         }
+        console.log(params)
         fastapi('put', url, params,
             (json) => {
-                console.log(myurl.postdetail_url+post_id)
+                store.now_page.set(1)
                 push(myurl.postdetail_url+'/'+post_id)
             },
             (json_error) => {

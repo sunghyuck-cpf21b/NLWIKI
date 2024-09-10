@@ -73,7 +73,7 @@
         console.log(params)
         fastapi('post', url, params, 
             (json) => {
-                store.now_page.set(0)
+                store.now_page.set(1)
                 push(myurl.postlist_url)
             },
             (json_error) => {
