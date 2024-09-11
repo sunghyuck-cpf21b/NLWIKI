@@ -13,14 +13,17 @@
   import UserLogin from './routes/UserLogin.svelte';
   import MyPage from './routes/MyPage.svelte';
   import SideBar from './components/Side_Bar.svelte';
+  import JFF from './routes/JFF.svelte';
 
   import { access_token, username, is_login } from './lib/store';
+  import * as store from './lib/store'
   import * as myurl from "./lib/myurl"
 
 
   const routes = {    // 속성값으로 path와 component를 받으며 path는 경로를 나타내는 문자열, component는 경로와 일치하는 경우 표시할 svelte 컴포넌트를 나타낸다.
     [myurl.home_url] : Home,
     [myurl.mypage_url+'/:username']: MyPage,
+    [myurl.jff_url]: JFF,
 
     [myurl.postlist_url] : PostList,
     [myurl.postdetail_url+'/:post_id'] : PostDetail,
@@ -37,6 +40,10 @@
   let render_ready = true
 
   $: if ($location) {
+    if ($location == myurl.home_url) {
+      store.ST_category.set('전체')
+    }
+
     if ($is_login) { // 토큰 만료됐는지 확인
       const payload = JSON.parse(atob($access_token.split('.')[1]))
       const expiry = payload.exp * 1000 

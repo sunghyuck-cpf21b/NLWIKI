@@ -13,7 +13,10 @@ from domain.user import user_crud, user_schema
 from domain.user.user_crud import pwd_context
 
 from starlette.config import Config
-config = Config('.env')
+import os
+here_dir = os.path.dirname(os.path.abspath(__file__))
+# C:\NLWIKI_proj\myapi\domain\user\user_router.py
+config = Config(os.path.join(here_dir,'..','..','.env'))
 
 ACCESS_TOKEN_EXPIRE_MINUTES = int(config('ACCESS_TOKEN_EXPIRE_MINUTES'))
 

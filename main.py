@@ -11,6 +11,7 @@ from domain.Sep_Program import sep_program_router
 from domain.memo import memo_router
 from domain.test_api import test_router
 from domain.file_api import file_router
+from domain.jff import jff_router
 # from domain.image import image_router
 
 app = FastAPI()
@@ -38,6 +39,7 @@ app.include_router(file_router.router)
 
 app.include_router(sep_program_router.router)
 app.include_router(memo_router.router)
+app.include_router(jff_router.router)
 
 #app.include_router(nonlan_router.router)
 # app.include_router(test_router.router)

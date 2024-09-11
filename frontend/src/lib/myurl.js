@@ -7,7 +7,7 @@
 
 export const home_url = '/'
 export const mypage_url = '/mypage' // + '/:username'
-
+export const jff_url = '/jff'
 
 export const postlist_url = '/postlist'
 export const postdetail_url = '/postdetail' // + '/:post_id'

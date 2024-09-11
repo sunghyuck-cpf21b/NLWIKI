@@ -160,3 +160,20 @@ User.volumes = relationship("Volume", back_populates='user')
 User.weeklymemos = relationship("Weeklymemo", back_populates='user')
 
 
+
+''' 재미로 만든 기능 '''
+
+class DotPaint(Base):
+    __tablename__ = 'dotpaint'
+
+    id = Column(Integer, primary_key=True)
+    x = Column(Integer, nullable=False)
+    y = Column(Integer, nullable=False)
+    color = Column(Text, nullable=False)
+
+    create_date = Column(DateTime ,nullable=False)
+
+    user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
+    user = relationship("User", back_populates='dotpaints')
+
+User.dotpaints = relationship("DotPaint", back_populates='user')

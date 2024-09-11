@@ -12,9 +12,13 @@ const persist_storage = (key, initValue) => {
     return store
 }
 
+// ST : store 변수라는 뜻
+
 export const page = persist_storage("page", 0)
 export const now_page = persist_storage("now_page", 1)
 export const T_page = persist_storage("T_page", 0)
+
+export const ST_category = persist_storage("ST_category", '전체')
 
 let NowDay = new Date
 export const ST_year = NowDay.getFullYear()
