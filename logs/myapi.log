@@ -2229,3 +2229,300 @@ Traceback (most recent call last):
 AttributeError: module 'bcrypt' has no attribute '__about__'
 [2024-09-07 23:10:58,192.192] DEBUG [126106660238912] - detected 'bcrypt' backend, version '<unknown>'
 [2024-09-07 23:10:58,192.192] DEBUG [126106660238912] - 'bcrypt' backend lacks $2$ support, enabling workaround
+[2024-09-09 02:14:58,204.204] DEBUG [128939196195264] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-09 02:14:58,204.204] DEBUG [128939196195264] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-09 02:14:58,204.204] DEBUG [128939196195264] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-09 02:14:58,204.204] DEBUG [128939196195264] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-09 02:14:58,204.204] DEBUG [128939196195264] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-09 02:14:58,204.204] DEBUG [128939196195264] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-09 02:14:58,281.281] DEBUG [128939196195264] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-09 02:14:58,282.282] DEBUG [128939196195264] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-09 02:16:28,612.612] DEBUG [128939196195264] - Calling on_field_start with no data
+[2024-09-09 02:16:28,612.612] DEBUG [128939196195264] - Calling on_field_name with data[0:8]
+[2024-09-09 02:16:28,612.612] DEBUG [128939196195264] - Calling on_field_data with data[9:19]
+[2024-09-09 02:16:28,612.612] DEBUG [128939196195264] - Calling on_field_end with no data
+[2024-09-09 02:16:28,612.612] DEBUG [128939196195264] - Calling on_field_start with no data
+[2024-09-09 02:16:28,612.612] DEBUG [128939196195264] - Calling on_field_name with data[20:28]
+[2024-09-09 02:16:28,612.612] DEBUG [128939196195264] - Calling on_field_data with data[29:37]
+[2024-09-09 02:16:28,612.612] DEBUG [128939196195264] - Calling on_field_end with no data
+[2024-09-09 02:16:28,612.612] DEBUG [128939196195264] - Calling on_end with no data
+[2024-09-09 02:16:49,809.809] DEBUG [135887409082816] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-09 02:16:49,810.810] DEBUG [135887409082816] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-09 02:16:49,811.811] DEBUG [135887409082816] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-09 02:16:49,811.811] DEBUG [135887409082816] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-09 02:16:49,811.811] DEBUG [135887409082816] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-09 02:16:49,811.811] DEBUG [135887409082816] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-09 02:16:49,865.865] DEBUG [135887409082816] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-09 02:16:49,865.865] DEBUG [135887409082816] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-09 02:17:03,992.992] DEBUG [135887409082816] - Calling on_field_start with no data
+[2024-09-09 02:17:03,992.992] DEBUG [135887409082816] - Calling on_field_name with data[0:8]
+[2024-09-09 02:17:03,992.992] DEBUG [135887409082816] - Calling on_field_data with data[9:19]
+[2024-09-09 02:17:03,992.992] DEBUG [135887409082816] - Calling on_field_end with no data
+[2024-09-09 02:17:03,992.992] DEBUG [135887409082816] - Calling on_field_start with no data
+[2024-09-09 02:17:03,992.992] DEBUG [135887409082816] - Calling on_field_name with data[20:28]
+[2024-09-09 02:17:03,993.993] DEBUG [135887409082816] - Calling on_field_data with data[29:37]
+[2024-09-09 02:17:03,993.993] DEBUG [135887409082816] - Calling on_field_end with no data
+[2024-09-09 02:17:03,993.993] DEBUG [135887409082816] - Calling on_end with no data
+[2024-09-09 02:17:03,996.996] WARNING [135887196255808] - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/myapi/.venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+[2024-09-09 02:17:03,999.999] DEBUG [135887196255808] - detected 'bcrypt' backend, version '<unknown>'
+[2024-09-09 02:17:04,000.000] DEBUG [135887196255808] - 'bcrypt' backend lacks $2$ support, enabling workaround
+[2024-09-09 12:21:49,843.843] DEBUG [135887409082816] - Calling on_field_start with no data
+[2024-09-09 12:21:49,844.844] DEBUG [135887409082816] - Calling on_field_name with data[0:8]
+[2024-09-09 12:21:49,845.845] DEBUG [135887409082816] - Calling on_field_data with data[9:21]
+[2024-09-09 12:21:49,845.845] DEBUG [135887409082816] - Calling on_field_end with no data
+[2024-09-09 12:21:49,845.845] DEBUG [135887409082816] - Calling on_field_start with no data
+[2024-09-09 12:21:49,845.845] DEBUG [135887409082816] - Calling on_field_name with data[22:30]
+[2024-09-09 12:21:49,845.845] DEBUG [135887409082816] - Calling on_field_data with data[31:42]
+[2024-09-09 12:21:49,845.845] DEBUG [135887409082816] - Calling on_field_end with no data
+[2024-09-09 12:21:49,845.845] DEBUG [135887409082816] - Calling on_end with no data
+[2024-09-09 12:21:49,849.849] WARNING [135887196255808] - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/myapi/.venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+[2024-09-09 12:21:49,853.853] DEBUG [135887196255808] - detected 'bcrypt' backend, version '<unknown>'
+[2024-09-09 12:21:49,856.856] DEBUG [135887196255808] - 'bcrypt' backend lacks $2$ support, enabling workaround
+[2024-09-09 12:21:50,463.463] DEBUG [135887409082816] - Calling on_field_start with no data
+[2024-09-09 12:21:50,463.463] DEBUG [135887409082816] - Calling on_field_name with data[0:8]
+[2024-09-09 12:21:50,463.463] DEBUG [135887409082816] - Calling on_field_data with data[9:21]
+[2024-09-09 12:21:50,463.463] DEBUG [135887409082816] - Calling on_field_end with no data
+[2024-09-09 12:21:50,463.463] DEBUG [135887409082816] - Calling on_field_start with no data
+[2024-09-09 12:21:50,463.463] DEBUG [135887409082816] - Calling on_field_name with data[22:30]
+[2024-09-09 12:21:50,464.464] DEBUG [135887409082816] - Calling on_field_data with data[31:42]
+[2024-09-09 12:21:50,464.464] DEBUG [135887409082816] - Calling on_field_end with no data
+[2024-09-09 12:21:50,464.464] DEBUG [135887409082816] - Calling on_end with no data
+[2024-09-09 13:06:39,197.197] DEBUG [138827845996992] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-09 13:06:39,198.198] DEBUG [138827845996992] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-09 13:06:39,198.198] DEBUG [138827845996992] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-09 13:06:39,209.209] DEBUG [138827845996992] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-09 13:06:39,209.209] DEBUG [138827845996992] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-09 13:06:39,209.209] DEBUG [138827845996992] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-09 13:06:39,271.271] DEBUG [138827845996992] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-09 13:06:39,271.271] DEBUG [138827845996992] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-09 13:06:46,626.626] DEBUG [138827845996992] - Calling on_field_start with no data
+[2024-09-09 13:06:46,627.627] DEBUG [138827845996992] - Calling on_field_name with data[0:8]
+[2024-09-09 13:06:46,627.627] DEBUG [138827845996992] - Calling on_field_data with data[9:19]
+[2024-09-09 13:06:46,627.627] DEBUG [138827845996992] - Calling on_field_end with no data
+[2024-09-09 13:06:46,627.627] DEBUG [138827845996992] - Calling on_field_start with no data
+[2024-09-09 13:06:46,627.627] DEBUG [138827845996992] - Calling on_field_name with data[20:28]
+[2024-09-09 13:06:46,627.627] DEBUG [138827845996992] - Calling on_field_data with data[29:37]
+[2024-09-09 13:06:46,627.627] DEBUG [138827845996992] - Calling on_field_end with no data
+[2024-09-09 13:06:46,627.627] DEBUG [138827845996992] - Calling on_end with no data
+[2024-09-09 13:06:46,673.673] WARNING [138827632854592] - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/myapi/.venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+[2024-09-09 13:06:46,674.674] DEBUG [138827632854592] - detected 'bcrypt' backend, version '<unknown>'
+[2024-09-09 13:06:46,674.674] DEBUG [138827632854592] - 'bcrypt' backend lacks $2$ support, enabling workaround
+[2024-09-09 16:53:21,535.535] DEBUG [138827845996992] - Calling on_field_start with no data
+[2024-09-09 16:53:21,537.537] DEBUG [138827845996992] - Calling on_field_name with data[0:8]
+[2024-09-09 16:53:21,537.537] DEBUG [138827845996992] - Calling on_field_data with data[9:19]
+[2024-09-09 16:53:21,537.537] DEBUG [138827845996992] - Calling on_field_end with no data
+[2024-09-09 16:53:21,537.537] DEBUG [138827845996992] - Calling on_field_start with no data
+[2024-09-09 16:53:21,537.537] DEBUG [138827845996992] - Calling on_field_name with data[20:28]
+[2024-09-09 16:53:21,537.537] DEBUG [138827845996992] - Calling on_field_data with data[29:37]
+[2024-09-09 16:53:21,537.537] DEBUG [138827845996992] - Calling on_field_end with no data
+[2024-09-09 16:53:21,537.537] DEBUG [138827845996992] - Calling on_end with no data
+[2024-09-10 03:32:38,771.771] DEBUG [130591170535872] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-10 03:32:38,771.771] DEBUG [130591170535872] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-10 03:32:38,772.772] DEBUG [130591170535872] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-10 03:32:38,772.772] DEBUG [130591170535872] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-10 03:32:38,772.772] DEBUG [130591170535872] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-10 03:32:38,772.772] DEBUG [130591170535872] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-10 03:32:38,843.843] DEBUG [130591170535872] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-10 03:32:38,844.844] DEBUG [130591170535872] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-10 03:32:54,977.977] DEBUG [130591170535872] - Calling on_field_start with no data
+[2024-09-10 03:32:54,977.977] DEBUG [130591170535872] - Calling on_field_name with data[0:8]
+[2024-09-10 03:32:54,977.977] DEBUG [130591170535872] - Calling on_field_data with data[9:19]
+[2024-09-10 03:32:54,977.977] DEBUG [130591170535872] - Calling on_field_end with no data
+[2024-09-10 03:32:54,977.977] DEBUG [130591170535872] - Calling on_field_start with no data
+[2024-09-10 03:32:54,977.977] DEBUG [130591170535872] - Calling on_field_name with data[20:28]
+[2024-09-10 03:32:54,977.977] DEBUG [130591170535872] - Calling on_field_data with data[29:37]
+[2024-09-10 03:32:54,977.977] DEBUG [130591170535872] - Calling on_field_end with no data
+[2024-09-10 03:32:54,977.977] DEBUG [130591170535872] - Calling on_end with no data
+[2024-09-10 03:32:55,027.027] WARNING [130590957368896] - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/myapi/.venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+[2024-09-10 03:32:55,029.029] DEBUG [130590957368896] - detected 'bcrypt' backend, version '<unknown>'
+[2024-09-10 03:32:55,029.029] DEBUG [130590957368896] - 'bcrypt' backend lacks $2$ support, enabling workaround
+[2024-09-10 03:42:39,806.806] DEBUG [130591170535872] - Calling on_field_start with no data
+[2024-09-10 03:42:39,807.807] DEBUG [130591170535872] - Calling on_field_name with data[0:8]
+[2024-09-10 03:42:39,807.807] DEBUG [130591170535872] - Calling on_field_data with data[9:13]
+[2024-09-10 03:42:39,807.807] DEBUG [130591170535872] - Calling on_field_end with no data
+[2024-09-10 03:42:39,807.807] DEBUG [130591170535872] - Calling on_field_start with no data
+[2024-09-10 03:42:39,807.807] DEBUG [130591170535872] - Calling on_field_name with data[14:22]
+[2024-09-10 03:42:39,807.807] DEBUG [130591170535872] - Calling on_field_data with data[23:26]
+[2024-09-10 03:42:39,807.807] DEBUG [130591170535872] - Calling on_field_end with no data
+[2024-09-10 03:42:39,807.807] DEBUG [130591170535872] - Calling on_end with no data
+[2024-09-10 03:42:39,810.810] WARNING [130590939534912] - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/myapi/.venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+[2024-09-10 03:42:39,813.813] DEBUG [130590939534912] - detected 'bcrypt' backend, version '<unknown>'
+[2024-09-10 03:42:39,813.813] DEBUG [130590939534912] - 'bcrypt' backend lacks $2$ support, enabling workaround
+[2024-09-10 03:43:04,002.002] DEBUG [130591170535872] - Calling on_field_start with no data
+[2024-09-10 03:43:04,002.002] DEBUG [130591170535872] - Calling on_field_name with data[0:8]
+[2024-09-10 03:43:04,002.002] DEBUG [130591170535872] - Calling on_field_data with data[9:19]
+[2024-09-10 03:43:04,002.002] DEBUG [130591170535872] - Calling on_field_end with no data
+[2024-09-10 03:43:04,002.002] DEBUG [130591170535872] - Calling on_field_start with no data
+[2024-09-10 03:43:04,002.002] DEBUG [130591170535872] - Calling on_field_name with data[20:28]
+[2024-09-10 03:43:04,002.002] DEBUG [130591170535872] - Calling on_field_data with data[29:37]
+[2024-09-10 03:43:04,002.002] DEBUG [130591170535872] - Calling on_field_end with no data
+[2024-09-10 03:43:04,002.002] DEBUG [130591170535872] - Calling on_end with no data
+[2024-09-10 19:30:20,471.471] DEBUG [130591170535872] - Calling on_field_start with no data
+[2024-09-10 19:30:20,473.473] DEBUG [130591170535872] - Calling on_field_name with data[0:8]
+[2024-09-10 19:30:20,473.473] DEBUG [130591170535872] - Calling on_field_data with data[9:19]
+[2024-09-10 19:30:20,473.473] DEBUG [130591170535872] - Calling on_field_end with no data
+[2024-09-10 19:30:20,473.473] DEBUG [130591170535872] - Calling on_field_start with no data
+[2024-09-10 19:30:20,473.473] DEBUG [130591170535872] - Calling on_field_name with data[20:28]
+[2024-09-10 19:30:20,473.473] DEBUG [130591170535872] - Calling on_field_data with data[29:37]
+[2024-09-10 19:30:20,473.473] DEBUG [130591170535872] - Calling on_field_end with no data
+[2024-09-10 19:30:20,473.473] DEBUG [130591170535872] - Calling on_end with no data
+[2024-09-10 19:49:40,642.642] DEBUG [129761852174784] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-10 19:49:40,642.642] DEBUG [129761852174784] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-10 19:49:40,642.642] DEBUG [129761852174784] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-10 19:49:40,642.642] DEBUG [129761852174784] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-10 19:49:40,642.642] DEBUG [129761852174784] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-10 19:49:40,642.642] DEBUG [129761852174784] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-10 19:49:40,735.735] DEBUG [129761852174784] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-10 19:49:40,744.744] DEBUG [129761852174784] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-10 20:28:09,746.746] DEBUG [129761852174784] - Calling on_field_start with no data
+[2024-09-10 20:28:09,747.747] DEBUG [129761852174784] - Calling on_field_name with data[0:8]
+[2024-09-10 20:28:09,747.747] DEBUG [129761852174784] - Calling on_field_data with data[9:21]
+[2024-09-10 20:28:09,748.748] DEBUG [129761852174784] - Calling on_field_end with no data
+[2024-09-10 20:28:09,748.748] DEBUG [129761852174784] - Calling on_field_start with no data
+[2024-09-10 20:28:09,748.748] DEBUG [129761852174784] - Calling on_field_name with data[22:30]
+[2024-09-10 20:28:09,748.748] DEBUG [129761852174784] - Calling on_field_data with data[31:42]
+[2024-09-10 20:28:09,748.748] DEBUG [129761852174784] - Calling on_field_end with no data
+[2024-09-10 20:28:09,748.748] DEBUG [129761852174784] - Calling on_end with no data
+[2024-09-10 20:28:09,750.750] WARNING [129761630217792] - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/myapi/.venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+[2024-09-10 20:28:09,753.753] DEBUG [129761630217792] - detected 'bcrypt' backend, version '<unknown>'
+[2024-09-10 20:28:09,755.755] DEBUG [129761630217792] - 'bcrypt' backend lacks $2$ support, enabling workaround
+[2024-09-10 22:41:38,679.679] DEBUG [129761852174784] - Calling on_field_start with no data
+[2024-09-10 22:41:38,679.679] DEBUG [129761852174784] - Calling on_field_name with data[0:8]
+[2024-09-10 22:41:38,679.679] DEBUG [129761852174784] - Calling on_field_data with data[9:19]
+[2024-09-10 22:41:38,679.679] DEBUG [129761852174784] - Calling on_field_end with no data
+[2024-09-10 22:41:38,679.679] DEBUG [129761852174784] - Calling on_field_start with no data
+[2024-09-10 22:41:38,679.679] DEBUG [129761852174784] - Calling on_field_name with data[20:28]
+[2024-09-10 22:41:38,679.679] DEBUG [129761852174784] - Calling on_field_data with data[29:37]
+[2024-09-10 22:41:38,679.679] DEBUG [129761852174784] - Calling on_field_end with no data
+[2024-09-10 22:41:38,679.679] DEBUG [129761852174784] - Calling on_end with no data
+[2024-09-10 22:41:38,682.682] WARNING [129761630217792] - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/myapi/.venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+[2024-09-10 22:41:38,683.683] DEBUG [129761630217792] - detected 'bcrypt' backend, version '<unknown>'
+[2024-09-10 22:41:38,683.683] DEBUG [129761630217792] - 'bcrypt' backend lacks $2$ support, enabling workaround
+[2024-09-11 00:20:02,559.559] DEBUG [131311032156608] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-11 00:20:02,559.559] DEBUG [131311032156608] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-11 00:20:02,559.559] DEBUG [131311032156608] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-11 00:20:02,570.570] DEBUG [131311032156608] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-11 00:20:02,570.570] DEBUG [131311032156608] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-11 00:20:02,571.571] DEBUG [131311032156608] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-11 00:20:02,645.645] DEBUG [131311032156608] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-11 00:20:02,645.645] DEBUG [131311032156608] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-11 01:44:53,612.612] DEBUG [131311032156608] - Calling on_field_start with no data
+[2024-09-11 01:44:53,612.612] DEBUG [131311032156608] - Calling on_field_name with data[0:8]
+[2024-09-11 01:44:53,612.612] DEBUG [131311032156608] - Calling on_field_data with data[9:19]
+[2024-09-11 01:44:53,612.612] DEBUG [131311032156608] - Calling on_field_end with no data
+[2024-09-11 01:44:53,612.612] DEBUG [131311032156608] - Calling on_field_start with no data
+[2024-09-11 01:44:53,612.612] DEBUG [131311032156608] - Calling on_field_name with data[20:28]
+[2024-09-11 01:44:53,612.612] DEBUG [131311032156608] - Calling on_field_data with data[29:37]
+[2024-09-11 01:44:53,612.612] DEBUG [131311032156608] - Calling on_field_end with no data
+[2024-09-11 01:44:53,612.612] DEBUG [131311032156608] - Calling on_end with no data
+[2024-09-11 01:44:53,615.615] WARNING [131310799541824] - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/myapi/.venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+[2024-09-11 01:44:53,616.616] DEBUG [131310799541824] - detected 'bcrypt' backend, version '<unknown>'
+[2024-09-11 01:44:53,616.616] DEBUG [131310799541824] - 'bcrypt' backend lacks $2$ support, enabling workaround
+[2024-09-11 20:18:58,531.531] DEBUG [131311032156608] - Calling on_field_start with no data
+[2024-09-11 20:18:58,532.532] DEBUG [131311032156608] - Calling on_field_name with data[0:8]
+[2024-09-11 20:18:58,532.532] DEBUG [131311032156608] - Calling on_field_data with data[9:19]
+[2024-09-11 20:18:58,532.532] DEBUG [131311032156608] - Calling on_field_end with no data
+[2024-09-11 20:18:58,532.532] DEBUG [131311032156608] - Calling on_field_start with no data
+[2024-09-11 20:18:58,533.533] DEBUG [131311032156608] - Calling on_field_name with data[20:28]
+[2024-09-11 20:18:58,533.533] DEBUG [131311032156608] - Calling on_field_data with data[29:37]
+[2024-09-11 20:18:58,533.533] DEBUG [131311032156608] - Calling on_field_end with no data
+[2024-09-11 20:18:58,533.533] DEBUG [131311032156608] - Calling on_end with no data
+[2024-09-11 20:18:58,560.560] WARNING [131310799541824] - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/myapi/.venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+[2024-09-11 20:18:58,563.563] DEBUG [131310799541824] - detected 'bcrypt' backend, version '<unknown>'
+[2024-09-11 20:18:58,565.565] DEBUG [131310799541824] - 'bcrypt' backend lacks $2$ support, enabling workaround
+[2024-09-11 20:32:28,493.493] DEBUG [131311032156608] - Calling on_field_start with no data
+[2024-09-11 20:32:28,494.494] DEBUG [131311032156608] - Calling on_field_name with data[0:8]
+[2024-09-11 20:32:28,494.494] DEBUG [131311032156608] - Calling on_field_data with data[9:19]
+[2024-09-11 20:32:28,494.494] DEBUG [131311032156608] - Calling on_field_end with no data
+[2024-09-11 20:32:28,494.494] DEBUG [131311032156608] - Calling on_field_start with no data
+[2024-09-11 20:32:28,494.494] DEBUG [131311032156608] - Calling on_field_name with data[20:28]
+[2024-09-11 20:32:28,494.494] DEBUG [131311032156608] - Calling on_field_data with data[29:37]
+[2024-09-11 20:32:28,494.494] DEBUG [131311032156608] - Calling on_field_end with no data
+[2024-09-11 20:32:28,494.494] DEBUG [131311032156608] - Calling on_end with no data
+[2024-09-12 00:48:11,243.243] DEBUG [131311032156608] - Calling on_field_start with no data
+[2024-09-12 00:48:11,243.243] DEBUG [131311032156608] - Calling on_field_name with data[0:8]
+[2024-09-12 00:48:11,243.243] DEBUG [131311032156608] - Calling on_field_data with data[9:19]
+[2024-09-12 00:48:11,243.243] DEBUG [131311032156608] - Calling on_field_end with no data
+[2024-09-12 00:48:11,243.243] DEBUG [131311032156608] - Calling on_field_start with no data
+[2024-09-12 00:48:11,243.243] DEBUG [131311032156608] - Calling on_field_name with data[20:28]
+[2024-09-12 00:48:11,243.243] DEBUG [131311032156608] - Calling on_field_data with data[29:37]
+[2024-09-12 00:48:11,243.243] DEBUG [131311032156608] - Calling on_field_end with no data
+[2024-09-12 00:48:11,243.243] DEBUG [131311032156608] - Calling on_end with no data
+[2024-09-12 04:07:17,920.920] DEBUG [134066237772224] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-12 04:07:17,920.920] DEBUG [134066237772224] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-12 04:07:17,920.920] DEBUG [134066237772224] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-12 04:07:17,920.920] DEBUG [134066237772224] - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+[2024-09-12 04:07:17,920.920] DEBUG [134066237772224] - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+[2024-09-12 04:07:17,920.920] DEBUG [134066237772224] - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+[2024-09-12 04:07:17,990.990] DEBUG [134066237772224] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-12 04:07:17,991.991] DEBUG [134066237772224] - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+[2024-09-12 04:07:29,672.672] DEBUG [134066237772224] - Calling on_field_start with no data
+[2024-09-12 04:07:29,672.672] DEBUG [134066237772224] - Calling on_field_name with data[0:8]
+[2024-09-12 04:07:29,672.672] DEBUG [134066237772224] - Calling on_field_data with data[9:19]
+[2024-09-12 04:07:29,672.672] DEBUG [134066237772224] - Calling on_field_end with no data
+[2024-09-12 04:07:29,672.672] DEBUG [134066237772224] - Calling on_field_start with no data
+[2024-09-12 04:07:29,672.672] DEBUG [134066237772224] - Calling on_field_name with data[20:28]
+[2024-09-12 04:07:29,672.672] DEBUG [134066237772224] - Calling on_field_data with data[29:37]
+[2024-09-12 04:07:29,672.672] DEBUG [134066237772224] - Calling on_field_end with no data
+[2024-09-12 04:07:29,672.672] DEBUG [134066237772224] - Calling on_end with no data
+[2024-09-12 04:07:29,743.743] WARNING [134066024216128] - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/myapi/.venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+[2024-09-12 04:07:29,746.746] DEBUG [134066024216128] - detected 'bcrypt' backend, version '<unknown>'
+[2024-09-12 04:07:29,746.746] DEBUG [134066024216128] - 'bcrypt' backend lacks $2$ support, enabling workaround
+[2024-09-12 04:07:35,424.424] DEBUG [134066024216128] - STREAM b'IHDR' 16 13
+[2024-09-12 04:07:35,424.424] DEBUG [134066024216128] - STREAM b'IDAT' 41 109
+[2024-09-12 04:07:36,240.240] DEBUG [134066024216128] - STREAM b'IHDR' 16 13
+[2024-09-12 04:07:36,240.240] DEBUG [134066024216128] - STREAM b'IDAT' 41 114
+[2024-09-12 04:07:36,404.404] DEBUG [134066024216128] - STREAM b'IHDR' 16 13
+[2024-09-12 04:07:36,404.404] DEBUG [134066024216128] - STREAM b'IDAT' 41 116
+[2024-09-12 04:07:37,628.628] DEBUG [134066024216128] - STREAM b'IHDR' 16 13
+[2024-09-12 04:07:37,629.629] DEBUG [134066024216128] - STREAM b'IDAT' 41 116
+[2024-09-12 04:07:37,771.771] DEBUG [134066024216128] - STREAM b'IHDR' 16 13
+[2024-09-12 04:07:37,771.771] DEBUG [134066024216128] - STREAM b'IDAT' 41 119
+[2024-09-12 04:07:38,483.483] DEBUG [134066024216128] - STREAM b'IHDR' 16 13
+[2024-09-12 04:07:38,483.483] DEBUG [134066024216128] - STREAM b'IDAT' 41 119
+[2024-09-12 04:07:39,227.227] DEBUG [134066024216128] - STREAM b'IHDR' 16 13
+[2024-09-12 04:07:39,227.227] DEBUG [134066024216128] - STREAM b'IDAT' 41 120
+[2024-09-12 04:07:39,443.443] DEBUG [134066024216128] - STREAM b'IHDR' 16 13
+[2024-09-12 04:07:39,443.443] DEBUG [134066024216128] - STREAM b'IDAT' 41 124
+[2024-09-12 04:07:40,651.651] DEBUG [134066024216128] - STREAM b'IHDR' 16 13
+[2024-09-12 04:07:40,651.651] DEBUG [134066024216128] - STREAM b'IDAT' 41 126
