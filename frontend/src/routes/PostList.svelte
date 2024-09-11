@@ -16,7 +16,6 @@
         push(myurl.userlogin_url)
     }
 
-    console.log('now_page=', $now_page,'T_page=', $T_page)
 
     let post_list = [] 
     let total = 0
@@ -36,7 +35,6 @@
     })
 
     async function get_post_list(PG, size, kw, category) {
-        if (category !== '공지') {console.log('PG=', PG)}
         let params = {
             page: PG,
             size: size,

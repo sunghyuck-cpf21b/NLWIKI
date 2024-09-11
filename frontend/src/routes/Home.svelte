@@ -8,7 +8,6 @@
     const fd = new FormData()
     fd.append('test', '1234567890')
 
-    console.log(fd)
 
     let imagefile
     let error = {}
