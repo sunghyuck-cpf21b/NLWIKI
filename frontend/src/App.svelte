@@ -1,5 +1,7 @@
 <script>
-  import Router from 'svelte-spa-router'
+  import Router, { push, location } from 'svelte-spa-router'
+  import { onMount } from 'svelte';
+
   import Home from './routes/Home.svelte';
   import PostList from "./routes/PostList.svelte"
   import PostDetail from "./routes/PostDetail.svelte"
@@ -28,29 +30,53 @@
     [myurl.usercreate_url] : UserCreate,
     [myurl.userlogin_url] : UserLogin,
   }
+  
 
-  if ($is_login) {
-    const payload = JSON.parse(atob($access_token.split('.')[1]))
-    const expiry = payload.exp * 1000 
-    const now = new Date()
-    const now_utc_1 = now.toUTCString()
-    const now_utc_2 = new Date(now_utc_1)
-    const now_utc = now_utc_2.getTime()
-    //console.log('token and now time', expiry - now_utc)
+  // 상태에 따른 api 에러메세지 방지를 위함
+  // 컴포넌트 렌더링 전에 script를 먼저 실행하기 위함
+  let render_ready = true
 
-    if (now >= expiry) {
-      $access_token = ''
-      $username = ''
-      $is_login = false
+  $: if ($location) {
+    if ($is_login) { // 토큰 만료됐는지 확인
+      const payload = JSON.parse(atob($access_token.split('.')[1]))
+      const expiry = payload.exp * 1000 
+      const now = new Date()
+      const now_utc_1 = now.toUTCString()
+      const now_utc_2 = new Date(now_utc_1)
+      const now_utc = now_utc_2.getTime()
+
+      if (now >= expiry) { // 토큰 시간 만료됐다면 모든 상태 초기화 후 로그인 페이지로 이동      
+        $access_token = ''
+        $username = ''
+        $is_login = false 
+        render_ready = false 
+        push(myurl.userlogin_url)
+      }
+    } 
+
+    if (!$is_login) { // 로그아웃 상태에서 사용자의 이동 제한
+      if (!($location===myurl.home_url || $location===myurl.usercreate_url || $location===myurl.userlogin_url)) {
+        render_ready = false // api 오류메세지 방지를 위해 컴포넌트 렌더링 비활성화
+        push(myurl.userlogin_url) // 로그인 페이지로 이동
+      } else {
+        render_ready = true
+      }
+    }
+
+    if ($location==myurl.userlogin_url) { // 로그인창으로 이동할 때에는 컴포넌트 렌더링 활성화
+      render_ready = true
     }
   }
+
 
 </script>
 
 
 <Navigation />
 <main>
+  {#if render_ready}
   <Router {routes}/>
+  {/if}
 </main>
 
 <style>
