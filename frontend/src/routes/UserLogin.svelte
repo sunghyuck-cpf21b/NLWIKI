@@ -31,8 +31,8 @@
     }
 </script>
 
-
 <div class='login_box'>
+    <span class='info'>입력창 클릭이 안된다면 ESC를 눌러주세요</span>
     <h5>로그인</h5>
     <Error error={error} />
     <form method='post'>
@@ -61,12 +61,22 @@
         align-items: center;
         justify-content: center;
     }
+    .info {
+        font-size: 12px;
+        color: #aaa;
+        margin-top: 15px;
+    }
+    h5 {
+        margin: auto;
+    }
     form {
         display: flex;
         flex-direction: column;
-        height: 200px;
+        width: 60%;
+        height: 180px;
         justify-content: space-evenly;
         align-items: center;
+        margin-bottom: 25px;
     }
     .login_input{
         width: 80%;
@@ -76,5 +86,7 @@
         align-items: flex-start;
         justify-content: center;
     }
-
+    input {
+        width: 100%;
+    }
 </style>
