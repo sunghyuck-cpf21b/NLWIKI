@@ -98,12 +98,11 @@
                 dp_position[0] = dp_position[0]+dp_ratio
             }
         }
-
-        if (key == 'q') {
-            const x = parseInt(dp_position[0]/dp_ratio)
-            const y = parseInt(dp_position[1]/dp_ratio)
-            const color = 'ffffff'
-            create_dot(x, y, color)
+        const x = parseInt(dp_position[0]/dp_ratio)
+        const y = parseInt(dp_position[1]/dp_ratio)
+        const palette = {'q':'ffffff', 'w':'000000', 'e':'ff0000', 'r':'ff8c00', 't':'ffff00', 'y':'008000', 'u':'0000ff', 'i':'4b0082', 'o':'800080'}
+        if (Object.keys(palette).includes(key)) {
+            create_dot(x, y, palette[key])
         }
     }
 
@@ -117,37 +116,71 @@
 on:click={()=>{dp_click()}} 
 on:keydown={()=>{dp_keydown()}}/>
 
+<div class= 'jff_room'>
+    <div class='palette'>
+        <span style='background-color: #ffffff; color: #000000;'>q</span>
+        <span style='background-color: #000000; color: #ffffff;'>w</span>
+        <span style='background-color: #ff0000; color: #ffffff;'>e</span>
+        <span style='background-color: #ff8c00; color: #ffffff;'>r</span>
+        <span style='background-color: #ffff00; color: #000000;'>t</span>
+        <span style='background-color: #008000; color: #ffffff;'>y</span>
+        <span style='background-color: #0000ff; color: #ffffff;'>u</span>
+        <span style='background-color: #4b0082; color: #ffffff;'>i</span>
+        <span style='background-color: #800080; color: #ffffff;'>o</span>
+    </div>
 
-
-<div class='jff_box' 
-style='background-image: url({img_data}); width:{x_limit*dp_ratio}px; height:{y_limit*dp_ratio}px;
-background-size: cover;
-image-rendering: pixelated;'>
-    <div class='hover_box' style='left: {dp_position[0]}px; top: {dp_position[1]}px'></div>
-    <table class='dp_pixel_table'>
-        <tbody>
-            {#each Array.from({length:y_limit}) as _, i}
-            <tr class='dp_pixel_tr'>
-                {#each Array.from({length:x_limit}) as _, j}
-                <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-                <td class='dp_pixel_td' 
-                style='
-                width: {dp_ratio}px;
-                height: {dp_ratio}px;
-                '
-                on:mouseover={()=>{dp_mouse_hover=[j, i]}}
-                on:click={()=>{dp_position=[j, i]}}></td>
+    <div class='jff_box' 
+    style='background-image: url({img_data}); width:{x_limit*dp_ratio}px; height:{y_limit*dp_ratio}px;
+    background-size: cover;
+    image-rendering: pixelated;'>
+        <div class='hover_box' style='left: {dp_position[0]}px; top: {dp_position[1]}px'></div>
+        <table class='dp_pixel_table'>
+            <tbody>
+                {#each Array.from({length:y_limit}) as _, i}
+                <tr class='dp_pixel_tr'>
+                    {#each Array.from({length:x_limit}) as _, j}
+                    <!-- svelte-ignore a11y-mouse-events-have-key-events -->
+                    <td class='dp_pixel_td' 
+                    style='
+                    width: {dp_ratio}px;
+                    height: {dp_ratio}px;
+                    '
+                    on:mouseover={()=>{dp_mouse_hover=[j, i]}}
+                    on:click={()=>{dp_position=[j, i]}}></td>
+                    {/each}
+                </tr>
                 {/each}
-            </tr>
-            {/each}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+
+    </div>
 
 </div>
 
 <style>
     :root {
         --jff-dp-size: 500px;
+    }
+    .jff_room {
+        margin: auto;
+        width: 800px;
+    }
+    .palette {
+        margin: auto;
+        width: 400px;
+        height: 100px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .palette > span {
+        width: 45px;
+        height: 45px;
+        border: 2px solid #000000;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .jff_box {
         margin: auto;
