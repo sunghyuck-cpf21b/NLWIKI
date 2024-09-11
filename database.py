@@ -4,7 +4,10 @@ from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.exc import InvalidRequestError
 from starlette.config import Config
 
-config = Config('.env')
+import os
+
+here_dir = os.path.dirname(os.path.abspath(__file__))
+config = Config(os.path.join(here_dir,'.env'))
 SQLALCHEMY_DATABASE_URL = config('SQLALCHEMY_DATABASE_URL')
 
 engine = create_engine(

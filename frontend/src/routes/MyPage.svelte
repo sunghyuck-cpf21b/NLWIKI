@@ -23,7 +23,6 @@
 </script>
 
 
-<h1>test</h1>
 <div class='date_control'>
     <select bind:value={year}>
         {#each Array.from({length:5}) as _, i}
@@ -40,15 +39,17 @@
 </div>
 
 
-<main>
-    <CalendarComp params={params}/>
-    <GraphComp params={params}/>
-</main>
+
+<CalendarComp params={params}/>
+<GraphComp params={params}/>
+
 
 
 
 <style>
     .date_control {
-        margin: 50px;
+        width: 300px;
+        margin: 50px auto;
     }
+    
 </style>

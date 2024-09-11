@@ -1,6 +1,6 @@
 <script>
     import { link } from 'svelte-spa-router'
-    import { page, now_page, T_page, access_token, username, is_login } from "../lib/store"
+    import { page, now_page, T_page, access_token, username, is_login, ST_category } from "../lib/store"
     import * as myurl from "../lib/myurl"
 
     const nav_height = 65
@@ -12,7 +12,7 @@
 
     <div class='logo_box'>
         
-        <a class='home_logo' use:link href={myurl.home_url} on:click={()=>{$page=0; $now_page=1; $T_page=0;}}>
+        <a class='home_logo' use:link href={myurl.home_url} on:click={()=>{$page=0; $now_page=1; $T_page=0; $ST_category='전체'}}>
             <img src='https://nlwk.nlwiki.com/media/youarebugs.gif' alt='' style='width: {nav_height-5}px; height: {nav_height-5}px;'>
             <span>NLWK</span>
         </a>
@@ -26,6 +26,9 @@
     <div class='button_box'>
         <ul>
             {#if $is_login}
+            <li>
+                <a use:link href={myurl.jff_url}>JFF</a>
+            </li>
             <li>
                 <a use:link href={myurl.mypage_url+'/'+$username}>마이페이지</a>
             </li>

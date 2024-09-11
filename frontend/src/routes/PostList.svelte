@@ -1,7 +1,7 @@
 <script>
     import {fastapi} from "../lib/api"
     import { link, push } from 'svelte-spa-router'    // href 앞에 link 를 사용하면 주소에 # 이 붙어 하나의 페이지로 인식된다.
-    import { page, now_page, T_page, is_login } from "../lib/store"
+    import { page, now_page, T_page, is_login, ST_category } from "../lib/store"
     import SideBar from "../components/Side_Bar.svelte";
     import * as api_funcs from '../lib/api_funcs'
 
@@ -49,7 +49,7 @@
         })
         return [post_list, _page, total]
     }
-    $: get_post_list($now_page-1, size, kw, selected_category).then(data=>{
+    $: get_post_list($now_page-1, size, kw, $ST_category).then(data=>{
         post_list = data[0]
         total = data[2]
     })
@@ -58,13 +58,20 @@
     get_post_list(0, notification_size, '', '공지').then(data=>{ // 공지 가져오기
         notification_list = data[0]
     })
+
+    function category_change() {
+        const CAT = event.target.value 
+        $ST_category = CAT
+        $now_page = 1 
+        $T_page = 0
+    }
     
 </script>
 
 <section>
     <div class='post_table'>
         <div class='tool_bar'>
-            <select class='select_category' on:change={()=>{selected_category=event.target.value}}>
+            <select class='select_category' on:change={()=>{category_change()}} bind:value={$ST_category}>
                 {#each categories as c}
                 <option style={(c=='논란') ? 'color: #ff0000':''}>{c}</option>
                 {/each}

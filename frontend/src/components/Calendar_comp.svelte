@@ -129,6 +129,7 @@
         )
     }
     async function delete_program_date(date) { // 날짜 데이터 삭제
+        console.log(date)
         if (Object.keys(month_data_2).includes(date)) {
             if (window.confirm(date+' 의 프로그램을 삭제하시겠습니까?')) {
                 const url = '/api/sep_program/delete/program_date'
@@ -444,6 +445,7 @@
 */
 
     // 태그 생성 감지 테스트
+    /*
     let sensor;
     let thisisdiv;
     onMount(()=>{
@@ -456,7 +458,7 @@
     $: if(thisisdiv) {
         const div_coord = thisisdiv.getBoundingClientRect()
         thisisdiv.style.width = 500+'px'
-    }
+    }*/
 
     // 이거 뭐더라?
     function calendar_bool(ccc) {
@@ -852,6 +854,12 @@
         similar_list_position.y = (position.top - top_tag.top) + 'px'
     }
 
+// 여기까지 스크립트 입니다.
+// ===============================================================================================================================================
+// ===============================================================================================================================================
+// ===============================================================================================================================================
+// ===============================================================================================================================================
+// ===============================================================================================================================================
 </script>
 
 
@@ -922,11 +930,11 @@ on:keyup={()=>{shortcut_key(event, false)}}/>
         </div>
     {/if}
 
-
+<!--
     <div bind:this={sensor}>
         <a href='/' on:click={()=>{event.preventDefault(); $year=year_init; $month=month_init;}}>오늘 날짜로 가기</a>
     </div>
-
+    -->
     <!--
     
     <select bind:value={$year}>
@@ -995,7 +1003,7 @@ on:keyup={()=>{shortcut_key(event, false)}}/>
                         {#if cal_date === date}
                             <div 
                             class='add_toolbox' id='toolbox{i}{j}'>
-                                <p><a href='/' on:click={()=>{tool_box_close(); if(exercise[i][j]!==[]) {delete_program_date(date)};}}>삭제</a></p>
+                                <p><a href='/' on:click={()=>{tool_box_close(); delete_program_date(date);}}>삭제</a></p>
                                 <p><a href='/' on:click={()=>{tool_box_close()}}>닫기</a></p>
                             </div>
                         {/if}
@@ -1088,9 +1096,5 @@ on:keyup={()=>{shortcut_key(event, false)}}/>
 
     </table>
 </div>
-
-
-
-
 
 
