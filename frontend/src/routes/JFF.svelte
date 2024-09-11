@@ -37,8 +37,9 @@
         await fastapi('post', url, params, 
             (json)=>{
                 get_dp_image()
+                
             }
-        )
+        ) 
     }
 
 /*
