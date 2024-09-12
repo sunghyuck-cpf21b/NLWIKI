@@ -16,12 +16,10 @@ def img_maker():
 
     image = Image.new('RGB', (width, height), background_color)
 
-    image.save('test_img.png')
+    image.save('now_image.png')
 
 def img_editor():
     image = Image.open('domain/jff/DP/now_image.png')
     pixels = image.load()
     pixels[50,50] = (0,0,0)
     image.save('test_img.png')
-
-
