@@ -25,4 +25,3 @@ def img_editor():
     image.save('test_img.png')
 
 
-
