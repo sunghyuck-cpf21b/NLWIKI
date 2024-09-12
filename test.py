@@ -17,6 +17,7 @@ def img_maker():
     image = Image.new('RGB', (width, height), background_color)
 
     image.save('now_image.png')
+    print('image saved')
 
 def img_editor():
     image = Image.open('domain/jff/DP/now_image.png')
