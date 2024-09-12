@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from "svelte";
     import { fastapi } from "../lib/api";
 
 
@@ -107,7 +108,24 @@
         }
     }
 
-    
+
+
+    onMount(()=>{
+        const palette_box = document.querySelectorAll('.palette span')
+        palette_box.forEach(span=>
+            span.addEventListener('click', function() {
+                const rgb = this.style.backgroundColor.match(/\d+/g) // /\d+/g : 정규표현식
+                const hex = rgb.map(c=> {
+                    const temp = parseInt(c).toString(16)
+                    return temp.length === 1 ? '0'+temp : temp;
+                    }
+                ).join('')
+                create_dot(dp_position[0]/dp_ratio, dp_position[1]/dp_ratio, hex)
+            }
+            )
+        )
+    })
+ 
 
 //
 
