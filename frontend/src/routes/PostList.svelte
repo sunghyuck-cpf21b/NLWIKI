@@ -60,6 +60,7 @@
         notification_list = data[0]
     })
 
+
     function category_change() {
         const CAT = event.target.value 
         $ST_category = CAT
@@ -100,13 +101,13 @@
                             <span class='category' style='color: #000000; font-weight: 600;'>[{note.category}]&nbsp;&nbsp;</span>
                             {note.subject}
                         </a>
-                        {#if note.comments.length > 0}
+                        {#if note.total_comments > 0}
                         <span> 
-                            [{note.comments.length}]
+                            [{note.total_comments}]
                         </span>
                         {/if}
                     </td>
-                    <td>{note.user ? note.user.username : ''}</td>
+                    <td>{note.creator ? note.creator : ''}</td>
                     <td class='th_date'>{moment(note.create_date).format('YYYY.MM.DD')}</td>
                     
                 </tr>
@@ -127,13 +128,13 @@
                             
                             {post.subject}
                         </a>
-                        {#if post.comments.length > 0}
+                        {#if post.total_comments > 0}
                         <span> 
-                            [{post.comments.length}]
+                            [{post.total_comments}]
                         </span>
                         {/if}
                     </td>
-                    <td>{post.user ? post.user.username : ''}</td>
+                    <td>{post.creator ? post.creator : ''}</td>
                     <!--<td class='th_date'>{moment(post.occ_date).format("YYYY.MM.DD")}</td>-->
                     <td class='th_date'>{moment(post.create_date).format('YYYY.MM.DD')}</td>
                 </tr>

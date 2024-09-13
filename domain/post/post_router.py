@@ -15,7 +15,7 @@ router = APIRouter(
 # response_model : API 엔드포인트에서 반환하는 응답의 형식을 지정하는데 사용된다. FastAPI에서자동 생성되는 API 문서 및 데이터 유효성 검사를 위해 중요한 역할을 한다.
 # 엔드포인트 : url 경로(여기서는 "/list")
 # response_model에 값으로 입력된 모델을 사용하여 응답의 형식을 정의 및 검사한다. 그리고 API 문서에 해당 형식이 표시된다.
-@router.get("/list", response_model=post_schema.PostList)
+@router.get("/list", status_code=status.HTTP_200_OK)
 def post_list(category: str, # 클라이언트가 선택한 카테고리
               page: int = 0, size: int = 10, keyword: str = '',
               db: Session = Depends(get_db),

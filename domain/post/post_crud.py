@@ -15,13 +15,13 @@ def get_post_list(db: Session, category: str, user: User,
         category_list.remove('논란')
     if category != categories[0]: # 선택한 카테고리가 '전체' 가 아니라면 카테고리 리스트를 축소(선택한 카테고리 하나만 남도록) => 판별을 category_list로만 할거기때문
         category_list = [category]
-    post_list = db.query(Post).filter(Post.category.in_(category_list)).order_by(desc(Post.id))
+    data = db.query(Post).filter(Post.category.in_(category_list)).order_by(desc(Post.id))
 
     if keyword: # 검색기능
         search = '%%{}%%'.format(keyword)
         sub_query = db.query(Comment.post_id, Comment.content, User.username)\
             .outerjoin(User, and_(Comment.user_id == User.id)).subquery()
-        post_list = post_list \
+        data = data \
             .outerjoin(User) \
             .outerjoin(sub_query, and_(sub_query.c.post_id == Post.id)) \
             .filter(Post.subject.ilike(search) |
@@ -30,8 +30,9 @@ def get_post_list(db: Session, category: str, user: User,
                     sub_query.c.content.ilike(search) |
                     sub_query.c.username.ilike(search)
                     )
-    total = post_list.distinct().count()
-    post_list = post_list.offset(skip).limit(limit).distinct().all()
+    total = data.distinct().count()
+    data = data.offset(skip).limit(limit).distinct().all()
+    post_list = data_maker.post_list_maker(data)
     return total, post_list
 
 def get_post(db: Session, post_id: int):

@@ -102,6 +102,11 @@
         await fastapi('post', url, params, 
             (json)=>{
                 subcomment_content = ''
+                error = {detail:[]}
+                subcomment_num = -1
+                get_post()
+            }, (err_json)=>{
+                error = err_json
             }
         )
     }
