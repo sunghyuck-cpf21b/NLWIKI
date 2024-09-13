@@ -76,10 +76,25 @@ class Comment(Base):
     user = relationship('User', back_populates='comments')
 
 
+class SubComment(Base):
+    __tablename__ = 'subcomment'
+
+    id = Column(Integer, primary_key=True)
+    content = Column(Text, nullable=False)
+    create_date = Column(DateTime, nullable=False)
+
+    comment_id = Column(Integer, ForeignKey("comment.id"))
+    comment = relationship("Comment", back_populates="subcomments")
+
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship("User", back_populates='subcomments')
+
 
 User.posts = relationship("Post", back_populates='user')
 User.comments = relationship("Comment", back_populates='user')
+User.subcomments = relationship('SubComment', back_populates='user')
 Post.comments = relationship("Comment", back_populates='post')
+Comment.subcomments = relationship("SubComment", back_populates='comment')
 
 
 class PersonalMemo(Base):

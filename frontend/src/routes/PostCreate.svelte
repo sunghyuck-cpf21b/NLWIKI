@@ -55,11 +55,11 @@
         }
         let occ_date 
         if (selected_category === '논란') {
+            console.log(selected_category)
             let date = add_0(selected_month)
             let month = add_0(selected_month)
-            let occ_date = `${selected_year}-${month}-${date}`
+            occ_date = `${selected_year}-${month}-${date}`
         }
-        console.log(occ_date)
         event.preventDefault()
         let url = "/api/post/create"
         let params = {      // 해당 스키마에 입력된 속성들
@@ -70,7 +70,6 @@
             person: person,
             occ_date: occ_date,
         }
-        console.log(params)
         fastapi('post', url, params, 
             (json) => {
                 store.now_page.set(1)

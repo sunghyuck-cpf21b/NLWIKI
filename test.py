@@ -1,6 +1,8 @@
 from database import SessionLocal
 from models import *
 
+from sqlalchemy import and_
+
 import datetime
 
 from PIL import Image
@@ -24,3 +26,10 @@ def img_editor():
     pixels = image.load()
     pixels[50,50] = (0,0,0)
     image.save('test_img.png')
+
+
+def occ_date_fix():
+    data = db.query(Post).filter(and_(Post.category=='논란', Post.occ_date==None)).all()
+    data.occ_date = datetime.date(2024,9,12)
+    db.add(data)
+    db.commit()

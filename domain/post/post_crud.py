@@ -5,6 +5,7 @@ from models import Post, Comment, User, categories
 from sqlalchemy.orm import Session
 from sqlalchemy import and_, desc
 
+from domain.post.data_maker import data_maker
 
 
 def get_post_list(db: Session, category: str, user: User,
@@ -30,8 +31,7 @@ def get_post_list(db: Session, category: str, user: User,
                     sub_query.c.username.ilike(search)
                     )
     total = post_list.distinct().count()
-    post_list = post_list.order_by(Post.occ_date.desc(), Post.create_date.desc())\
-        .offset(skip).limit(limit).distinct().all()
+    post_list = post_list.offset(skip).limit(limit).distinct().all()
     return total, post_list
 
 def get_post(db: Session, post_id: int):

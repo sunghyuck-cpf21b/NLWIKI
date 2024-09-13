@@ -31,11 +31,13 @@
     때문에 post 딕셔너리의 속성에 불러와지는 값 들을 초기화 해준다고 하지만
     그냥 불러오는 데이터에 있는 모든 속성들을 해주는게 마음이 편할듯 */
     let comment_content = ''
+    let subcomment_content = ''
     let error = {detail:[]}
     
     function get_post() {
         fastapi("get", "/api/post/detail/"+post_id, {}, (json) => {
             post = json
+            console.log(json)
         }) // params 매개변수에 값을 넣지 않는 이유는 백엔드의 router데코레이터 url의 가변형 변수가 자동적으로 id값에 매칭되기 때문이다.
     }
 
@@ -91,14 +93,45 @@
             }
     }
 
+    async function subcomment_create(comment_id) {
+        console.log(subcomment_content)
+        const url = '/api/comment/sub/create/'+comment_id
+        const params = {
+            content: subcomment_content
+        }
+        await fastapi('post', url, params, 
+            (json)=>{
+                subcomment_content = ''
+            }
+        )
+    }
 
+    async function delete_subcomment(subcomment_id) {
+        if(window.confirm('답글을 삭제하시겠습니까?')) {
+            const url = '/api/comment/sub/delete'
+            const params = {
+                data_id: subcomment_id
+            }
+            await fastapi('delete', url, params, 
+                (json)=>{
+                    get_post()
+                }
+            )
+        } 
+    }
+
+
+    let subcomment_num = -1
 </script>
 
 
 <section>
     <div class='content_box'>
         <div class='content_info_room'>
-            <div class='subject'>[{post.category}] {post.subject}</div>
+            <div class='subject'>
+                <span style={post.category==='논란' ? 'color: #ff0000':'#000000'}>[{post.category}]</span> 
+                {post.subject}
+            </div>
             <div class='content_info_box'>
                 <span>작성 정보</span>
                 <span class='content_info'>{post.user.username}</span>
@@ -107,7 +140,7 @@
             {#if post.category == '논란'}
             <div class='content_info_box'>
                 <span>논란 정보</span>
-                <span class='content_info'>{post.person}</span>
+                <span class='content_info' style='color: #ff0000; font-weight: 600;'>{post.person}</span>
                 <span class='content_info'>{moment(post.occ_date).format("YYYY.MM.DD")}</span>
             </div>
             {/if}
@@ -122,20 +155,55 @@
                 <button on:click={()=>{push(`/postmodify/${post.id}`)}}>게시물 수정</button>
             {/if}
         </div>
-    
-        <div class='comment_box'>
-            {#each post.comments as comment}
-                <div class='comment_box_inside'>
-                    <div class="comment_info">
-                        {@html marked.parse(comment.user.username)}
+        
+        <div class='comment_room'>
+            {#each post.comments as comment, i}
+                <div class='comment_box'>
+                    <div class="comment_user">
+                        {comment.user.username}
                     </div>
                     <div class='comment_content'>
-                        {@html marked.parse(comment.content)}
+                        {comment.content}
                     </div>
-                    <div class='comment_date'>
-                        {moment(comment.create_date).format("YYYY.MM.DD")}
-                        <button class='comment_btn' on:click={()=>delete_comment(comment.id)}>삭제</button>
+                    <div class='comment_btn_room'>
+                        <div class='comment_date'>
+                            {moment(comment.create_date).format("YYYY.MM.DD")}
+                        </div>
+                        <div class='comment_btn_box'>
+                            <button class='comment_btn add_sub' on:click={()=>{subcomment_num=i; console.log(subcomment_num)}}>답글</button>
+                            {#if comment.user.username === $username}
+                            <button class='comment_btn del_com' on:click={()=>delete_comment(comment.id)}>삭제</button>
+                            {/if}
+                        </div>
                     </div>
+                    {#if comment.subcomments.length || subcomment_num === i}
+                    <div class='subcomment_room'>
+                        {#if subcomment_num === i}
+                        <div class='subcomment_create_box'>
+                            <div class='comment_div'>
+                                <textarea class='comment_textarea' bind:value={subcomment_content}></textarea>
+                                <button on:click={()=>{subcomment_create(comment.id)}}>답글 등록</button>
+                            </div>
+                        </div>
+                        {/if}
+                        {#each comment.subcomments as subcomment}
+                        <div class='subcomment_box'>
+                            <div>{subcomment.user.username}</div>
+                            <div>{subcomment.content}</div>
+                            <div class='comment_btn_room'>
+                                <div class='comment_date'>
+                                    {moment(subcomment.create_date).format("YYYY.MM.DD")}
+                                </div>
+                                <div class='comment_btn_box'>
+                                    {#if subcomment.user.username === $username}
+                                    <button class='comment_btn del_com' on:click={()=>delete_subcomment(subcomment.id)}>삭제</button>
+                                    {/if}
+                                </div>
+                            </div>
+                        </div>
+                        {/each}
+                    </div>
+                    {/if}
                 </div>
             {/each}
             <form class='comment_form' method='post'>
@@ -179,7 +247,9 @@ on:click = "{문자열 또는 함수"
 
 
 <style>
-
+    :root {
+        --comment-font-size: 14px;
+    }
     .subject {
         font-size: 20px;
         font-weight: 600;
@@ -215,42 +285,68 @@ on:click = "{문자열 또는 함수"
         width: 800px;
     }
     .main_content {
+        font-size: 14px;
         margin: 20px auto 50px;
     }
 
 
-
-    .comment_box {
-        position: static;
+/* comment part */
+    .comment_room {
+        font-size: var(--comment-font-size);
+        width: 100%;
         margin: 20px auto;
         padding: 10px 0;
-        border-top: 3px solid #000000;
-        border-bottom: 3px solid #000000;
+        border: 3px solid #000000;
+        border-left: none;
+        border-right: none;
     }
 
-    .comment_box_inside {
-        display: grid;
-        grid-template-columns: 15% 1fr 20%;
-        grid-template-areas: 
-        "a b c";
-        
-
+    .comment_box {
+        position: relative;
         border-bottom: 1px solid #000000;
-
     }
-
-    .comment_box_inside > div {
-        padding: 5px;
+    .comment_box, .subcomment_box {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 120px 1fr 115px;
+        grid-template-areas: 
+        "a b c"
+        'd d d';
+        align-items: center;
+        padding: 5px 10px;
+    }
+    .comment_btn_room {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+    }
+    .comment_btn {
+        display: inline;
+        font-size: 11px;
+    }
+    .subcomment_room {
+        grid-area: d;
+        position: relative;
+        margin: 10px 0 5px 30px;
+        border: 1px solid;
+        border-top: none;
+    }
+    .subcomment_box, .subcomment_create_box {
+        border-top: 1px solid;
+        margin: 0;
+        width: 100%;
+    }
+    .subcomment_create_box {
+        height: 110px;
     }
 
     .comment_info {
         grid-area: a;
     }
-
     .comment_content {
         grid-area: b;
     }
-
     .comment_date {
         position: static;
         grid-area: c;
@@ -259,13 +355,17 @@ on:click = "{문자열 또는 함수"
         margin: 10px auto;
     }
     .comment_div {
+        padding: 5px;
+        width: 95%;
+        height: 110px;
+        border: 1px solid;
+        margin: 0 auto;
     }
     .comment_textarea {
+        
         width: 100%;
+        height: 60%;
+        margin: 0 auto;
     }
-    .comment_btn {
-        position: absolute;
-        margin: 0px 5px;
-        right: 0px;
-    }
+
 </style>

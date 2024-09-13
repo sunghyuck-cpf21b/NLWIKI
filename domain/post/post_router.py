@@ -34,10 +34,7 @@ def post_list(category: str, # 클라이언트가 선택한 카테고리
     return {'total': total, 'post_list': _post_list}
     # return 값은 dictionary 형식으로
     # API에서 받는 형식이 dictionart 이기 때문
-'''
-기존 라우터에서는 with 방식을 사용하여 열고 닫았는데, post_crud에서 가져온 get_post_list 함수에는 with 문이 없다
-이유가 뭘까?
-'''
+
 
 # params는 db 매개변수 이외의 것들을 생각하면 될 듯 하다.
 

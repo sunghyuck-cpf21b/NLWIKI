@@ -2,7 +2,7 @@ import datetime
 
 from pydantic import BaseModel, field_validator
 # pydantic은 FastAPI의 입출력 스펙을 정의하고 그 값을 검증하기 위해 사용된다.
-from domain.comment.comment_schema import Comment
+from domain.comment.comment_schema import Comment, CommentForPL
 from domain.user.user_schema import User
 
 
@@ -46,9 +46,18 @@ class PostCreate(BaseModel):
             raise ValueError('내용을 작성하세요.')
         return v
 
+class ForPostList(BaseModel): # postlist에 표시하기 위한 목록
+    id: int
+    category: str
+    subject: str
+    comments: list[CommentForPL] = []
+    create_date: datetime.datetime
+    user: User
+
+
 class PostList(BaseModel):
     total: int = 0
-    post_list: list[Post] = []
+    post_list: list[ForPostList] = []
 
 
 class PostDelete(BaseModel):

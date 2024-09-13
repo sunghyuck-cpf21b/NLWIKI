@@ -46,6 +46,7 @@
             post_list = json.post_list
             _page = PG
             total = json.total
+            console.log(json)
         })
         return [post_list, _page, total]
     }
