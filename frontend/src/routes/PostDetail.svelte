@@ -172,7 +172,7 @@
                     </div>
                     <div class='comment_btn_room'>
                         <div class='comment_date'>
-                            {moment(comment.create_date).format("YYYY.MM.DD")}
+                            {moment(comment.create_date).format("YYYY.MM.DD HH:mm:ss")}
                         </div>
                         <div class='comment_btn_box'>
                             <button class='comment_btn add_sub' on:click={()=>{subcomment_num=i; console.log(subcomment_num)}}>답글</button>
@@ -197,7 +197,7 @@
                             <div>{@html subcomment.content}</div>
                             <div class='comment_btn_room'>
                                 <div class='comment_date'>
-                                    {moment(subcomment.create_date).format("YYYY.MM.DD")}
+                                    {moment(subcomment.create_date).format("YYYY.MM.DD HH:mm:ss")}
                                 </div>
                                 <div class='comment_btn_box'>
                                     {#if subcomment.user.username === $username}
@@ -253,7 +253,7 @@ on:click = "{문자열 또는 함수"
 
 <style>
     :root {
-        --comment-font-size: 14px;
+        --comment-font-size: 13px; 
     }
     .subject {
         font-size: 20px;
@@ -313,7 +313,7 @@ on:click = "{문자열 또는 함수"
     .comment_box, .subcomment_box {
         display: grid;
         width: 100%;
-        grid-template-columns: 120px 1fr 115px;
+        grid-template-columns: 120px 1fr 125px;
         grid-template-areas: 
         "a b c"
         'd d d';
@@ -355,6 +355,7 @@ on:click = "{문자열 또는 함수"
     .comment_date {
         position: static;
         grid-area: c;
+        opacity: 0.5;
     }
     .comment_form {
         margin: 10px auto;
