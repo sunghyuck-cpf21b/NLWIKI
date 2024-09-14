@@ -1,8 +1,9 @@
 <script>
     import { push } from 'svelte-spa-router'
-    import {fastapi} from "../lib/api"
+    import { fastapi, fileapi } from "../lib/api"
     import Error from "../components/Error.svelte"
     import { is_login } from '../lib/store'
+    import { onMount } from 'svelte';
 
     import * as store from '../lib/store'
     import * as api_funcs from '../lib/api_funcs'

@@ -5,8 +5,8 @@
     import bootstrapMin from 'bootstrap/dist/js/bootstrap.min';
     import Modal from '../lib/Modal.svelte';
     import { onMount } from 'svelte';
+    
     import * as store from "../lib/store"
-
     import * as api_funcs from '../lib/api_funcs'
     import * as myurl from "../lib/myurl"
 
