@@ -195,32 +195,43 @@
                 temp_alert = true
             } 
         }
-        if (temp_alert) {alert_function('이미지 크기는 10MB보다 작아야 합니다.')}
+        if (temp_alert) {alert_function('이미지 크기는 5MB보다 작아야 합니다.')}
         showModal = false;
     }
 
-    async function copy_img_post(data) {
-        const url = '/api/file/b64_img'
-        const params = {
-            data: data,
-        }
-        let result = {}
-        await fastapi('post', url, params, 
-            (json)=>{
-                result = json
+    async function copy_img_post(data) { // 복붙한 이미지 데이터를 백엔드로 전송하고 url을 반환하는 함수
+        // base64 형태 그대로 전달
+        // 단, base64 문자열 데이터는 기존 데이터의 1.33배 라고 함
+        // 추후에 파일로 변환해서 전송하는 방법으로 변경하기
+
+        // 전송 전에 파일 용량 확인
+        const padding = (data.match(/=/g) || []).length 
+        const b64length = data.length*0.75 - padding 
+        if (b64length/(1024*1024) > 5) {
+            alert_function('이미지 크기는 5MB보다 작아야 합니다.')
+            return 
+        } else {
+            const url = '/api/file/b64_img'
+            const params = {
+                data: data,
             }
-        )
-        return result
+            let result = {}
+            await fastapi('post', url, params, 
+                (json)=>{
+                    result = json
+                }
+            )
+            return result
+        }
     }
 
     let content_div
-    onMount(()=>{
+    onMount(()=>{ // 내용 입력칸에 복붙한 이미지를 감지하기 위한 코드
         const observer = new MutationObserver((muts)=>{
             muts.forEach((mut)=>{
                 mut.addedNodes.forEach(node=>{
                     if (node.nodeName === 'IMG') {
-                        copy_img_post(node.src).then(data=>{
-                            console.log(data)
+                        copy_img_post(node.src).then(data=>{ // 이미지 데이터와 교환한 url을 받아 src 내용을 변경 및 사이즈 조정
                             node.src = data.image_url
                             if (data.width > 600) {
                                 height = data.height * (600/data.width)
