@@ -134,6 +134,85 @@
 	}
 
 
+    let alert_message = ''
+    let showAlert = false
+    function alert_function(message) {
+        alert_message = message 
+        showAlert = true 
+        setTimeout(()=>{
+            showAlert = false
+        }, 4000)
+    }
+
+
+    async function testtt() { // 이미지 백엔드 서버에 저장하고 url 가져오는 함수
+        const url = '/api/file/img'
+        const dd = document.getElementById('content-div-2')
+
+        let temp_alert = false
+        for (const i of input.files) {
+            if (i.size/(1024*1024) < 5) {
+                const fd = new FormData()
+                fd.append('file', i)
+                const params = fd
+                console.log('api 호출 직전')
+                await fileapi(url, params, 
+                    async (json)=>{
+                        await imgtag_maker({CD: dd, src_url: json.image_url, width: json.width, height: json.height})
+                    }     
+                )
+            } else {
+                temp_alert = true
+            } 
+        }
+        if (temp_alert) {alert_function('이미지 크기는 5MB보다 작아야 합니다.')}
+        showModal = false;
+    }
+
+    async function copy_img_post(data) {
+        const padding = (data.match(/=/g) || []).length 
+        const b64length = data.length*0.75 - padding 
+        if (b64length/(1024*1024) > 5) {
+            alert_function('이미지 크기는 5MB보다 작아야 합니다.')
+            return 
+        } else {
+            const url = '/api/file/b64_img'
+            const params = {
+                data: data,
+            }
+            let result = {}
+            await fastapi('post', url, params, 
+                (json)=>{
+                    result = json
+                }
+            )
+            return result
+        }
+    }
+
+    let content_div
+    onMount(()=>{ // 내용 입력칸에 복붙한 이미지를 감지하기 위한 코드
+        const observer = new MutationObserver((muts)=>{
+            muts.forEach((mut)=>{
+                mut.addedNodes.forEach(node=>{
+                    if (node.nodeName === 'IMG') {
+                        copy_img_post(node.src).then(data=>{ // 이미지 데이터와 교환한 url을 받아 src 내용을 변경 및 사이즈 조정
+                            node.src = data.image_url
+                            if (data.width > 600) {
+                                height = data.height * (600/data.width)
+                                node.style.width = data.width + 'px'
+                                node.style.height = height + 'px'
+                            }
+                        })
+                    }
+                })
+            })
+        })
+        observer.observe(content_div, {
+            childList: true,
+            subtree: true,
+        })
+    })
 
 </script>
 
@@ -179,7 +258,9 @@
 
             <div id='content-div' class='mb-3'>
                 <label for='content'>내용</label>
-                <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true">{@html content}</div>
+                <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true"
+                bind:this={content_div}
+                >{@html content}</div>
                 <input id='content' style='display: none'>
                 <!--<input id="contt" type="text" class="form-control" bind:value="{content}">-->
             </div>
@@ -192,6 +273,7 @@
 
 
 
+
 {#if showModal}
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -201,12 +283,21 @@
             <div id='modal_img' class='modal-content-img'>
             </div>
             <div class='btn-box'>
-                <button class='check-btn' on:click={btn_check}>확인</button>
+                <button class='check-btn' on:click={()=>{testtt();}}>확인</button>
                 <button class='cancel-btn' on:click={btn_cancel}>취소</button>
             </div>
         </div>
     </div>
 {/if}
+
+{#if showAlert}
+<div class='alert_st'>
+    <span>
+        {alert_message}
+    </span>
+</div>
+{/if}
+
 
 <style>
 	.modal {

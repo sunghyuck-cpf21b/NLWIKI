@@ -168,7 +168,7 @@
                         {comment.user.username}
                     </div>
                     <div class='comment_content'>
-                        {comment.content}
+                        {@html comment.content}
                     </div>
                     <div class='comment_btn_room'>
                         <div class='comment_date'>
@@ -194,7 +194,7 @@
                         {#each comment.subcomments as subcomment}
                         <div class='subcomment_box'>
                             <div>{subcomment.user.username}</div>
-                            <div>{subcomment.content}</div>
+                            <div>{@html subcomment.content}</div>
                             <div class='comment_btn_room'>
                                 <div class='comment_date'>
                                     {moment(subcomment.create_date).format("YYYY.MM.DD")}
