@@ -105,7 +105,8 @@
 
     // Modal
     let showModal = false;
-    let input;
+    let input; // 이미지 파일 입력되는 변수
+
     //let urls_total = []
     let urls = []
     function onModal() {
@@ -118,6 +119,7 @@
 			ii.style.width = '100px'
 			ii.style.height = '100px'
 			const reader = new FileReader()
+            console.log(reader.files)
 			reader.readAsDataURL(f)
 			reader.addEventListener('load', function () {
 				ii.src = reader.result
@@ -162,22 +164,66 @@
         CD.appendChild(ii)
     }
 
-    async function testtt() {
+    let alert_message = ''
+    let showAlert = false
+    function alert_function(message) {
+        alert_message = message 
+        showAlert = true 
+        setTimeout(()=>{
+            showAlert = false
+        }, 4000)
+    }
+
+
+    async function testtt() { // 이미지 백엔드 서버에 저장하고 url 가져오는 함수
         const url = '/api/file/img'
         const dd = document.getElementById('content-div-2')
+
+        let temp_alert = false
         for (const i of input.files) {
-            const fd = new FormData()
-            fd.append('file', i)
-            const params = fd
-            console.log('api 호출 직전')
-            await fileapi(url, params, 
-                async (json)=>{
-                    await imgtag_maker({CD: dd, src_url: json.image_url, width: json.width, height: json.height})
-                }
-        )
+            if (i.size/(1024*1024) < 5) {
+                const fd = new FormData()
+                fd.append('file', i)
+                const params = fd
+                console.log('api 호출 직전')
+                await fileapi(url, params, 
+                    async (json)=>{
+                        await imgtag_maker({CD: dd, src_url: json.image_url, width: json.width, height: json.height})
+                    }     
+                )
+            } else {
+                temp_alert = true
+            } 
         }
+        if (temp_alert) {alert_function('이미지 크기는 10MB보다 작아야 합니다.')}
         showModal = false;
     }
+
+    async function copy_img_post(data) {
+        const url = '/api/file/b64_img'
+        const params = {
+            data: data,
+        }
+        await fastapi('post', url, params)
+    }
+
+    let content_div
+    onMount(()=>{
+        const observer = new MutationObserver((muts)=>{
+            muts.forEach((mut)=>{
+                mut.addedNodes.forEach(node=>{
+                    if (node.nodeName === 'IMG') {
+                        copy_img_post(node.src)
+                    }
+                })
+            })
+        })
+        observer.observe(content_div, {
+            childList: true,
+            subtree: true,
+        })
+    })
+
 </script>
 
 
@@ -226,7 +272,9 @@
 
             <div id='content-div' class='mb-3'>
                 <label for='content'>내용</label>
-                <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true"></div>
+                <div id='content-div-2' class="form-control" style="height: 600px" contenteditable="true"
+                bind:this={content_div}
+                ></div>
                 <input id='content' style='display: none'>
                 <!--<input id="contt" type="text" class="form-control" bind:value="{content}">-->
             </div>
@@ -255,6 +303,13 @@
     </div>
 {/if}
 
+{#if showAlert}
+<div class='alert_st'>
+    <span>
+        {alert_message}
+    </span>
+</div>
+{/if}
 
 
 
@@ -320,7 +375,7 @@
 		background-color: white; 
 		width: 200px;
 		margin: 0 auto;
-		text-align: center
+		text-align: center;
 	}
 	
 	.check-btn {
@@ -335,5 +390,25 @@
 
     #content-div-2 {
         overflow: auto;
+    }
+
+    .alert_st {
+        height: 100px;
+        background-color: var(--bs-danger-bg-subtle);
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid var(--bs-danger-border-subtle);
+        border-radius: var(--bs-border-radius);
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-weight: bolder;
+        color: var(--bs-danger-text-emphasis);
+
+        padding: 10px;
     }
   </style>

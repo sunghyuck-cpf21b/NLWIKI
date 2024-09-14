@@ -26,6 +26,9 @@
     }
 }
 
+#app {
+    color: #000000;
+}
 
 body {
     background-color: #ff0000;

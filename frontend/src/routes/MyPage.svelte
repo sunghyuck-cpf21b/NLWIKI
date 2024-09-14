@@ -24,17 +24,18 @@
 
 
 <div class='date_control'>
-    <select bind:value={year}>
-        {#each Array.from({length:5}) as _, i}
-            <option>{i+2023}</option>
-        {/each}
-    </select>
-    <select bind:value={month}>
-        {#each Array.from({length:12}) as _, i}
-            <option>{i+1}</option>
-        {/each}
-    </select>
-
+    <div class='date_select'> 
+        <select bind:value={year}>
+            {#each Array.from({length:5}) as _, i}
+                <option>{i+2023}</option>
+            {/each}
+        </select>
+        <select bind:value={month}>
+            {#each Array.from({length:12}) as _, i}
+                <option>{i+1}</option>
+            {/each}
+        </select>
+    </div>
     <h1>{year}.{month}</h1>
 </div>
 
@@ -47,7 +48,11 @@
 
 
 <style>
+
     .date_control {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 300px;
         margin: 50px auto;
     }
