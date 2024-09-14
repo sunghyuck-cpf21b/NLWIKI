@@ -1098,3 +1098,201 @@ on:keyup={()=>{shortcut_key(event, false)}}/>
 </div>
 
 
+<style>
+    #top_tag {
+        border: 1px solid;
+        width: 100%;
+        text-align: center;
+    }
+
+    .main_table {
+        margin: 0 auto;
+    }
+    tr {
+        width: auto;
+        vertical-align: top;
+    }
+    td {
+        min-width: 100px;
+        max-width: 200px;
+        border: 1px solid #000000;
+    }
+    a {
+        font-weight: 600;
+        color: #000000;
+        text-decoration: inherit;
+    }
+
+    /* 주간 메모 */
+    .weekly_memo_box {
+        border: none;
+        font-size: 12px;
+    }
+    .weekkly-memo {
+        min-height: 100px;
+        margin: auto;
+        padding: 5px;
+    }
+
+
+
+    /* 날짜 칸 */
+    .date_part, .date_part_today {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 28px;
+    }
+    .date_part::after, .date_part_today::after {   /* 날짜와 프로그램 사이의 구분선 */
+        content: '';
+        position: absolute;
+        margin: 0 auto;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        height: 1px;
+        background-color: #000000;
+    }
+    .date_part_today {
+        background-color: #55bb5566;
+    }
+
+    .date_part_p {
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    /* 설정 버튼 (a태그) */
+    .add_tool { 
+        position: absolute;
+        margin: 0 0;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .add_toolbox > p > a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+
+    /* 운동 프로그램 표시 칸 */
+    .program_part {
+        position: relative;
+        margin: 0 auto;
+        min-height: 150px;
+        height: auto;
+        width: auto;
+        padding: 1px;
+        z-index: 1;
+    }
+    .program_input {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 12px 1fr 1fr 0.8fr 0.8fr;
+        grid-template-areas: 
+        "x_btn exercise_input exercise_input exercise_input exercise_input"
+        "p_btn vs vr vw wk";
+    }
+    .x_btn {grid-area: x_btn;} .p_btn {grid-area: p_btn;}
+    .exercise_input {grid-area: exercise_input;} .vs {grid-area: vs;} .vr {grid-area: vr;} .vw {grid-area: vw;} .wk {grid-area: wk;}
+
+    .program_input input, .program_input select {
+        box-sizing: border-box;
+        font-size: 12px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+    .program_input a {
+        width: 14px;
+        height: 14px;
+        margin: auto;
+        line-height: 10px;
+    }
+    .program_input > *{
+        margin: 1px;
+        display: block;
+    }
+
+    .program_ex_example {   /* 볼륨칸 예시 */
+        font-size: 11px;
+        height: 20px;
+        min-width: 130px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: 
+        "ex_sets ex_reps ex_kg";
+    }
+    .ex_sets {grid-area: ex_sets;} .ex_reps {grid-area: ex_reps;} .ex_kg {grid-area: ex_kg;} 
+
+    .program_ex {   /* 작성한 프로그램이 표시되는 부분 */
+        font-size: 11px;
+        display: grid;
+        grid-template-columns: 12px 1fr;
+        grid-template-areas: 
+        "box_delete temp"
+        "box_add vol_div";
+    }
+    .k_name, .v_sets, .v_reps, .v_kg {
+        border: 1px solid #000000;
+        margin: 0;
+    }
+    .v_sets, .v_reps, .v_kg {
+        border-top: none;
+    }
+    .v_reps {
+        border-left: none;
+        border-right: none;
+    }
+    .program_ex > a {font-size: 12px;}
+    .excel_box_delete {grid-area: box_delete;} .excel_box_add {grid-area: box_add;}
+    .k_name {
+        grid-area: temp;
+        font-size: 12px;
+        min-height: 18px;
+    }
+    .volume_div {
+        grid-area: vol_div;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: 
+        'sets reps kg';
+    }
+    .v_sets, .v_reps, .v_kg { height: 16.5px;}
+    .v_sets {grid-area: sets;} .v_reps {grid-area: reps;} .v_kg {grid-area: kg; margin: 0;}
+
+    .WK_a {  
+        color: #000000;
+    }
+
+
+    .lets_make_program {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        width: 80%;
+        height: 60%;
+        margin: 0 auto;
+        font-size: 100px;
+    }
+    .lets_make_program:hover {
+        cursor: pointer;
+    }
+
+
+    .weekly_memo_box {
+        border: none;
+        font-size: 12px;
+    }
+    .weekly_memo {
+        min-height: 100px;
+        margin: auto;
+        padding: 5px;
+    }
+</style>

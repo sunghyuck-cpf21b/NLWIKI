@@ -363,11 +363,10 @@ on:click = "{문자열 또는 함수"
         padding: 5px;
         width: 95%;
         height: 110px;
-        border: 1px solid;
         margin: 0 auto;
     }
     .comment_textarea {
-        
+        background-color: var(--main-bg-color);
         width: 100%;
         height: 60%;
         margin: 0 auto;

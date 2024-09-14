@@ -100,6 +100,8 @@
     width: 1150px;
     /* 최소 너비 설정 + 창 크기에 맞춰서 크기 설정*/
     overflow: hidden;
+
+    background-color: var(--main-bg-color);
   }
 
 </style> 
