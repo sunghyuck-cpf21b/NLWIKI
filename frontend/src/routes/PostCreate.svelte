@@ -204,7 +204,13 @@
         const params = {
             data: data,
         }
-        await fastapi('post', url, params)
+        let result = {}
+        await fastapi('post', url, params, 
+            (json)=>{
+                result = json
+            }
+        )
+        return result
     }
 
     let content_div
@@ -213,7 +219,15 @@
             muts.forEach((mut)=>{
                 mut.addedNodes.forEach(node=>{
                     if (node.nodeName === 'IMG') {
-                        copy_img_post(node.src)
+                        copy_img_post(node.src).then(data=>{
+                            console.log(data)
+                            node.src = data.image_url
+                            if (data.width > 600) {
+                                height = data.height * (600/data.width)
+                                node.style.width = data.width + 'px'
+                                node.style.height = height + 'px'
+                            }
+                        })
                     }
                 })
             })

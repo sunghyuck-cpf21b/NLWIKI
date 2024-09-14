@@ -57,4 +57,5 @@ async def upload_b64_image(data: file_schema.ImageB64):
     img_data_for_size = Image.open(BytesIO(img_bytes))
     width, height = img_data_for_size.size
     image_url = image_url = f'https://nlwk.nlwiki.com/media/{filename}'
+    # image_url = f'http://localhost:4000/{filename}'
     return {'image_url': image_url, 'width': width, 'height': height}
