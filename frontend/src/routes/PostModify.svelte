@@ -152,7 +152,7 @@
 
         let temp_alert = false
         for (const i of input.files) {
-            if (i.size/(1024*1024) < 5) {
+            if (i.size/(1024*1024) < 10) {
                 const fd = new FormData()
                 fd.append('file', i)
                 const params = fd
@@ -166,15 +166,15 @@
                 temp_alert = true
             } 
         }
-        if (temp_alert) {alert_function('이미지 크기는 5MB보다 작아야 합니다.')}
+        if (temp_alert) {alert_function('이미지 크기는 10MB보다 작아야 합니다.')}
         showModal = false;
     }
 
     async function copy_img_post(data) {
         const padding = (data.match(/=/g) || []).length 
         const b64length = data.length*0.75 - padding 
-        if (b64length/(1024*1024) > 5) {
-            alert_function('이미지 크기는 5MB보다 작아야 합니다.')
+        if (b64length/(1024*1024) > 10) {
+            alert_function('이미지 크기는 10MB보다 작아야 합니다.')
             return 
         } else {
             const url = '/api/file/b64_img'
